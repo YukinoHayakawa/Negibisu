@@ -19,6 +19,7 @@ bool StringParser::isSpaceChar(char32_t c)
 
 void StringParser::skipWhiteSpace()
 {
+	// discard whitespace characters
 	while(isSpaceChar(cur()))
 		advance(false);
 }
@@ -103,12 +104,12 @@ std::string_view StringParser::endSubstring(const std::size_t trim_back)
 {
 	assert(mSubstringBegin != std::string::npos);
 
-	if(trim_back)
-		mUtf8Source.erase(mUtf8Source.end() - trim_back, mUtf8Source.end());
+	// if(trim_back)
+	// 	mUtf8Source.erase(mUtf8Source.end() - trim_back, mUtf8Source.end());
 
 	const std::string_view subview {
 		mUtf8Source.data() + mSubstringBegin,
-		mUtf8Source.size() - mSubstringBegin
+		mUtf8Source.size() - mSubstringBegin - trim_back
 	};
 
 	mSubstringBegin = std::string::npos;

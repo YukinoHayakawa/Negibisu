@@ -74,20 +74,20 @@ void Tokenizer::tokenize()
 		{
 			if(this_char == ':')
 			{
-				endToken(TokenType::COLON);
 				advance();
+				endToken(TokenType::COLON);
 				continue;
 			}
 			if(this_char == '=')
 			{
-				endToken(TokenType::EQUAL);
 				advance();
+				endToken(TokenType::EQUAL);
 				continue;
 			}
 			if(this_char == ',')
 			{
-				endToken(TokenType::COMMA);
 				advance();
+				endToken(TokenType::COMMA);
 				continue;
 			}
 		}
@@ -95,8 +95,8 @@ void Tokenizer::tokenize()
 		{
 			if(this_char == ':')
 			{
-				endToken(TokenType::COLON);
 				advance();
+				endToken(TokenType::COLON);
 				continue;
 			}
 		}
@@ -154,58 +154,59 @@ void Tokenizer::readStringLiteral()
 	skipWhiteSpace();
 	beginToken();
 	const std::size_t begin_u8_size = currentUtf8Size();
-	std::size_t last_non_space = 0;
+	std::size_t last_non_space_size = begin_u8_size;
 	bool escape_next = false;
 	// if not in command block, read til next command begin token,
 	// otherwise read til next control token
-	while(const auto next = peek())
+	while(const auto next_char = cur())
 	{
 		// line not continued, break.
-		if(next == '\n' && cur() != '\\')
+		if(next_char == '\n' && last() != '\\')
 		{
 			break;
 		}
 		// escape next character
-		if(peek() == '\\')
+		if(next_char == '\\')
 		{
 			advance(false);
 			escape_next = true;
-			continue;
+			goto goto_next;
 		}
 		// always append the escaped character
 		if(escape_next)
 		{
 			advance();
 			escape_next = false;
-			continue;
+			goto goto_next;
 		}
 		if(mEnvironment == Environment::GLOBAL)
 		{
-			if(isCommandTokenChar(next))
+			if(isCommandTokenChar(next_char))
 				break;
 		}
 		else if(mEnvironment == Environment::COMMAND)
 		{
-			if(isTokenChar(next))
+			if(isTokenChar(next_char))
 				break;
 		}
 		else if(mEnvironment == Environment::COMMENT)
 		{
-			if(next == '}' && peek(2) == '}')
+			if(next_char == '}' && peek() == '}')
 				break;
 		}
 		else if(mEnvironment == Environment::TITLE)
 		{
-			if(next == ':')
+			if(next_char == ':')
 				break;
 		}
 		// move onto next char
 		advance();
 
-		if(!isSpaceChar(cur()))
-			last_non_space = currentUtf8Size() - 1;
+goto_next:
+		if(!isSpaceChar(next_char))
+			last_non_space_size = currentUtf8Size();
 	}
-	const auto trim_back_space = currentUtf8Size() - last_non_space;
+	const auto trim_back_space = currentUtf8Size() - last_non_space_size;
 	const auto len = currentUtf8Size() - begin_u8_size - trim_back_space;
 	if(len > 0)
 	{
