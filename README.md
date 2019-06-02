@@ -13,7 +13,7 @@ A markup lanugage for visual novels. The syntax should allow the story writer to
 - [ ] The text can be annotated for editing purpose
 - [ ] Allow using variables to store and pass command parameters
 - [ ] Allow state restoration and arbitrary location preview
-
+- [ ] Text characters can be escaped by prefixing a slash (\\)
 
 
 ## Script Structure
@@ -21,6 +21,8 @@ A markup lanugage for visual novels. The syntax should allow the story writer to
 
 
 ## Lexical Grammars
+
+The lexical grammars are sometimes context-sensitive as in many lanugages. The analyser may parse the text using different rules according to neighbor tokens. A extra newline token will be always appended at the end of the token stream.
 
 ### Token Types (In Regular Expressions)
 
@@ -52,6 +54,7 @@ void tokenize(stream in)
             
         }
     }
+    newToken(NEW_LINE);
 }
 ```
 

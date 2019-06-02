@@ -18,18 +18,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Token.cpp">
+    <ClCompile Include="StringParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tokenizer.cpp">
+    <ClCompile Include="Lexical\Tokenizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexical\Token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Token.hpp">
+    <ClInclude Include="StringParser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tokenizer.hpp">
+    <ClInclude Include="Lexical\Tokenizer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexical\Token.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

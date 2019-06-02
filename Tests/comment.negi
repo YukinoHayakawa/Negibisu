@@ -1,0 +1,8 @@
+# test_label:comments
+
+{{ this should be allowed }}
+{{this too}}
+
+\{\{this is a line of text\}\}
+
+{{ \}\} commenet not ended yet }}

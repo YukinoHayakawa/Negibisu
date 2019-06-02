@@ -1,13 +1,7 @@
 ﻿#include <fstream>
 
-#include <boost/program_options.hpp>
+#include "Lexical/Tokenizer.hpp"
 
-#include <Usagi/Runtime/Runtime.hpp>
-
-
-#include "Tokenizer.hpp"
-
-using namespace boost::program_options;
 using namespace usagi::negibisu;
 
 int main(int argc, char *argv[])
@@ -24,7 +18,9 @@ int main(int argc, char *argv[])
 	// }
 
 	std::ifstream in(argv[1]);
-	Tokenizer t;
-	t.tokenize(in);
+	Tokenizer t(in);
+	t.tokenize();
 	t.dumpTokens();
+
+	getchar();
 }
