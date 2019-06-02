@@ -8,3 +8,8 @@
 \{\{  this is a line of text  \}\}
 
 {{ \}\} commenet not ended yet }}
+
+
+{{ contin\
+uation }}
+

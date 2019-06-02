@@ -25,3 +25,10 @@ Line 10, Col 1: [LEFT_DOUBLE_BRACE] {{
 Line 10, Col 4: [STRING_LITERAL] }} commenet not ended yet
 Line 10, Col 32: [RIGHT_DOUBLE_BRACE] }}
 Line 10, Col 34: [NEWLINE]
+Line 11, Col 1: [NEWLINE]
+Line 12, Col 1: [NEWLINE]
+Line 13, Col 1: [LEFT_DOUBLE_BRACE] {{
+Line 13, Col 4: [STRING_LITERAL] continuation
+Line 14, Col 8: [RIGHT_DOUBLE_BRACE] }}
+Line 14, Col 10: [NEWLINE]
+Line 15, Col 1: [NEWLINE]

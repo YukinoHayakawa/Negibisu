@@ -6,23 +6,23 @@ namespace usagi::negibisu
 {
 void Tokenizer::tokenize()
 {
-	while(const auto this_char = cur())
+	while(cur())
 	{
 		skipWhiteSpace();
 		beginToken();
-		if(this_char == '#')
+		if(cur() == '#')
 		{
-			advance();
 			if(const auto last_type = lastTokenType();
 				last_type == TokenType::NEWLINE
 				|| last_type == TokenType::SHARP)
 			{
+				advance();
 				endToken(TokenType::SHARP);
 				mEnvironment = Environment::TITLE;
+				continue;
 			}
-			continue;
 		}
-		if(this_char == '{')
+		if(cur() == '{')
 		{
 			if(peek() == '{')
 			{
@@ -39,7 +39,7 @@ void Tokenizer::tokenize()
 			}
 			continue;
 		}
-		if(this_char == '}')
+		if(cur() == '}')
 		{
 			if(peek() == '}')
 			{
@@ -56,14 +56,14 @@ void Tokenizer::tokenize()
 			}
 			continue;
 		}
-		if(this_char == '[')
+		if(cur() == '[')
 		{
 			advance();
 			endToken(TokenType::LEFT_BRACKET);
 			mEnvironment = Environment::COMMAND;
 			continue;
 		}
-		if(this_char == ']')
+		if(cur() == ']')
 		{
 			advance();
 			endToken(TokenType::RIGHT_BRACKET);
@@ -72,19 +72,19 @@ void Tokenizer::tokenize()
 		}
 		if(mEnvironment == Environment::COMMAND)
 		{
-			if(this_char == ':')
+			if(cur() == ':')
 			{
 				advance();
 				endToken(TokenType::COLON);
 				continue;
 			}
-			if(this_char == '=')
+			if(cur() == '=')
 			{
 				advance();
 				endToken(TokenType::EQUAL);
 				continue;
 			}
-			if(this_char == ',')
+			if(cur() == ',')
 			{
 				advance();
 				endToken(TokenType::COMMA);
@@ -93,7 +93,7 @@ void Tokenizer::tokenize()
 		}
 		if(mEnvironment == Environment::TITLE)
 		{
-			if(this_char == ':')
+			if(cur() == ':')
 			{
 				advance();
 				endToken(TokenType::COLON);
@@ -151,22 +151,20 @@ bool Tokenizer::isCommandTokenChar(char32_t c)
 
 void Tokenizer::readStringLiteral()
 {
-	skipWhiteSpace();
-	beginToken();
 	const std::size_t begin_u8_size = currentUtf8Size();
 	std::size_t last_non_space_size = begin_u8_size;
 	bool escape_next = false;
 	// if not in command block, read til next command begin token,
 	// otherwise read til next control token
-	while(const auto next_char = cur())
+	while(const auto this_char = cur())
 	{
 		// line not continued, break.
-		if(next_char == '\n' && last() != '\\')
+		if(this_char == '\n' && last() != '\\')
 		{
 			break;
 		}
 		// escape next character
-		if(next_char == '\\')
+		if(this_char == '\\')
 		{
 			advance(false);
 			escape_next = true;
@@ -175,35 +173,43 @@ void Tokenizer::readStringLiteral()
 		// always append the escaped character
 		if(escape_next)
 		{
-			advance();
+			if(isSpaceChar(this_char))
+			{
+				advance(false);
+				skipWhiteSpace();
+			}
+			else
+			{
+				advance();
+			}
 			escape_next = false;
 			goto goto_next;
 		}
 		if(mEnvironment == Environment::GLOBAL)
 		{
-			if(isCommandTokenChar(next_char))
+			if(isCommandTokenChar(this_char))
 				break;
 		}
 		else if(mEnvironment == Environment::COMMAND)
 		{
-			if(isTokenChar(next_char))
+			if(isTokenChar(this_char))
 				break;
 		}
 		else if(mEnvironment == Environment::COMMENT)
 		{
-			if(next_char == '}' && peek() == '}')
+			if(this_char == '}' && peek() == '}')
 				break;
 		}
 		else if(mEnvironment == Environment::TITLE)
 		{
-			if(next_char == ':')
+			if(this_char == ':')
 				break;
 		}
 		// move onto next char
 		advance();
 
 goto_next:
-		if(!isSpaceChar(next_char))
+		if(!isSpaceChar(this_char))
 			last_non_space_size = currentUtf8Size();
 	}
 	const auto trim_back_space = currentUtf8Size() - last_non_space_size;

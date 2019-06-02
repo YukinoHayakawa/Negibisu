@@ -22,6 +22,7 @@ void StringParser::skipWhiteSpace()
 	// discard whitespace characters
 	while(isSpaceChar(cur()))
 		advance(false);
+	assert(!isSpaceChar(cur()));
 }
 
 char32_t StringParser::cur() const

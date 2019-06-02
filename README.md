@@ -22,12 +22,12 @@ A markup lanugage for visual novels. The syntax should allow the story writer to
 
 ## Lexical Grammars
 
-The lexical grammars are sometimes context-sensitive as in many lanugages. The analyser may parse the text using different rules according to neighbor tokens. A extra newline token will be always appended at the end of the token stream.
+The lexical grammars are sometimes context-sensitive as in many lanugages. The analyser may parse the text using different rules according to neighbor tokens.
 
 ### Token Types (In Regular Expressions)
 
 ```
-         SectionMark -> #+
+         SectionMark -> ^\s*#+
          EscapedChar -> \.
              NewLine -> \n
                Colon -> :
@@ -40,6 +40,16 @@ The lexical grammars are sometimes context-sensitive as in many lanugages. The a
     RightDoubleBrace -> }}
           Identifier -> [a-zA-Z0-9]+
        StringLiteral -> <Any character sequence that is not control character or newline>
+```
+### Context and Tokens Parsing
+
+```
+GLOBAL_TEXT: STRING_LITERAL
+    SECTION_MARK    -> SECTION_TITLE
+
+    LEFT_BRACKET    -> DIALOG_CHARACTER: RIGHT_BRACKET, TOKEN, 
+    LEFT_BRACE      -> COMMAND: {LEFT|RIGHT}_BRACE
+    -> COMMENT: {LEFT|RIGHT}_DOUBLE_BRACE
 ```
 
 ### Lexical Analyser Pesudocode
