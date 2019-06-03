@@ -2,33 +2,33 @@ Line 1, Col 1: [SHARP] #
 Line 1, Col 3: [STRING_LITERAL] test_label
 Line 1, Col 13: [COLON] :
 Line 1, Col 14: [STRING_LITERAL] comments
-Line 1, Col 22: [NEWLINE]
-Line 2, Col 1: [NEWLINE]
+Line 1, Col 22: [NEWLINE] 
+Line 2, Col 1: [NEWLINE] 
 Line 3, Col 1: [LEFT_DOUBLE_BRACE] {{
 Line 3, Col 4: [STRING_LITERAL] this should be allowed
 Line 3, Col 27: [RIGHT_DOUBLE_BRACE] }}
-Line 3, Col 29: [NEWLINE]
+Line 3, Col 29: [NEWLINE] 
 Line 4, Col 1: [LEFT_DOUBLE_BRACE] {{
 Line 4, Col 3: [STRING_LITERAL] this too
 Line 4, Col 11: [RIGHT_DOUBLE_BRACE] }}
-Line 4, Col 13: [NEWLINE]
-Line 5, Col 1: [NEWLINE]
+Line 4, Col 13: [NEWLINE] 
+Line 5, Col 1: [NEWLINE] 
 Line 6, Col 1: [LEFT_DOUBLE_BRACE] {{
 Line 6, Col 4: [STRING_LITERAL] o.p:e,r}a{t}or#s
 Line 6, Col 21: [RIGHT_DOUBLE_BRACE] }}
-Line 6, Col 23: [NEWLINE]
-Line 7, Col 1: [NEWLINE]
+Line 6, Col 23: [NEWLINE] 
+Line 7, Col 1: [NEWLINE] 
 Line 8, Col 1: [STRING_LITERAL] {{  this is a line of text  }}
-Line 8, Col 35: [NEWLINE]
-Line 9, Col 1: [NEWLINE]
+Line 8, Col 35: [NEWLINE] 
+Line 9, Col 1: [NEWLINE] 
 Line 10, Col 1: [LEFT_DOUBLE_BRACE] {{
 Line 10, Col 4: [STRING_LITERAL] }} commenet not ended yet
 Line 10, Col 32: [RIGHT_DOUBLE_BRACE] }}
-Line 10, Col 34: [NEWLINE]
-Line 11, Col 1: [NEWLINE]
-Line 12, Col 1: [NEWLINE]
+Line 10, Col 34: [NEWLINE] 
+Line 11, Col 1: [NEWLINE] 
+Line 12, Col 1: [NEWLINE] 
 Line 13, Col 1: [LEFT_DOUBLE_BRACE] {{
 Line 13, Col 4: [STRING_LITERAL] continuation
 Line 14, Col 8: [RIGHT_DOUBLE_BRACE] }}
-Line 14, Col 10: [NEWLINE]
-Line 15, Col 1: [NEWLINE]
+Line 14, Col 10: [NEWLINE] 
+Line 15, Col 1: [NEWLINE] 

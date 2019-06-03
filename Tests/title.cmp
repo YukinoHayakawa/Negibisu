@@ -2,18 +2,18 @@ Line 1, Col 1: [SHARP] #
 Line 1, Col 2: [STRING_LITERAL] test
 Line 1, Col 6: [COLON] :
 Line 1, Col 7: [STRING_LITERAL] title
-Line 1, Col 12: [NEWLINE]
+Line 1, Col 12: [NEWLINE] 
 Line 2, Col 2: [SHARP] #
 Line 2, Col 4: [STRING_LITERAL] t est
 Line 2, Col 10: [COLON] :
 Line 2, Col 12: [STRING_LITERAL] tit le # t est
 Line 2, Col 27: [COLON] :
 Line 2, Col 29: [STRING_LITERAL] tit le
-Line 2, Col 35: [NEWLINE]
+Line 2, Col 35: [NEWLINE] 
 Line 3, Col 1: [STRING_LITERAL] this is not a # title nor #this
-Line 3, Col 32: [NEWLINE]
-Line 4, Col 1: [NEWLINE]
+Line 3, Col 32: [NEWLINE] 
+Line 4, Col 1: [NEWLINE] 
 Line 5, Col 1: [SHARP] #
-Line 5, Col 2: [STRING_LITERAL] conutiunation
+Line 6, Col 2: [STRING_LITERAL] conutiunation
 Line 7, Col 5: [COLON] :
-Line 7, Col 6: [STRING_LITERAL] test title
+Line 8, Col 9: [STRING_LITERAL] test title
