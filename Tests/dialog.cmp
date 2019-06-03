@@ -1,0 +1,38 @@
+Line 1, Col 1: [STRING_LITERAL] This is a line of dialog.
+Line 1, Col 26: [NEWLINE]
+Line 2, Col 1: [NEWLINE]
+Line 3, Col 1: [NEWLINE]
+Line 4, Col 6: [STRING_LITERAL] Spaces     at the endings of the line are  trimmed but not those in between.
+Line 5, Col 1: [NEWLINE]
+Line 6, Col 1: [NEWLINE]
+Line 7, Col 1: [NEWLINE]
+Line 8, Col 1: [STRING_LITERAL] 这是一行中文。
+Line 8, Col 8: [NEWLINE]
+Line 9, Col 1: [NEWLINE]
+Line 10, Col 1: [NEWLINE]
+Line 11, Col 1: [LEFT_BRACKET] [
+Line 11, Col 2: [STRING_LITERAL] Yuki
+Line 11, Col 6: [RIGHT_BRACKET] ]
+Line 11, Col 8: [STRING_LITERAL] This is Yuki speaking.
+Line 11, Col 30: [NEWLINE]
+Line 12, Col 1: [NEWLINE]
+Line 13, Col 1: [NEWLINE]
+Line 14, Col 1: [LEFT_BRACKET] [
+Line 14, Col 2: [STRING_LITERAL] Mystery Girl
+Line 14, Col 14: [EQUAL] =
+Line 14, Col 15: [STRING_LITERAL] Yuki
+Line 14, Col 19: [RIGHT_BRACKET] ]
+Line 14, Col 21: [STRING_LITERAL] Yuki is hiding her identity.
+Line 14, Col 49: [NEWLINE]
+Line 15, Col 1: [NEWLINE]
+Line 16, Col 1: [NEWLINE]
+Line 17, Col 1: [LEFT_BRACKET] [
+Line 17, Col 2: [STRING_LITERAL] Moon
+Line 17, Col 6: [COMMA] ,
+Line 17, Col 7: [STRING_LITERAL] Smile
+Line 17, Col 12: [COMMA] ,
+Line 17, Col 13: [STRING_LITERAL] Middle
+Line 17, Col 19: [RIGHT_BRACKET] ]
+Line 17, Col 21: [STRING_LITERAL] Mr. Moon likes to laugh.
+Line 18, Col 23: [NEWLINE]
+Line 19, Col 1: [NEWLINE]
