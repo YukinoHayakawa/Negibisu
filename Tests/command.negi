@@ -1,0 +1,19 @@
+{command:1,2,3}
+
+{}
+
+{:}
+
+{:,}
+
+{\
+}
+
+{test}
+
+{te\
+    st}
+
+
+{test:a,b,c,"xxx"}
+{test:a=m,b,c,"xxx"}

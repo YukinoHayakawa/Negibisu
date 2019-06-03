@@ -1,0 +1,67 @@
+Line 1, Col 1: [LEFT_BRACE] {
+Line 1, Col 2: [STRING_LITERAL] command
+Line 1, Col 9: [COLON] :
+Line 1, Col 10: [STRING_LITERAL] 1
+Line 1, Col 11: [COMMA] ,
+Line 1, Col 12: [STRING_LITERAL] 2
+Line 1, Col 13: [COMMA] ,
+Line 1, Col 14: [STRING_LITERAL] 3
+Line 1, Col 15: [RIGHT_BRACE] }
+Line 1, Col 16: [NEWLINE]
+Line 2, Col 1: [NEWLINE]
+Line 3, Col 1: [LEFT_BRACE] {
+Line 3, Col 2: [RIGHT_BRACE] }
+Line 3, Col 3: [NEWLINE]
+Line 4, Col 1: [NEWLINE]
+Line 5, Col 1: [LEFT_BRACE] {
+Line 5, Col 2: [COLON] :
+Line 5, Col 3: [RIGHT_BRACE] }
+Line 5, Col 4: [NEWLINE]
+Line 6, Col 1: [NEWLINE]
+Line 7, Col 1: [LEFT_BRACE] {
+Line 7, Col 2: [COLON] :
+Line 7, Col 3: [COMMA] ,
+Line 7, Col 4: [RIGHT_BRACE] }
+Line 7, Col 5: [NEWLINE]
+Line 8, Col 1: [NEWLINE]
+Line 9, Col 1: [LEFT_BRACE] {
+Line 10, Col 1: [RIGHT_BRACE] }
+Line 10, Col 2: [NEWLINE]
+Line 11, Col 1: [NEWLINE]
+Line 12, Col 1: [LEFT_BRACE] {
+Line 12, Col 2: [STRING_LITERAL] test
+Line 12, Col 6: [RIGHT_BRACE] }
+Line 12, Col 7: [NEWLINE]
+Line 13, Col 1: [NEWLINE]
+Line 14, Col 1: [LEFT_BRACE] {
+Line 14, Col 2: [STRING_LITERAL] test
+Line 15, Col 7: [RIGHT_BRACE] }
+Line 15, Col 8: [NEWLINE]
+Line 16, Col 1: [NEWLINE]
+Line 17, Col 1: [NEWLINE]
+Line 18, Col 1: [LEFT_BRACE] {
+Line 18, Col 2: [STRING_LITERAL] test
+Line 18, Col 6: [COLON] :
+Line 18, Col 7: [STRING_LITERAL] a
+Line 18, Col 8: [COMMA] ,
+Line 18, Col 9: [STRING_LITERAL] b
+Line 18, Col 10: [COMMA] ,
+Line 18, Col 11: [STRING_LITERAL] c
+Line 18, Col 12: [COMMA] ,
+Line 18, Col 13: [STRING_LITERAL] "xxx"
+Line 18, Col 18: [RIGHT_BRACE] }
+Line 18, Col 19: [NEWLINE]
+Line 19, Col 1: [LEFT_BRACE] {
+Line 19, Col 2: [STRING_LITERAL] test
+Line 19, Col 6: [COLON] :
+Line 19, Col 7: [STRING_LITERAL] a
+Line 19, Col 8: [EQUAL] =
+Line 19, Col 9: [STRING_LITERAL] m
+Line 19, Col 10: [COMMA] ,
+Line 19, Col 11: [STRING_LITERAL] b
+Line 19, Col 12: [COMMA] ,
+Line 19, Col 13: [STRING_LITERAL] c
+Line 19, Col 14: [COMMA] ,
+Line 19, Col 15: [STRING_LITERAL] "xxx"
+Line 19, Col 20: [RIGHT_BRACE] }
+Line 19, Col 21: [NEWLINE]
