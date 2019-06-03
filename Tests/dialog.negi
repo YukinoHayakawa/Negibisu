@@ -1,7 +1,7 @@
 This is a line of dialog.
 
 
-    Spaces     at the endings of the line are  trimmed but not those in between.         \
+    Spaces     at the endings of the line are  trimmed but not those in between.         \
 
 
 
@@ -17,3 +17,4 @@ This is a line of dialog.
 [Moon,Smile,Middle] Mr. Mo\
     on likes to laugh.
 
+continuation at last line \

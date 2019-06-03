@@ -2,7 +2,7 @@ Line 1, Col 1: [STRING_LITERAL] This is a line of dialog.
 Line 1, Col 26: [NEWLINE]
 Line 2, Col 1: [NEWLINE]
 Line 3, Col 1: [NEWLINE]
-Line 4, Col 6: [STRING_LITERAL] Spaces     at the endings of the line are  trimmed but not those in between.
+Line 4, Col 5: [STRING_LITERAL] Spaces     at the endings of the line are  trimmed but not those in between.
 Line 5, Col 1: [NEWLINE]
 Line 6, Col 1: [NEWLINE]
 Line 7, Col 1: [NEWLINE]
@@ -33,6 +33,7 @@ Line 17, Col 7: [STRING_LITERAL] Smile
 Line 17, Col 12: [COMMA] ,
 Line 17, Col 13: [STRING_LITERAL] Middle
 Line 17, Col 19: [RIGHT_BRACKET] ]
-Line 17, Col 21: [STRING_LITERAL] Mr. Moon likes to laugh.
+Line 17, Col 22: [STRING_LITERAL] Mr. Mo    on likes to laugh.
 Line 18, Col 23: [NEWLINE]
 Line 19, Col 1: [NEWLINE]
+Line 20, Col 1: [STRING_LITERAL] continuation at last line

@@ -4,6 +4,7 @@
 
 #include <Usagi/Core/Logging.hpp>
 #include <Usagi/Utility/Stream.hpp>
+#include <Usagi/Utility/Debug.hpp>
 
 namespace usagi::negibisu
 {
@@ -30,26 +31,22 @@ char32_t StringParser::cur() const
 	return mSource[mCurrentPos];
 }
 
-char32_t StringParser::peek(std::size_t lookahead) const
+char32_t StringParser::next(const std::size_t lookahead) const
 {
 	const auto next_pos = mCurrentPos + lookahead;
 	return next_pos >= mSource.size() ? 0 : mSource[next_pos];
 }
 
-char32_t StringParser::last() const
+char32_t StringParser::prev() const
 {
 	return mCurrentPos > 0 ? mSource[mCurrentPos - 1] : 0;
 }
 
-char32_t StringParser::advance(const bool append)
+void StringParser::advanceLineColumnCounter()
 {
-	assert(mCurrentPos < mSource.size());
-
 	// assuming unix end-line
 	if(cur() == '\n')
 	{
-		onNewLine();
-
 		++mCurrentLine;
 		mCurrentColumn = 1;
 	}
@@ -57,15 +54,52 @@ char32_t StringParser::advance(const bool append)
 	{
 		++mCurrentColumn;
 	}
+}
+
+void StringParser::advanceSourceCursor()
+{
+	++mCurrentPos;
+}
+
+void StringParser::advanceCursor()
+{
+	advanceLineColumnCounter();
+	advanceSourceCursor();
+}
+
+char32_t StringParser::advance(const bool append, const bool allow_continue)
+{
+	assert(mCurrentPos < mSource.size());
+
+	// check newline before next advance to avoid interrupting running strings
+	if(cur() == '\n')
+	{
+		onNewLine();
+	}
 
 	if(append)
 	{
 		utf8::append(cur(), back_inserter(mUtf8Source));
 	}
 
-	++mCurrentPos;
-	// if(mCurrentPos == mSource.size())
-	//     LOG(info, "Toknenizer: Reached end-of-file");
+	// move to the next character
+	advanceCursor();
+
+	if(cur() == '\\')
+	{
+		// continue current line, move cursor to the beginning of next line
+		if(allow_continue && next() == '\n')
+		{
+			advanceCursor();
+			advanceCursor();
+		}
+	}
+	else if(cur() == 7)
+	{
+		debugBreak();
+		// skip debug mark
+		advanceCursor();
+	}
 
 	return cur();
 }

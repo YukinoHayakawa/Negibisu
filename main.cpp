@@ -2,6 +2,11 @@
 
 #include "Lexical/Tokenizer.hpp"
 
+#ifdef _WIN32
+#include <Usagi/Extension/Win32/Win32Helper.hpp>
+#endif
+
+using namespace usagi;
 using namespace usagi::negibisu;
 
 int main(int argc, char *argv[])
@@ -17,10 +22,14 @@ int main(int argc, char *argv[])
 	// 	throw;
 	// }
 
+#ifdef _WIN32
+	win32::patchConsole();
+#endif
+
 	std::ifstream in(argv[1]);
 	Tokenizer t(in);
 	t.tokenize();
 	t.dumpTokens();
 
-	getchar();
+	return 0;
 }

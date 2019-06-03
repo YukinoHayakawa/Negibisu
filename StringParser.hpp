@@ -22,6 +22,10 @@ class StringParser : Noncopyable
 
 	std::size_t mSubstringBegin = std::string::npos;
 
+	void advanceLineColumnCounter();
+	void advanceSourceCursor();
+	void advanceCursor();
+
 protected:
 	virtual ~StringParser() = default;
 
@@ -31,10 +35,10 @@ protected:
 	// return the character pointed by current position
 	char32_t cur() const;
 	// return the value of later character without actually moving the cursor.
-	char32_t peek(std::size_t lookahead = 1) const;
+	char32_t next(std::size_t lookahead = 1) const;
 	// return the character on the position immediately before the current
 	// position.
-	char32_t last() const;
+	char32_t prev() const;
 
 	//
 	/**
@@ -42,9 +46,11 @@ protected:
 	 * new position. If the stream is ended, a 0 will be returned.
 	 * \param append If true, the current character before advancing will
 	 * be appended to the parsed uft-8 string.
+	 * \param allow_continue If true, a slash (\) at the end of line will
+	 * cause appending of the content of next line to the current one.
 	 * \return
 	 */
-	char32_t advance(bool append = true);
+	char32_t advance(bool append = true, bool allow_continue = true);
 
 	// report error with current source position.
 	void error(const std::string &msg) const;
@@ -72,6 +78,7 @@ protected:
 		return mUtf8Source.size();
 	}
 
+	// invoked when a \n is encountered
 	virtual void onNewLine();
 
 public:

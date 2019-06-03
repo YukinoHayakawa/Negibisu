@@ -14,6 +14,7 @@ A markup lanugage for visual novels. The syntax should allow the story writer to
 - [ ] Allow using variables to store and pass command parameters
 - [ ] Allow state restoration and arbitrary location preview
 - [ ] Text characters can be escaped by prefixing a slash (\\)
+- [ ] Use ASCII code 7 (beep) to set breakpoints in the scripts (need to set corresponding breakpoints in the debugger, too)
 
 
 ## Script Structure
