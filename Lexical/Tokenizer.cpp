@@ -11,6 +11,11 @@ void Tokenizer::tokenize()
 		skipWhiteSpace();
 		beginToken();
 		const auto this_char = cur();
+		// todo: preprocessor directives
+		// if(this_char == '$' && lastTokenType() == TokenType::NEWLINE)
+		// {
+		//
+		// }
 		if(this_char == '#')
 		{
 			if(const auto last_type = lastTokenType();
@@ -19,7 +24,7 @@ void Tokenizer::tokenize()
 			{
 				advance();
 				endToken(TokenType::SHARP);
-				mEnvironment = Environment::TITLE;
+				enterEnvironment(Environment::TITLE);
 				continue;
 			}
 		}
@@ -30,13 +35,13 @@ void Tokenizer::tokenize()
 				advance();
 				advance();
 				endToken(TokenType::LEFT_DOUBLE_BRACE);
-				mEnvironment = Environment::COMMENT;
+				enterEnvironment(Environment::COMMENT);
 			}
 			else
 			{
 				advance();
 				endToken(TokenType::LEFT_BRACE);
-				mEnvironment = Environment::COMMAND;
+				enterEnvironment(Environment::COMMAND);
 			}
 			continue;
 		}
@@ -44,16 +49,16 @@ void Tokenizer::tokenize()
 		{
 			if(next() == '}')
 			{
+				exitEnvironment(Environment::COMMENT);
 				advance();
 				advance();
 				endToken(TokenType::RIGHT_DOUBLE_BRACE);
-				mEnvironment = Environment::GLOBAL;
 			}
 			else
 			{
+				exitEnvironment(Environment::COMMAND);
 				advance();
 				endToken(TokenType::RIGHT_BRACE);
-				mEnvironment = Environment::GLOBAL;
 			}
 			continue;
 		}
@@ -61,17 +66,18 @@ void Tokenizer::tokenize()
 		{
 			advance();
 			endToken(TokenType::LEFT_BRACKET);
-			mEnvironment = Environment::COMMAND;
+			enterEnvironment(Environment::CHARACTER);
 			continue;
 		}
 		if(this_char == ']')
 		{
+			exitEnvironment(Environment::CHARACTER);
 			advance();
 			endToken(TokenType::RIGHT_BRACKET);
-			mEnvironment = Environment::GLOBAL;
 			continue;
 		}
-		if(mEnvironment == Environment::COMMAND)
+		if(currentEnvironment() == Environment::COMMAND
+			|| currentEnvironment() == Environment::CHARACTER)
 		{
 			if(this_char == ':')
 			{
@@ -92,7 +98,7 @@ void Tokenizer::tokenize()
 				continue;
 			}
 		}
-		if(mEnvironment == Environment::TITLE)
+		if(currentEnvironment() == Environment::TITLE)
 		{
 			if(this_char == ':')
 			{
@@ -105,14 +111,77 @@ void Tokenizer::tokenize()
 	}
 }
 
+void Tokenizer::resetEnvironment()
+{
+	mEnv = { Environment::GLOBAL };
+}
+
 void Tokenizer::onNewLine()
 {
 	// append newline token
 	beginToken();
 	endToken(TokenType::NEWLINE);
 
-	// reset environment
-	mEnvironment = Environment::GLOBAL;
+	if(const auto cur_env = currentEnvironment();
+		cur_env != Environment::GLOBAL)
+	{
+		assert(mEnv.size() > 1);
+
+		switch(cur_env)
+		{
+			case Environment::COMMAND:
+				error("Expected a }.");
+				break;
+			case Environment::CHARACTER:
+				error("Expected a ].");
+				break;
+			case Environment::COMMENT:
+				error("Expected a }}. ");
+				break;
+			default: ;
+		}
+		// reset env on newline
+		resetEnvironment();
+	}
+}
+
+Tokenizer::Environment Tokenizer::currentEnvironment() const
+{
+	return mEnv.back();
+}
+
+void Tokenizer::enterEnvironment(Environment env)
+{
+	mEnv.push_back(env);
+}
+
+void Tokenizer::exitEnvironment(Environment env)
+{
+	assert(env != Environment::GLOBAL);
+	const auto matched = env == currentEnvironment();
+
+	if(matched)
+	{
+		assert(mEnv.size() > 1);
+		mEnv.pop_back();
+	}
+	else
+	{
+		switch(env)
+		{
+			case Environment::COMMAND:
+				error("Expected a matching {.");
+				break;
+			case Environment::CHARACTER:
+				error("Expected a matching [.");
+				break;
+			case Environment::COMMENT:
+				error("Expected a matching {{.");
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 void Tokenizer::beginToken()
@@ -129,16 +198,16 @@ void Tokenizer::endToken(TokenType type, std::size_t trim_back)
 	mTokens.push_back(mTempToken);
 }
 
-bool Tokenizer::isTokenChar(char32_t c)
+bool Tokenizer::isOperatorChar(char32_t c)
 {
-	return isCommandTokenChar(c)
+	return isEnvironmentBoundaryChar(c)
 		// these are only effective within [] and {} pairs
 		|| c == ','
 		|| c == '='
 		|| c == ':';
 }
 
-bool Tokenizer::isCommandTokenChar(char32_t c)
+bool Tokenizer::isEnvironmentBoundaryChar(char32_t c)
 {
 	return c == '['
 		|| c == ']'
@@ -185,24 +254,29 @@ void Tokenizer::readStringLiteral()
 			escape_next = false;
 			goto read_next;
 		}
-		if(mEnvironment == Environment::GLOBAL)
+		if(currentEnvironment() == Environment::GLOBAL)
 		{
-			if(isCommandTokenChar(this_char))
+			if(isEnvironmentBoundaryChar(this_char))
 				break;
 		}
-		else if(mEnvironment == Environment::COMMAND)
+		else if(currentEnvironment() == Environment::COMMAND)
 		{
-			if(isTokenChar(this_char))
+			if(isOperatorChar(this_char))
 				break;
 		}
-		else if(mEnvironment == Environment::COMMENT)
+		else if(currentEnvironment() == Environment::CHARACTER)
+		{
+			if(isOperatorChar(this_char))
+				break;
+		}
+		else if(currentEnvironment() == Environment::COMMENT)
 		{
 			if(this_char == '}' && next() == '}')
 				break;
 		}
-		else if(mEnvironment == Environment::TITLE)
+		else if(currentEnvironment() == Environment::TITLE)
 		{
-			if(this_char == ':')
+			if(isEnvironmentBoundaryChar(this_char) || this_char == ':')
 				break;
 		}
 		// move onto next char

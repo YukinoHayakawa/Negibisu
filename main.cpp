@@ -1,4 +1,5 @@
 ﻿#include <fstream>
+#include <filesystem>
 
 #include "Lexical/Tokenizer.hpp"
 
@@ -26,8 +27,9 @@ int main(int argc, char *argv[])
 	win32::patchConsole();
 #endif
 
-	std::ifstream in(argv[1]);
-	Tokenizer t(in);
+	const auto input_name = std::filesystem::canonical(argv[1]);
+	std::ifstream in(input_name);
+	Tokenizer t(input_name.u8string(), in);
 	t.tokenize();
 	t.dumpTokens();
 

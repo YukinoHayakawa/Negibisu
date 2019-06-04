@@ -21,14 +21,14 @@ A markup lanugage for visual novels. The syntax should allow the story writer to
 
 
 
-## Lexical Grammars
+## Lexical Grammar
 
-The lexical grammars are sometimes context-sensitive as in many lanugages. The analyser may parse the text using different rules according to neighbor tokens.
+The lexical grammars are context-sensitive as in many lanugages. The analyser may parse the text using different rules according to neighbor tokens.
 
 ### Token Types (In Regular Expressions)
 
 ```
-         SectionMark -> ^\s*#+
+               Sharp -> ^[\s#]*#+ (# being the first non-whitespace character of a line or following another #)
          EscapedChar -> \.
              NewLine -> \n
                Colon -> :
@@ -39,41 +39,33 @@ The lexical grammars are sometimes context-sensitive as in many lanugages. The a
           RightBrace -> }
      LeftDoubleBrace -> {{
     RightDoubleBrace -> }}
-          Identifier -> [a-zA-Z0-9]+
-       StringLiteral -> <Any character sequence that is not control character or newline>
+       StringLiteral -> <Character sequence depending on the context>
 ```
-### Context and Tokens Parsing
+### Lexical Analysis Contexts
 
 ```
-GLOBAL_TEXT: STRING_LITERAL
-    SECTION_MARK    -> SECTION_TITLE
-
-    LEFT_BRACKET    -> DIALOG_CHARACTER: RIGHT_BRACKET, TOKEN, 
-    LEFT_BRACE      -> COMMAND: {LEFT|RIGHT}_BRACE
-    -> COMMENT: {LEFT|RIGHT}_DOUBLE_BRACE
+GLOBAL
+TITLE
+COMMENT
+COMMAND
 ```
+## Syntactic Grammar
 
-### Lexical Analyser Pesudocode
+A grammar suitable for a recursive descent parser.
 
-```c++
-void tokenize(stream in)
-{
-    while(in)
-    {
-        switch(nextChar())
-        {
-            
-        }
-    }
-    newToken(NEW_LINE);
-}
 ```
-
-## Syntactic Grammars
-
-SectionTitle -> \#+ Text:Text
-
-Command -> {}
+           Script -> Sections
+         Sections -> Section | nil
+          Section -> Title Content
+            Title -> # StringLiteral : StringLiteral
+          Content -> Line NewLine Content | nil
+             Line -> CharacterTag Dialog | Dialog
+     CharacterTag -> [StringLiteral] | [StringLiteral , StringLiteral , StringLiteral]
+           Dialog -> Command | StringLiteral | StringLiteral Dialog
+          Command -> { StringLiteral CommandArgs }
+      CommandArgs -> : CommandArgSeq | nil
+    CommandArgSeq -> StringLiteral CommandArgSeq | nil
+```
 
 ## Semantic Rules
 

@@ -106,15 +106,17 @@ char32_t StringParser::advance(const bool append, const bool allow_continue)
 
 void StringParser::error(const std::string &msg) const
 {
-	LOG(error, "at Line {}, Col {}: {}", mCurrentLine, mCurrentColumn, msg);
+	fmt::print("Error at Line {}, Col {}: {}\n",
+		mCurrentLine, mCurrentColumn, msg);
 }
 
-StringParser::StringParser(std::istream &u8src)
-	: StringParser(readStreamAsString(u8src))
+StringParser::StringParser(const std::string &name, std::istream &u8src)
+	: StringParser(name, readStreamAsString(u8src))
 {
 }
 
-StringParser::StringParser(const std::string &u8src)
+StringParser::StringParser(const std::string &name, const std::string &u8src)
+	: mName { name }
 {
 	mUtf8Source.reserve(u8src.size());
 

@@ -8,6 +8,8 @@ namespace usagi::negibisu
 {
 class StringParser : Noncopyable
 {
+	std::string mName;
+
 	// source code stream in utf-32 code points
 	std::u32string mSource;
 	// parsed characters converted back to utf-8 bytes, referenced by the
@@ -84,15 +86,17 @@ protected:
 public:
 	/**
 	 * \brief
+	 * \param name
 	 * \param src Input stream of source code in utf-8 bytes
 	 */
-	explicit StringParser(std::istream &src);
+	StringParser(const std::string &name, std::istream &src);
 
 	/**
 	 * \brief
+	 * \param name
 	 * \param src Input stream of source code in utf-8 bytes
 	 */
-	explicit StringParser(const std::string &src);
+	StringParser(const std::string &name, const std::string &src);
 };
 
 

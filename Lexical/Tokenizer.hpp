@@ -20,15 +20,22 @@ protected:
 	{
 		GLOBAL,
 		COMMAND,
+		CHARACTER,
 		COMMENT,
 		TITLE,
-	} mEnvironment = Environment::GLOBAL;
+	};
+
+	std::vector<Environment> mEnv = { Environment::GLOBAL };
+
+	Environment currentEnvironment() const;
+	void enterEnvironment(Environment env);
+	void exitEnvironment(Environment env);
 
 	void beginToken();
 	void endToken(TokenType type, std::size_t trim_back = 0);
 
-	static bool isTokenChar(char32_t c);
-	static bool isCommandTokenChar(char32_t c);
+	static bool isOperatorChar(char32_t c);
+	static bool isEnvironmentBoundaryChar(char32_t c);
 	void readStringLiteral();
 	TokenType lastTokenType() const;
 
@@ -38,6 +45,7 @@ public:
 	using StringParser::StringParser;
 
 	void tokenize();
+	void resetEnvironment();
 	void dumpTokens();
 	const std::vector<Token> & tokens() const { return mTokens; }
 };

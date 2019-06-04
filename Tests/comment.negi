@@ -13,3 +13,11 @@
 {{ contin\
 uation }}
 
+This is a line with {{ a comment }} inside.
+
+# test{{comment}}:work with title?
+
+This is another line {with:a, command, {{and a comment}} in, it}
+This is another line {with:a, command, {{and } a comment}} in, it}
+
+{{# im a dummy title}}

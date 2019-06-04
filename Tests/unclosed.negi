@@ -1,0 +1,8 @@
+# {unclosed
+another unclosed }
+{{ unclosed 
+comment }}
+{{ this is \
+continued }}
+[who is me
+this [ is also not fine
