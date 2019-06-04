@@ -19,7 +19,7 @@ for file in glob.glob("*.negi"):
 
     with open(diff_name, "w") as diff_output:
         subprocess.Popen(
-            ["diff", out_name, cmp_name],
+            ["diff", '--strip-trailing-cr', out_name, cmp_name],
             stdout=diff_output
         ).wait()
 
