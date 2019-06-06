@@ -1,0 +1,44 @@
+# prolog_scene_a:Prolog Scene Intro
+
+Line of dialog.
+Continued \
+dialog.
+
+
+
+
+
+
+A lot of newlines.
+
+
+
+
+
+
+{{ Begin with comment }} Dialog.
+Dialog. {{ End with comment }} 
+Dialog. {{ End with comment }} 
+
+Dialog {{ with a comment in between }}ends here.
+[Mystery Girl=Alice] Hello.
+[Alice] Hello.
+Hello.
+Hello.
+
+[Alice, Happy, Middle] Hello.
+[Alice ,Happy,Middle] Hello.
+[Anony=Alice,Happy,Middle] Hello.
+[Anony=Alice,Happy,Middle] Hello {cmd:this} world.
+[Anony=Alice,Happy,Middle] Hello {cmd} world.
+[Anony=Alice,Happy,Middle] Hello {cmd:a,b,c} world.
+
+
+# section2:Hello again.
+
+
+# section3:Hello again.
+
+nothing here.
+
+# section4:Hello again.

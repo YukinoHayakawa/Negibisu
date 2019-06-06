@@ -4,17 +4,18 @@
 
 A markup lanugage for visual novels. The syntax should allow the story writer to incorporate common operations into the text of the story without compromising too much of the text readability.
 
-## Features
+## Syntax
 
-- [ ] Chapters and sections can be nested
+- [ ] Sections with titles
 - [ ] Each line is a line of game dialog
 - [ ] A line of dialog can be associated with a speaking character
 - [ ] Commands can be inserted within dialog texts
-- [ ] The text can be annotated for editing purpose
+- [ ] Single-line and multi-line comments
 - [ ] Allow using variables to store and pass command parameters
 - [ ] Allow state restoration and arbitrary location preview
 - [ ] Text characters can be escaped by prefixing a slash (\\)
 - [ ] Use ASCII code 7 (beep) to set breakpoints in the scripts (need to set corresponding breakpoints in the debugger, too)
+- [ ] Support ASCII escape sequences
 
 
 ## Script Structure
@@ -48,6 +49,7 @@ GLOBAL
 TITLE
 COMMENT
 COMMAND
+CHARACTER
 ```
 ## Syntactic Grammar
 
@@ -60,11 +62,11 @@ A grammar suitable for a recursive descent parser.
             Title -> # StringLiteral : StringLiteral
           Content -> Line NewLine Content | nil
              Line -> CharacterTag Dialog | Dialog
-     CharacterTag -> [StringLiteral] | [StringLiteral , StringLiteral , StringLiteral]
+     CharacterTag -> [ StringLiteral (= StringLiteral) ] | [ StringLiteral (= StringLiteral) , StringLiteral , StringLiteral ]
            Dialog -> Command | StringLiteral | StringLiteral Dialog
           Command -> { StringLiteral CommandArgs }
       CommandArgs -> : CommandArgSeq | nil
-    CommandArgSeq -> StringLiteral CommandArgSeq | nil
+    CommandArgSeq -> StringLiteral | StringLiteral , CommandArgSeq | nil
 ```
 
 ## Semantic Rules

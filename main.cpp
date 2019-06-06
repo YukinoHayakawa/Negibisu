@@ -2,6 +2,7 @@
 #include <filesystem>
 
 #include "Lexical/Tokenizer.hpp"
+#include "Parsing/AST/ASTNode.hpp"
 
 #ifdef _WIN32
 #include <Usagi/Extension/Win32/Win32Helper.hpp>
@@ -32,6 +33,11 @@ int main(int argc, char *argv[])
 	Tokenizer t(input_name.u8string(), in);
 	t.tokenize();
 	t.dumpTokens();
+
+	auto token_begin = t.tokens().begin();
+	auto token_end = t.tokens().end();
+	ScriptNode p { token_begin, token_end };
+	p.parse();
 
 	return 0;
 }
