@@ -18,7 +18,7 @@ const char * tokenName(TokenType token)
 		case TokenType::COMMA: return "COMMA";
         case TokenType::COLON: return "COLON";
         case TokenType::EQUAL: return "EQUAL";
-        case TokenType::END_OF_TOKENS: return "END_OF_TOKENS";
+        case TokenType::END_OF_STREAM: return "END_OF_STREAM";
         default: return "UNKNOWN";
     }
 }

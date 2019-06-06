@@ -67,12 +67,15 @@ void StringParser::advanceCursor()
 	advanceSourceCursor();
 }
 
-char32_t StringParser::advance(const bool append, const bool allow_continue)
+char32_t StringParser::advance(
+	const bool append,
+	const bool allow_continue,
+	const bool ignore_newline)
 {
 	assert(mCurrentPos < mSource.size());
 
 	// check newline before next advance to avoid interrupting running strings
-	if(cur() == '\n')
+	if(cur() == '\n' && !ignore_newline)
 	{
 		onNewLine();
 	}

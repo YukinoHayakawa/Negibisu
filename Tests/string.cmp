@@ -1,0 +1,14 @@
+Line 1, Col 1: [STRING_LITERAL] single line string
+Line 1, Col 19: [NEWLINE] 
+Line 2, Col 1: [NEWLINE] 
+Line 3, Col 1: [STRING_LITERAL] multiline string
+Line 5, Col 8: [NEWLINE] 
+Line 6, Col 1: [NEWLINE] 
+Line 7, Col 1: [STRING_LITERAL] string inside
+Line 7, Col 34: [NEWLINE] 
+Line 8, Col 1: [NEWLINE] 
+Line 9, Col 1: [STRING_LITERAL] \\ two slashes
+Line 9, Col 17: [NEWLINE] 
+Line 10, Col 1: [NEWLINE] 
+Line 11, Col 1: [STRING_LITERAL] meaningless escapes
+Line 11, Col 27: [NEWLINE] 

@@ -4,84 +4,65 @@ Line 1, Col 13: [COLON] :
 Line 1, Col 14: [STRING_LITERAL] comments
 Line 1, Col 22: [NEWLINE] 
 Line 2, Col 1: [NEWLINE] 
-Line 3, Col 1: [LEFT_DOUBLE_BRACE] {{
-Line 3, Col 4: [STRING_LITERAL] this should be allowed
-Line 3, Col 27: [RIGHT_DOUBLE_BRACE] }}
 Line 3, Col 29: [NEWLINE] 
-Line 4, Col 1: [LEFT_DOUBLE_BRACE] {{
-Line 4, Col 3: [STRING_LITERAL] this too
-Line 4, Col 11: [RIGHT_DOUBLE_BRACE] }}
 Line 4, Col 13: [NEWLINE] 
 Line 5, Col 1: [NEWLINE] 
-Line 6, Col 1: [LEFT_DOUBLE_BRACE] {{
-Line 6, Col 4: [STRING_LITERAL] o.p:e,r}a{t}or#s
-Line 6, Col 21: [RIGHT_DOUBLE_BRACE] }}
 Line 6, Col 23: [NEWLINE] 
 Line 7, Col 1: [NEWLINE] 
 Line 8, Col 1: [STRING_LITERAL] {{  this is a line of text  }}
 Line 8, Col 35: [NEWLINE] 
 Line 9, Col 1: [NEWLINE] 
-Line 10, Col 1: [LEFT_DOUBLE_BRACE] {{
-Line 10, Col 4: [STRING_LITERAL] }} commenet not ended yet
-Line 10, Col 32: [RIGHT_DOUBLE_BRACE] }}
 Line 10, Col 34: [NEWLINE] 
 Line 11, Col 1: [NEWLINE] 
 Line 12, Col 1: [NEWLINE] 
-Line 13, Col 1: [LEFT_DOUBLE_BRACE] {{
-Line 13, Col 4: [STRING_LITERAL] continuation
-Line 14, Col 8: [RIGHT_DOUBLE_BRACE] }}
 Line 14, Col 10: [NEWLINE] 
 Line 15, Col 1: [NEWLINE] 
-Line 16, Col 1: [STRING_LITERAL] This is a line with
-Line 16, Col 21: [LEFT_DOUBLE_BRACE] {{
-Line 16, Col 24: [STRING_LITERAL] a comment
-Line 16, Col 34: [RIGHT_DOUBLE_BRACE] }}
-Line 16, Col 37: [STRING_LITERAL] inside.
-Line 16, Col 44: [NEWLINE] 
-Line 17, Col 1: [NEWLINE] 
-Line 18, Col 1: [SHARP] #
-Line 18, Col 3: [STRING_LITERAL] test
-Line 18, Col 7: [LEFT_DOUBLE_BRACE] {{
-Line 18, Col 9: [STRING_LITERAL] comment
-Line 18, Col 16: [RIGHT_DOUBLE_BRACE] }}
-Line 18, Col 18: [COLON] :
-Line 18, Col 19: [STRING_LITERAL] work with title?
-Line 18, Col 35: [NEWLINE] 
-Line 19, Col 1: [NEWLINE] 
-Line 20, Col 1: [STRING_LITERAL] This is another line
-Line 20, Col 22: [LEFT_BRACE] {
-Line 20, Col 23: [STRING_LITERAL] with
-Line 20, Col 27: [COLON] :
-Line 20, Col 28: [STRING_LITERAL] a
-Line 20, Col 29: [COMMA] ,
-Line 20, Col 31: [STRING_LITERAL] command
-Line 20, Col 38: [COMMA] ,
-Line 20, Col 40: [LEFT_DOUBLE_BRACE] {{
-Line 20, Col 42: [STRING_LITERAL] and a comment
-Line 20, Col 55: [RIGHT_DOUBLE_BRACE] }}
-Line 20, Col 58: [STRING_LITERAL] in
-Line 20, Col 60: [COMMA] ,
-Line 20, Col 62: [STRING_LITERAL] it
-Line 20, Col 64: [RIGHT_BRACE] }
-Line 20, Col 65: [NEWLINE] 
-Line 21, Col 1: [STRING_LITERAL] This is another line
-Line 21, Col 22: [LEFT_BRACE] {
-Line 21, Col 23: [STRING_LITERAL] with
-Line 21, Col 27: [COLON] :
-Line 21, Col 28: [STRING_LITERAL] a
-Line 21, Col 29: [COMMA] ,
-Line 21, Col 31: [STRING_LITERAL] command
-Line 21, Col 38: [COMMA] ,
-Line 21, Col 40: [LEFT_DOUBLE_BRACE] {{
-Line 21, Col 42: [STRING_LITERAL] and } a comment
-Line 21, Col 57: [RIGHT_DOUBLE_BRACE] }}
-Line 21, Col 60: [STRING_LITERAL] in
-Line 21, Col 62: [COMMA] ,
-Line 21, Col 64: [STRING_LITERAL] it
-Line 21, Col 66: [RIGHT_BRACE] }
-Line 21, Col 67: [NEWLINE] 
-Line 22, Col 1: [NEWLINE] 
-Line 23, Col 1: [LEFT_DOUBLE_BRACE] {{
-Line 23, Col 3: [STRING_LITERAL] # im a dummy title
-Line 23, Col 21: [RIGHT_DOUBLE_BRACE] }}
-Line 23, Col 23: [NEWLINE] 
+Line 19, Col 3: [NEWLINE] 
+Line 20, Col 1: [NEWLINE] 
+Line 21, Col 1: [STRING_LITERAL] empty comment
+Line 21, Col 19: [NEWLINE] 
+Line 22, Col 5: [NEWLINE] 
+Line 23, Col 1: [NEWLINE] 
+Line 26, Col 3: [NEWLINE] 
+Line 27, Col 1: [NEWLINE] 
+Line 30, Col 3: [NEWLINE] 
+Line 31, Col 1: [NEWLINE] 
+Line 32, Col 9: [NEWLINE] 
+Line 33, Col 1: [NEWLINE] 
+Line 34, Col 1: [STRING_LITERAL] This is a line with inside.
+Line 34, Col 43: [NEWLINE] 
+Line 35, Col 1: [NEWLINE] 
+Line 36, Col 1: [SHARP] #
+Line 36, Col 3: [STRING_LITERAL] test
+Line 36, Col 18: [COLON] :
+Line 36, Col 19: [STRING_LITERAL] work with title?
+Line 36, Col 35: [NEWLINE] 
+Line 37, Col 1: [NEWLINE] 
+Line 38, Col 1: [STRING_LITERAL] This is another line
+Line 38, Col 22: [LEFT_BRACE] {
+Line 38, Col 23: [STRING_LITERAL] with
+Line 38, Col 27: [COLON] :
+Line 38, Col 28: [STRING_LITERAL] a
+Line 38, Col 29: [COMMA] ,
+Line 38, Col 31: [STRING_LITERAL] command
+Line 38, Col 38: [COMMA] ,
+Line 38, Col 58: [STRING_LITERAL] in
+Line 38, Col 60: [COMMA] ,
+Line 38, Col 62: [STRING_LITERAL] it
+Line 38, Col 64: [RIGHT_BRACE] }
+Line 38, Col 65: [NEWLINE] 
+Line 39, Col 1: [STRING_LITERAL] This is another line
+Line 39, Col 22: [LEFT_BRACE] {
+Line 39, Col 23: [STRING_LITERAL] with
+Line 39, Col 27: [COLON] :
+Line 39, Col 28: [STRING_LITERAL] a
+Line 39, Col 29: [COMMA] ,
+Line 39, Col 31: [STRING_LITERAL] command
+Line 39, Col 38: [COMMA] ,
+Line 39, Col 60: [STRING_LITERAL] in
+Line 39, Col 62: [COMMA] ,
+Line 39, Col 64: [STRING_LITERAL] it
+Line 39, Col 66: [RIGHT_BRACE] }
+Line 39, Col 67: [NEWLINE] 
+Line 40, Col 1: [NEWLINE] 
+Line 41, Col 23: [NEWLINE] 

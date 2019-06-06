@@ -11,15 +11,15 @@ for file in glob.glob("*.negi"):
     diff_name = test_case_name + ".diff"
     cmp_name = test_case_name + ".cmp"
 
-    with open(out_name, "w") as test_output:
+    with open(out_name, "w", newline='\n') as test_output:
         subprocess.Popen(
             ["../../../../x64/Debug/Negibisu", file],
             stdout=test_output
         ).wait()
 
-    with open(diff_name, "w") as diff_output:
+    with open(diff_name, "w", newline='\n') as diff_output:
         subprocess.Popen(
-            ["diff", '--strip-trailing-cr', out_name, cmp_name],
+            ["diff", '--strip-trailing-cr', cmp_name, out_name],
             stdout=diff_output
         ).wait()
 

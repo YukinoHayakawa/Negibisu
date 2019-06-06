@@ -50,9 +50,13 @@ protected:
 	 * be appended to the parsed uft-8 string.
 	 * \param allow_continue If true, a slash (\) at the end of line will
 	 * cause appending of the content of next line to the current one.
+	 * \param ignore_newline
 	 * \return
 	 */
-	char32_t advance(bool append = true, bool allow_continue = true);
+	char32_t advance(
+		bool append = true,
+		bool allow_continue = true,
+		bool ignore_newline = false);
 
 	// report error with current source position.
 	void error(const std::string &msg) const;

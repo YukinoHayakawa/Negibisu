@@ -32,10 +32,7 @@ void Tokenizer::tokenize()
 		{
 			if(next() == '{')
 			{
-				advance();
-				advance();
-				endToken(TokenType::LEFT_DOUBLE_BRACE);
-				enterEnvironment(Environment::COMMENT);
+				ignoreComment();
 			}
 			else
 			{
@@ -49,10 +46,8 @@ void Tokenizer::tokenize()
 		{
 			if(next() == '}')
 			{
-				exitEnvironment(Environment::COMMENT);
-				advance();
-				advance();
-				endToken(TokenType::RIGHT_DOUBLE_BRACE);
+				// }} should already be consumed by ignoreComment()
+				assert(false);
 			}
 			else
 			{
@@ -136,7 +131,7 @@ void Tokenizer::onNewLine()
 				error("Expected a ].");
 				break;
 			case Environment::COMMENT:
-				error("Expected a }}. ");
+				error("Expected a }}.");
 				break;
 			default: ;
 		}
@@ -234,7 +229,7 @@ void Tokenizer::readStringLiteral()
 			break;
 		}
 		// escape next character. note that \\\n is hidden from by advance()
-		if(this_char == '\\')
+		if(this_char == '\\' && !escape_next)
 		{
 			advance(false);
 			escape_next = true;
@@ -254,6 +249,11 @@ void Tokenizer::readStringLiteral()
 			escape_next = false;
 			goto read_next;
 		}
+		if(cur() == '{' && next() == '{')
+		{
+			ignoreComment();
+			continue;
+		}
 		if(currentEnvironment() == Environment::GLOBAL)
 		{
 			if(isEnvironmentBoundaryChar(this_char))
@@ -267,11 +267,6 @@ void Tokenizer::readStringLiteral()
 		else if(currentEnvironment() == Environment::CHARACTER)
 		{
 			if(isOperatorChar(this_char))
-				break;
-		}
-		else if(currentEnvironment() == Environment::COMMENT)
-		{
-			if(this_char == '}' && next() == '}')
 				break;
 		}
 		else if(currentEnvironment() == Environment::TITLE)
@@ -299,6 +294,26 @@ TokenType Tokenizer::lastTokenType() const
 	if(mTokens.empty())
 		return TokenType::NEWLINE;
 	return mTokens.back().type;
+}
+
+void Tokenizer::ignoreComment()
+{
+	assert(cur() == '{' && next() == '{');
+	advance(false);
+	advance(false);
+	enterEnvironment(Environment::COMMENT);
+	while(cur())
+	{
+		if(cur() == '}' && next() == '}')
+		{
+			exitEnvironment(Environment::COMMENT);
+			advance(false);
+			advance(false);
+			return;
+		}
+		advance(false, false, true);
+	}
+	error("Expected a }}.");
 }
 
 void Tokenizer::dumpTokens()

@@ -13,7 +13,25 @@
 {{ contin\
 uation }}
 
-This is a line with {{ a comment }} inside.
+{{ 
+multiline
+comment
+}}
+
+empty comment {{}}
+{{}}
+
+{{
+    hello
+}}
+
+{{
+    
+}}
+
+{{    }}
+
+This is a line with {{ a comment }}inside.
 
 # test{{comment}}:work with title?
 

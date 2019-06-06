@@ -7,6 +7,7 @@ namespace usagi::negibisu
 {
 enum class TokenType
 {
+	END_OF_STREAM = 0,
 	SHARP,
 	NEWLINE,
     LEFT_BRACKET,
@@ -19,7 +20,6 @@ enum class TokenType
 	COLON,
 	COMMA,
     EQUAL,
-	END_OF_TOKENS
 };
 
 const char * tokenName(TokenType token);
@@ -27,7 +27,7 @@ const char * tokenName(TokenType token);
 struct Token
 {
     int line = 0, column = 0;
-    TokenType type = TokenType::END_OF_TOKENS;
+    TokenType type = TokenType::END_OF_STREAM;
     std::string_view text;
 
     template <typename T>

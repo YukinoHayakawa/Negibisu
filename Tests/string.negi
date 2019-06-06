@@ -1,0 +1,11 @@
+single line string
+
+multi\
+line\
+ string
+
+string {{ with a comment }}inside
+
+\\\\ two slashes
+
+meaningless \e\s\c\a\p\e\s

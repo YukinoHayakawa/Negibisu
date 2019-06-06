@@ -38,6 +38,7 @@ protected:
 	static bool isEnvironmentBoundaryChar(char32_t c);
 	void readStringLiteral();
 	TokenType lastTokenType() const;
+	void ignoreComment();
 
 	void onNewLine() override;
 
