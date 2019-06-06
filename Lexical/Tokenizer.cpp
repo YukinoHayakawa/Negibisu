@@ -106,12 +106,6 @@ void Tokenizer::tokenize()
 	}
 }
 
-void Tokenizer::finalize()
-{
-	beginToken();
-	endToken(TokenType::END_OF_STREAM);
-}
-
 void Tokenizer::resetEnvironment()
 {
 	mEnv = { Environment::GLOBAL };
