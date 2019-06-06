@@ -23,6 +23,7 @@ enum class TokenType
 };
 
 const char * tokenName(TokenType token);
+const char * tokenSymbol(TokenType token);
 
 struct Token
 {

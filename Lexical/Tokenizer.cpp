@@ -106,6 +106,12 @@ void Tokenizer::tokenize()
 	}
 }
 
+void Tokenizer::finalize()
+{
+	beginToken();
+	endToken(TokenType::END_OF_STREAM);
+}
+
 void Tokenizer::resetEnvironment()
 {
 	mEnv = { Environment::GLOBAL };
@@ -193,12 +199,24 @@ void Tokenizer::endToken(TokenType type, std::size_t trim_back)
 	mTokens.push_back(mTempToken);
 }
 
-bool Tokenizer::isOperatorChar(char32_t c)
+bool Tokenizer::isOperatorCharInCharacterName(char32_t c)
 {
 	return isEnvironmentBoundaryChar(c)
-		// these are only effective within [] and {} pairs
 		|| c == ','
 		|| c == '='
+		|| c == ':';
+}
+
+bool Tokenizer::isOperatorCharInCommand(char32_t c)
+{
+	return isEnvironmentBoundaryChar(c)
+		|| c == ','
+		|| c == ':';
+}
+
+bool Tokenizer::isOperatorCharInTitle(char32_t c)
+{
+	return isEnvironmentBoundaryChar(c)
 		|| c == ':';
 }
 
@@ -261,17 +279,17 @@ void Tokenizer::readStringLiteral()
 		}
 		else if(currentEnvironment() == Environment::COMMAND)
 		{
-			if(isOperatorChar(this_char))
+			if(isOperatorCharInCommand(this_char))
 				break;
 		}
 		else if(currentEnvironment() == Environment::CHARACTER)
 		{
-			if(isOperatorChar(this_char))
+			if(isOperatorCharInCharacterName(this_char))
 				break;
 		}
 		else if(currentEnvironment() == Environment::TITLE)
 		{
-			if(isEnvironmentBoundaryChar(this_char) || this_char == ':')
+			if(isOperatorCharInTitle(this_char))
 				break;
 		}
 		// move onto next char

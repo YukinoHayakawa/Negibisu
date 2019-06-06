@@ -34,19 +34,22 @@ protected:
 	void beginToken();
 	void endToken(TokenType type, std::size_t trim_back = 0);
 
-	static bool isOperatorChar(char32_t c);
 	static bool isEnvironmentBoundaryChar(char32_t c);
+	static bool isOperatorCharInCharacterName(char32_t c);
+	static bool isOperatorCharInCommand(char32_t c);
+	static bool isOperatorCharInTitle(char32_t c);
 	void readStringLiteral();
 	TokenType lastTokenType() const;
 	void ignoreComment();
 
 	void onNewLine() override;
+	void resetEnvironment();
 
 public:
 	using StringParser::StringParser;
 
 	void tokenize();
-	void resetEnvironment();
+	void finalize();
 	void dumpTokens();
 	const std::vector<Token> & tokens() const { return mTokens; }
 };
