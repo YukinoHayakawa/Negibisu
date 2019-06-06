@@ -9,17 +9,21 @@ for file in glob.glob("*.negi"):
 
     out_name = test_case_name + ".out"
     diff_name = test_case_name + ".diff"
-    cmp_name = test_case_name + ".cmp"
 
-    with open(out_name, "w", newline='\n') as test_output:
-        subprocess.Popen(
-            ["../../../../x64/Debug/Negibisu", file],
-            stdout=test_output
-        ).wait()
+    with open(out_name, "wb") as test_output:
+        output = subprocess.check_output(
+            ["../../../../x64/Debug/Negibisu", file]
+        )
+        test_output.write(output.replace(b'\r\n', b'\n'))
 
-    with open(diff_name, "w", newline='\n') as diff_output:
+    if not subprocess.check_output(["git", "ls-files", out_name]):
+        print(" - failed (no expected output)")
+        continue
+
+    with open(diff_name, "wb") as diff_output:
         subprocess.Popen(
-            ["diff", '--strip-trailing-cr', cmp_name, out_name],
+            # compare with index
+            ["git", "diff", "--ignore-cr-at-eol", "--", out_name],
             stdout=diff_output
         ).wait()
 

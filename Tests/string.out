@@ -1,3 +1,6 @@
+Token Stream
+============
+
 Line 1, Col 1: [STRING_LITERAL] single line string
 Line 1, Col 19: [NEWLINE] 
 Line 2, Col 1: [NEWLINE] 
@@ -12,3 +15,10 @@ Line 9, Col 17: [NEWLINE]
 Line 10, Col 1: [NEWLINE] 
 Line 11, Col 1: [STRING_LITERAL] meaningless escapes
 Line 11, Col 27: [NEWLINE] 
+
+
+AST
+===
+
+Error at Line 1, Col 1: Expected a #.
+Syntax error.

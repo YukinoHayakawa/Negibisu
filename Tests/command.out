@@ -1,3 +1,6 @@
+Token Stream
+============
+
 Line 1, Col 1: [LEFT_BRACE] {
 Line 1, Col 2: [STRING_LITERAL] command
 Line 1, Col 9: [COLON] :
@@ -54,9 +57,7 @@ Line 18, Col 19: [NEWLINE]
 Line 19, Col 1: [LEFT_BRACE] {
 Line 19, Col 2: [STRING_LITERAL] test
 Line 19, Col 6: [COLON] :
-Line 19, Col 7: [STRING_LITERAL] a
-Line 19, Col 8: [EQUAL] =
-Line 19, Col 9: [STRING_LITERAL] m
+Line 19, Col 7: [STRING_LITERAL] a=m
 Line 19, Col 10: [COMMA] ,
 Line 19, Col 11: [STRING_LITERAL] b
 Line 19, Col 12: [COMMA] ,
@@ -65,3 +66,10 @@ Line 19, Col 14: [COMMA] ,
 Line 19, Col 15: [STRING_LITERAL] "xxx"
 Line 19, Col 20: [RIGHT_BRACE] }
 Line 19, Col 21: [NEWLINE] 
+
+
+AST
+===
+
+Error at Line 1, Col 1: Expected a #.
+Syntax error.

@@ -9,7 +9,7 @@ namespace usagi::negibisu
 class ASTNode
 {
 protected:
-	static constexpr int INDENTATION = 4;
+	static constexpr int INDENTATION = 2;
 
 	using TokenStreamIterator = std::vector<Token>::const_iterator;
 
@@ -38,7 +38,8 @@ public:
 	virtual ~ASTNode() = default;
 
 	virtual void parse() = 0;
-	virtual void print(int indentation = 0) { }
+	virtual void print(std::string &indentation) = 0;
+	// semantic validation
 	virtual void validate() { }
 };
 
@@ -61,6 +62,7 @@ public:
 	using LineNode::LineNode;
 
 	void parse() override;
+	void print(std::string &indentation) override;
 };
 
 class CommandNode : public LineNode
@@ -74,6 +76,7 @@ public:
 	using LineNode::LineNode;
 
 	void parse() override;
+	void print(std::string &indentation) override;
 };
 
 class SectionNode : public ASTNode
@@ -92,7 +95,7 @@ public:
 	using ASTNode::ASTNode;
 
 	void parse() override;
-	void print(int indentation) override;
+	void print(std::string &indentation) override;
 };
 
 class ScriptNode : public ASTNode
@@ -105,6 +108,6 @@ public:
 	using ASTNode::ASTNode;
 
 	void parse() override;
-	void print(int indentation) override;
+	void print(std::string &indentation) override;
 };
 }

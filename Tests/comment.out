@@ -1,3 +1,6 @@
+Token Stream
+============
+
 Line 1, Col 1: [SHARP] #
 Line 1, Col 3: [STRING_LITERAL] test_label
 Line 1, Col 13: [COLON] :
@@ -66,3 +69,18 @@ Line 39, Col 66: [RIGHT_BRACE] }
 Line 39, Col 67: [NEWLINE] 
 Line 40, Col 1: [NEWLINE] 
 Line 41, Col 23: [NEWLINE] 
+
+
+AST
+===
+
+SCRIPT
+  SECTION: script_name="test_label", display_name="comments"
+    DIALOG: char="", alias="", expr="", pos="", text="{{  this is a line of text  }}"
+    DIALOG: char="", alias="", expr="", pos="", text="empty comment"
+    DIALOG: char="", alias="", expr="", pos="", text="This is a line with inside."
+  SECTION: script_name="test", display_name="work with title?"
+    DIALOG: char="", alias="", expr="", pos="", text="This is another line"
+    COMMAND: name=with, args=[a, command, in, it]
+    DIALOG: char="", alias="", expr="", pos="", text="This is another line"
+    COMMAND: name=with, args=[a, command, in, it]

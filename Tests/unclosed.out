@@ -1,3 +1,6 @@
+Token Stream
+============
+
 Error at Line 1, Col 12: Expected a }.
 Error at Line 2, Col 18: Expected a matching {.
 Error at Line 7, Col 11: Expected a ].
@@ -20,3 +23,10 @@ Line 8, Col 6: [LEFT_BRACKET] [
 Line 8, Col 8: [STRING_LITERAL] is also not fine
 Line 8, Col 24: [NEWLINE] 
 Line 9, Col 1: [NEWLINE] 
+
+
+AST
+===
+
+Error at Line 1, Col 3: Expected a STRING_LITERAL.
+Syntax error.

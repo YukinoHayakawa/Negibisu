@@ -1,3 +1,6 @@
+Token Stream
+============
+
 Line 1, Col 1: [SHARP] #
 Line 1, Col 2: [STRING_LITERAL] test
 Line 1, Col 6: [COLON] :
@@ -17,3 +20,10 @@ Line 5, Col 1: [SHARP] #
 Line 6, Col 2: [STRING_LITERAL] conutiunation
 Line 7, Col 5: [COLON] :
 Line 8, Col 9: [STRING_LITERAL] test title
+
+
+AST
+===
+
+Error at Line 2, Col 27: Expected a line of text or a command.
+Syntax error.

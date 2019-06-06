@@ -73,7 +73,7 @@ std::string_view ASTNode::consumeString()
 
 void ASTNode::error(const std::string &msg) const
 {
-	LOG(error, "at Line {}, Col {}: {}",
+	fmt::print("Error at Line {}, Col {}: {}.\n",
 		mTokenBegin->line,
 		mTokenBegin->column,
 		msg
@@ -99,7 +99,8 @@ void DialogNode::parse()
 		if(currentType() == TokenType::EQUAL)
 		{
 			advance();
-			mAlias = consumeString();
+			mAlias = mCharacter;
+			mCharacter = consumeString();
 		}
 		// optional expression and position change
 		if(currentType() == TokenType::COMMA)
@@ -119,6 +120,20 @@ void DialogNode::parse()
 	}
 }
 
+void DialogNode::print(std::string &indentation)
+{
+	fmt::print(
+		"{}DIALOG: char=\"{}\", alias=\"{}\", "
+		"expr=\"{}\", pos=\"{}\", text=\"{}\"\n",
+		indentation,
+		mCharacter,
+		mAlias,
+		mExpression,
+		mPosition,
+		mText
+	);
+}
+
 void CommandNode::parseArgs()
 {
 	while(streamNotEnded())
@@ -134,7 +149,7 @@ void CommandNode::parseArgs()
 				return;
 
 			default:
-				error("Expected a , or }.");
+				error("Expected a , or }");
 		}
 	}
 }
@@ -149,6 +164,28 @@ void CommandNode::parse()
 		parseArgs();
 	}
 	consume(TokenType::RIGHT_BRACE);
+}
+
+void CommandNode::print(std::string &indentation)
+{
+	fmt::print("{}COMMAND: name={}, args=[{}]\n",
+		indentation,
+		mCommandName,
+		fmt::join(mArgs.begin(), mArgs.end(), ", ")
+	);
+}
+
+void SectionNode::print(std::string &indentation)
+{
+	fmt::print(
+		"{}SECTION: script_name=\"{}\", display_name=\"{}\"\n",
+		indentation,
+		mScriptName, mDisplayName
+	);
+	indentation.append(INDENTATION, ' ');
+	for(auto &&line : mLines)
+		line->print(indentation);
+	indentation.erase(indentation.end() - INDENTATION, indentation.end());
 }
 
 void SectionNode::parseTitle()
@@ -179,7 +216,7 @@ void SectionNode::parseContent()
 				advance();
 				continue;
 			default:
-				error("Expected a dialog or command.");
+				error("Expected a line of text or a command");
 		}
 	}
 }
@@ -202,10 +239,6 @@ void SectionNode::parse()
 	parseContent();
 }
 
-void SectionNode::print(int indentation)
-{
-}
-
 void ScriptNode::parseSection()
 {
 	mSections.emplace_back(mTokenBegin, mTokenEnd);
@@ -221,8 +254,12 @@ void ScriptNode::parse()
 	}
 }
 
-void ScriptNode::print(int indentation)
+void ScriptNode::print(std::string &indentation)
 {
-
+	fmt::print("{}SCRIPT\n", indentation);
+	indentation.append(INDENTATION, ' ');
+	for(auto &&section : mSections)
+		section.print(indentation);
+	indentation.erase(indentation.end() - INDENTATION, indentation.end());
 }
 }

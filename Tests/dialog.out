@@ -1,3 +1,6 @@
+Token Stream
+============
+
 Line 1, Col 1: [STRING_LITERAL] This is a line of dialog.
 Line 1, Col 26: [NEWLINE] 
 Line 2, Col 1: [NEWLINE] 
@@ -37,3 +40,10 @@ Line 17, Col 21: [STRING_LITERAL] Mr. Mo    on likes to laugh.
 Line 18, Col 23: [NEWLINE] 
 Line 19, Col 1: [NEWLINE] 
 Line 20, Col 1: [STRING_LITERAL] continuation at last line 
+
+
+AST
+===
+
+Error at Line 1, Col 1: Expected a #.
+Syntax error.
