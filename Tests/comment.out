@@ -81,6 +81,6 @@ SCRIPT
     DIALOG: char="", alias="", expr="", pos="", text="This is a line with inside."
   SECTION: script_name="test", display_name="work with title?"
     DIALOG: char="", alias="", expr="", pos="", text="This is another line"
-    COMMAND: name=with, args=[a, command, in, it]
+    COMMAND: name="with", args=[a, command, in, it]
     DIALOG: char="", alias="", expr="", pos="", text="This is another line"
-    COMMAND: name=with, args=[a, command, in, it]
+    COMMAND: name="with", args=[a, command, in, it]

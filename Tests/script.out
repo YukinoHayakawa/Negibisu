@@ -178,13 +178,13 @@ SCRIPT
     DIALOG: char="Alice", alias="", expr="Happy", pos="Middle", text="Hello."
     DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello."
     DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
-    COMMAND: name=cmd, args=[this]
+    COMMAND: name="cmd", args=[this]
     DIALOG: char="", alias="", expr="", pos="", text="world."
     DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
-    COMMAND: name=cmd, args=[]
+    COMMAND: name="cmd", args=[]
     DIALOG: char="", alias="", expr="", pos="", text="world."
     DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
-    COMMAND: name=cmd, args=[a, b, c]
+    COMMAND: name="cmd", args=[a, b, c]
     DIALOG: char="", alias="", expr="", pos="", text="world."
   SECTION: script_name="section2", display_name="Hello again."
   SECTION: script_name="section3", display_name="Hello again."
