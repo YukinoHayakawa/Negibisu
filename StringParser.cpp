@@ -1,6 +1,6 @@
 ﻿#include "StringParser.hpp"
 
-#include <utfcpp/utf8.h>
+#include <utf8.h>
 
 #include <Usagi/Core/Logging.hpp>
 #include <Usagi/Utility/Stream.hpp>

@@ -1,6 +1,6 @@
 ﻿#include "Token.hpp"
 
-#include <cassert>
+#include <iostream>
 
 namespace usagi::negibisu
 {
@@ -44,5 +44,16 @@ const char * tokenSymbol(const TokenType token)
 		case TokenType::END_OF_STREAM: return "END_OF_STREAM";
 		default: return "UNKNOWN";
 	}
+}
+
+std::ostream & operator<<(std::ostream &os, const Token &t)
+{
+	return os << t.text;
+}
+
+std::ostream & operator<<(std::ostream &os, const TokenRef &t)
+{
+	if(!t.ref) return os;
+	return os << t->text;
 }
 }

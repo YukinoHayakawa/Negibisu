@@ -4,7 +4,8 @@
 #include <fmt/printf.h>
 
 #include "Lexical/Tokenizer.hpp"
-#include "Parsing/AST/ASTNode.hpp"
+#include "Parsing/ASTNode.hpp"
+#include "Parsing/ScriptNode.hpp"
 
 #ifdef _WIN32
 #include <Usagi/Extension/Win32/Win32Helper.hpp>

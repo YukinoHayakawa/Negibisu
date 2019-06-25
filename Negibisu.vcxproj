@@ -14,19 +14,19 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{67D7F7B8-4630-445E-8DAF-009D8D59FD15}</ProjectGuid>
     <RootNamespace>Negibisu</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -73,14 +73,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Parsing\AST\ASTNode.hpp" />
+    <ClInclude Include="Intermediate\Instruction.hpp" />
+    <ClInclude Include="Intermediate\Section.hpp" />
+    <ClInclude Include="Parsing\ASTNode.hpp" />
+    <ClInclude Include="Parsing\CommandNode.hpp" />
+    <ClInclude Include="Parsing\DialogNode.hpp" />
+    <ClInclude Include="Parsing\LineNode.hpp" />
+    <ClInclude Include="Parsing\ScriptNode.hpp" />
+    <ClInclude Include="Parsing\SectionNode.hpp" />
+    <ClInclude Include="Semantic\AssetTracking.hpp" />
+    <ClInclude Include="Semantic\SemanticContext.hpp" />
+    <ClInclude Include="Semantic\StageTracking.hpp" />
     <ClInclude Include="StringParser.hpp" />
     <ClInclude Include="Lexical\Token.hpp" />
     <ClInclude Include="Lexical\Tokenizer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Intermediate\Section.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Parsing\AST\ASTNode.cpp" />
+    <ClCompile Include="Parsing\ASTNode.cpp" />
+    <ClCompile Include="Parsing\CommandNode.cpp" />
+    <ClCompile Include="Parsing\DialogNode.cpp" />
+    <ClCompile Include="Parsing\LineNode.cpp" />
+    <ClCompile Include="Parsing\ScriptNode.cpp" />
+    <ClCompile Include="Parsing\SectionNode.cpp" />
+    <ClCompile Include="Semantic\SemanticContext.cpp" />
     <ClCompile Include="StringParser.cpp" />
     <ClCompile Include="Lexical\Token.cpp" />
     <ClCompile Include="Lexical\Tokenizer.cpp" />
