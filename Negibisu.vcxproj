@@ -74,13 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexical\SourcePosition.hpp" />
-    <ClInclude Include="Parsing\ASTNode.hpp" />
-    <ClInclude Include="Parsing\CommandNode.hpp" />
-    <ClInclude Include="Parsing\DialogNode.hpp" />
-    <ClInclude Include="Parsing\LineNode.hpp" />
-    <ClInclude Include="Parsing\ScriptNode.hpp" />
-    <ClInclude Include="Parsing\SectionNode.hpp" />
-    <ClInclude Include="Semantic\SemanticContext.hpp" />
+    <ClInclude Include="AST\ASTNode.hpp" />
+    <ClInclude Include="AST\CommandNode.hpp" />
+    <ClInclude Include="AST\DialogNode.hpp" />
+    <ClInclude Include="AST\LineNode.hpp" />
+    <ClInclude Include="AST\ScriptNode.hpp" />
+    <ClInclude Include="AST\SectionNode.hpp" />
     <ClInclude Include="Semantic\SymbolTable.hpp" />
     <ClInclude Include="Lexical\StringParser.hpp" />
     <ClInclude Include="Lexical\Token.hpp" />
@@ -89,13 +88,12 @@
   <ItemGroup>
     <ClCompile Include="Lexical\SourcePosition.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Parsing\ASTNode.cpp" />
-    <ClCompile Include="Parsing\CommandNode.cpp" />
-    <ClCompile Include="Parsing\DialogNode.cpp" />
-    <ClCompile Include="Parsing\LineNode.cpp" />
-    <ClCompile Include="Parsing\ScriptNode.cpp" />
-    <ClCompile Include="Parsing\SectionNode.cpp" />
-    <ClCompile Include="Semantic\SemanticContext.cpp" />
+    <ClCompile Include="AST\ASTNode.cpp" />
+    <ClCompile Include="AST\CommandNode.cpp" />
+    <ClCompile Include="AST\DialogNode.cpp" />
+    <ClCompile Include="AST\LineNode.cpp" />
+    <ClCompile Include="AST\ScriptNode.cpp" />
+    <ClCompile Include="AST\SectionNode.cpp" />
     <ClCompile Include="Semantic\SymbolTable.cpp" />
     <ClCompile Include="Lexical\StringParser.cpp" />
     <ClCompile Include="Lexical\Token.cpp" />

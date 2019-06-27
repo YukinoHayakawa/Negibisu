@@ -24,6 +24,8 @@ void SectionNode::parseTitle()
 	mScriptName = consumeString();
 	consume(TokenType::COLON);
 	mDisplayName = consumeString();
+
+    mSymbolTable.lookup(mScriptName.ref, SymbolType::SCRIPT);
 }
 
 void SectionNode::parseContent()

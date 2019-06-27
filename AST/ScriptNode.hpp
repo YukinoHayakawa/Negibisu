@@ -15,5 +15,10 @@ public:
 
 	void parse(SymbolTable *table = nullptr) override;
 	void print(std::string &indentation) override;
+
+    const std::vector<SectionNode> & sections() const
+    {
+        return mSections;
+    }
 };
 }

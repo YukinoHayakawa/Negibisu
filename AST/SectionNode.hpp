@@ -25,5 +25,15 @@ public:
 
 	void parse(SymbolTable *table) override;
 	void print(std::string &indentation) override;
+
+    const SymbolTable & symbolTable() const
+    {
+        return mSymbolTable;
+    }
+
+    std::string_view scriptName() const
+    {
+        return mScriptName->text;
+    }
 };
 }

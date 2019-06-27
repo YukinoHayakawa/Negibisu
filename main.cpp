@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include "Lexical/Tokenizer.hpp"
-#include "Parsing/ASTNode.hpp"
-#include "Parsing/ScriptNode.hpp"
+#include "AST/ASTNode.hpp"
+#include "AST/ScriptNode.hpp"
 
 #ifdef _WIN32
 #include <Usagi/Extension/Win32/Win32Helper.hpp>
@@ -39,6 +39,21 @@ int main(int argc, char *argv[])
 		p.parse();
 		std::string indent;
 		p.print(indent);
+
+        for(auto &s : p.sections())
+        {
+            fmt::print("\n\n");
+            fmt::print("Symbol Tables: {}\n", s.scriptName());
+            fmt::print("========================\n\n");
+
+            s.symbolTable().dumpSymbols();
+
+            fmt::print("\n\n");
+            fmt::print("String Literals: {}\n", s.scriptName());
+            fmt::print("========================\n\n");
+
+            s.symbolTable().dumpStringLiterals();
+        }
 	}
 	catch(const std::exception &e)
 	{
