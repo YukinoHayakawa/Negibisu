@@ -5,10 +5,10 @@ namespace usagi::negibisu
 void ScriptNode::parseSection()
 {
 	mSections.emplace_back(mTokenBegin, mTokenEnd);
-	mSections.back().parse();
+	mSections.back().parse(nullptr);
 }
 
-void ScriptNode::parse()
+void ScriptNode::parse(SymbolTable *table)
 {
 	while(streamNotEnded())
 	{

@@ -2,7 +2,7 @@
 
 namespace usagi::negibisu
 {
-void DialogNode::parse()
+void DialogNode::parse(SymbolTable *table)
 {
 	if(currentType() == TokenType::LEFT_BRACKET)
 	{

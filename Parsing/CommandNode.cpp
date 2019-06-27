@@ -17,12 +17,16 @@ void CommandNode::parseArgs()
 			return;
 
 		default:
-			error("Expected a , or }");
+			syntaxError(
+                "Expected a {} or {}.",
+                tokenSymbol(TokenType::COMMA),
+                tokenSymbol(TokenType::RIGHT_BRACE)
+            );
 		}
 	}
 }
 
-void CommandNode::parse()
+void CommandNode::parse(SymbolTable *table)
 {
 	consume(TokenType::LEFT_BRACE);
 	mCommandName = consumeString();

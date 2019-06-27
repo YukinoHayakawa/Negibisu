@@ -3,11 +3,13 @@
 #include <memory>
 
 #include "LineNode.hpp"
+#include "../Semantic/SymbolTable.hpp"
 
 namespace usagi::negibisu
 {
 class SectionNode : public ASTNode
 {
+	SymbolTable mSymbolTable;
 	TokenRef mScriptName;
 	TokenRef mDisplayName;
 
@@ -21,7 +23,7 @@ class SectionNode : public ASTNode
 public:
 	using ASTNode::ASTNode;
 
-	void parse() override;
+	void parse(SymbolTable *table) override;
 	void print(std::string &indentation) override;
 };
 }

@@ -46,7 +46,7 @@ void SectionNode::parseContent()
 				advance();
 				continue;
 			default:
-				error("Expected a line of text or a command");
+				syntaxError("Expected a line of text or a command.");
 		}
 	}
 }
@@ -54,16 +54,16 @@ void SectionNode::parseContent()
 void SectionNode::parseDialog()
 {
 	mLines.push_back(std::make_unique<DialogNode>(mTokenBegin, mTokenEnd));
-	mLines.back()->parse();
+	mLines.back()->parse(&mSymbolTable);
 }
 
 void SectionNode::parseCommand()
 {
 	mLines.push_back(std::make_unique<CommandNode>(mTokenBegin, mTokenEnd));
-	mLines.back()->parse();
+	mLines.back()->parse(&mSymbolTable);
 }
 
-void SectionNode::parse()
+void SectionNode::parse(SymbolTable *table)
 {
 	parseTitle();
 	parseContent();

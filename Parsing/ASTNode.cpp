@@ -57,7 +57,7 @@ bool ASTNode::streamNotEnded() const
 void ASTNode::expect(const TokenType token_type) const
 {
 	if(currentType() != token_type)
-		error(fmt::format("Expected a {}", tokenSymbol(token_type)));
+		syntaxError("Expected a {}.", tokenSymbol(token_type));
 }
 
 void ASTNode::consume(const TokenType token_type)
@@ -72,16 +72,6 @@ TokenRef ASTNode::consumeString()
 	const auto ret = curRef();
 	advance();
 	return ret;
-}
-
-void ASTNode::error(const std::string &msg) const
-{
-	fmt::print("Error at Line {}, Col {}: {}.\n",
-		mTokenBegin->line,
-		mTokenBegin->column,
-		msg
-	);
-	throw std::runtime_error("Syntax error.");
 }
 
 ASTNode::ASTNode(

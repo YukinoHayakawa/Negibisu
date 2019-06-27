@@ -16,7 +16,7 @@ class DialogNode : public LineNode
 public:
 	using LineNode::LineNode;
 
-	void parse() override;
+	void parse(SymbolTable *table) override;
 	void print(std::string &indentation) override;
 };;
 }

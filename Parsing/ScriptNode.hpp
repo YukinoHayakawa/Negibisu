@@ -13,7 +13,7 @@ class ScriptNode : public ASTNode
 public:
 	using ASTNode::ASTNode;
 
-	void parse() override;
+	void parse(SymbolTable *table = nullptr) override;
 	void print(std::string &indentation) override;
 };
 }
