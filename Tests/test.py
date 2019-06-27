@@ -11,10 +11,15 @@ for file in glob.glob("*.negi"):
     diff_name = test_case_name + ".diff"
 
     with open(out_name, "wb") as test_output:
-        output = subprocess.check_output(
-            ["../../../../x64/Debug/Negibisu", file]
-        )
-        test_output.write(output.replace(b'\r\n', b'\n'))
+        try:
+            output = subprocess.check_output(
+                ["../../../../x64/Debug/Negibisu", file]
+            )
+            test_output.write(output.replace(b'\r\n', b'\n'))
+        # https://stackoverflow.com/questions/7575284/check-output-from-calledprocesserror
+        except subprocess.CalledProcessError as e:
+            test_output.write(e.output.replace(b'\r\n', b'\n'))
+            sys.stdout.write("(crashed)")
 
     if not subprocess.check_output(["git", "ls-files", out_name]):
         print(" - failed (no expected output)")
