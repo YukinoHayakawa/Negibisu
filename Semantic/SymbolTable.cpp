@@ -14,7 +14,10 @@ std::string_view to_string(SymbolType t)
         case SymbolType::MUSIC: return "Music";
         case SymbolType::SCRIPT: return "Script";
         case SymbolType::SCENE: return "Scene";
-        case SymbolType::TEXT: return "Text";
+        case SymbolType::POSITION: return "Position";
+        case SymbolType::GAME_TEXT: return "GameText";
+        case SymbolType::IDENTIFIER: return "Identifier";
+        case SymbolType::UNKNOWN: return "Unknown";
         default: return "Unknown";
     }
 }
@@ -24,7 +27,7 @@ std::ostream & operator<<(std::ostream &os, SymbolType t)
     return os << to_string(t);
 }
 
-void SymbolReferenceScope::extendScope(std::size_t position)
+void SymbolInfo::extendScope(std::size_t position)
 {
     assert(position != -1);
 
@@ -36,7 +39,7 @@ void SymbolTable::lookup(const Token *token, const SymbolType type)
 {
     const auto ref = symbols.try_emplace(
         token->text,
-        SymbolReferenceScope { }
+        SymbolInfo { }
     );
     auto &symbol = ref.first->second;
 
@@ -57,6 +60,27 @@ void SymbolTable::lookup(const Token *token, const SymbolType type)
             );
         }
         symbol.extendScope(token->index);
+    }
+}
+
+void SymbolTable::addStringLiteral(const Token *token)
+{
+    string_literals.emplace(token->text);
+}
+
+void SymbolTable::dumpSymbols() const
+{
+    for(auto &&s : symbols)
+    {
+        fmt::print("{}: {}\n", s.first, s.second.type);
+    }
+}
+
+void SymbolTable::dumpStringLiterals() const
+{
+    for(auto &&s : string_literals)
+    {
+        fmt::print("\"{}\"\n", s);
     }
 }
 }

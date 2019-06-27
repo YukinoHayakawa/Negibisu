@@ -16,7 +16,6 @@ Line 10, Col 1: [NEWLINE]
 Line 11, Col 1: [STRING_LITERAL] meaningless escapes
 Line 11, Col 27: [NEWLINE] 
 
-
 AST
 ===
 

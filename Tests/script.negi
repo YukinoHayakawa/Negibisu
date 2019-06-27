@@ -17,8 +17,8 @@ A lot of newlines.
 
 
 {{ Begin with comment }} Dialog.
-Dialog. {{ End with comment }} 
-Dialog. {{ End with comment }} 
+Dialog. {{ End with comment }}
+Dialog.{{ End with comment, both trailing spaces stripped }}
 
 Dialog {{ with a comment in between }}ends here.
 [Mystery Girl=Alice] Hello.
@@ -27,11 +27,19 @@ Hello.
 Hello.
 
 [Alice, Happy, Middle] Hello.
-[Alice ,Happy,Middle] Hello.
+[ Alice ,Happy,Middle] Hello.
 [Anony=Alice,Happy,Middle] Hello.
 [Anony=Alice,Happy,Middle] Hello {cmd:this} world.
-[Anony=Alice,Happy,Middle] Hello {cmd} world.
+[ Anony = Alice,Happy,Middle] Hello {cmd} world.
 [Anony=Alice,Happy,Middle] Hello {cmd:a,b,c} world.
+
+[Anony=Alice,Happy,Middle] Hello   {cmd:two spaces} world.
+[Anony=Alice,Happy,Middle] Hello  {cmd:one space}world.
+[Anony=Alice,Happy,Middle] Hello{cmd:one space}  world.
+
+[Alice] Hello {{cmd:two spaces}} world.
+[Alice] Hello {{cmd:one space}}world.
+[Alice] Hello{{cmd:one space}} world.
 
 
 # section2:Hello again.

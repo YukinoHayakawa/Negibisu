@@ -28,9 +28,9 @@ Line 18, Col 1: [NEWLINE]
 Line 19, Col 26: [STRING_LITERAL] Dialog.
 Line 19, Col 33: [NEWLINE] 
 Line 20, Col 1: [STRING_LITERAL] Dialog.
-Line 20, Col 32: [NEWLINE] 
+Line 20, Col 31: [NEWLINE] 
 Line 21, Col 1: [STRING_LITERAL] Dialog.
-Line 21, Col 32: [NEWLINE] 
+Line 21, Col 61: [NEWLINE] 
 Line 22, Col 1: [NEWLINE] 
 Line 23, Col 1: [STRING_LITERAL] Dialog ends here.
 Line 23, Col 49: [NEWLINE] 
@@ -61,14 +61,14 @@ Line 29, Col 22: [RIGHT_BRACKET] ]
 Line 29, Col 24: [STRING_LITERAL] Hello.
 Line 29, Col 30: [NEWLINE] 
 Line 30, Col 1: [LEFT_BRACKET] [
-Line 30, Col 2: [STRING_LITERAL] Alice
-Line 30, Col 8: [COMMA] ,
-Line 30, Col 9: [STRING_LITERAL] Happy
-Line 30, Col 14: [COMMA] ,
-Line 30, Col 15: [STRING_LITERAL] Middle
-Line 30, Col 21: [RIGHT_BRACKET] ]
-Line 30, Col 23: [STRING_LITERAL] Hello.
-Line 30, Col 29: [NEWLINE] 
+Line 30, Col 3: [STRING_LITERAL] Alice
+Line 30, Col 9: [COMMA] ,
+Line 30, Col 10: [STRING_LITERAL] Happy
+Line 30, Col 15: [COMMA] ,
+Line 30, Col 16: [STRING_LITERAL] Middle
+Line 30, Col 22: [RIGHT_BRACKET] ]
+Line 30, Col 24: [STRING_LITERAL] Hello.
+Line 30, Col 30: [NEWLINE] 
 Line 31, Col 1: [LEFT_BRACKET] [
 Line 31, Col 2: [STRING_LITERAL] Anony
 Line 31, Col 7: [EQUAL] =
@@ -89,7 +89,7 @@ Line 32, Col 14: [STRING_LITERAL] Happy
 Line 32, Col 19: [COMMA] ,
 Line 32, Col 20: [STRING_LITERAL] Middle
 Line 32, Col 26: [RIGHT_BRACKET] ]
-Line 32, Col 28: [STRING_LITERAL] Hello
+Line 32, Col 28: [STRING_LITERAL] Hello 
 Line 32, Col 34: [LEFT_BRACE] {
 Line 32, Col 35: [STRING_LITERAL] cmd
 Line 32, Col 38: [COLON] :
@@ -98,20 +98,20 @@ Line 32, Col 43: [RIGHT_BRACE] }
 Line 32, Col 45: [STRING_LITERAL] world.
 Line 32, Col 51: [NEWLINE] 
 Line 33, Col 1: [LEFT_BRACKET] [
-Line 33, Col 2: [STRING_LITERAL] Anony
-Line 33, Col 7: [EQUAL] =
-Line 33, Col 8: [STRING_LITERAL] Alice
-Line 33, Col 13: [COMMA] ,
-Line 33, Col 14: [STRING_LITERAL] Happy
-Line 33, Col 19: [COMMA] ,
-Line 33, Col 20: [STRING_LITERAL] Middle
-Line 33, Col 26: [RIGHT_BRACKET] ]
-Line 33, Col 28: [STRING_LITERAL] Hello
-Line 33, Col 34: [LEFT_BRACE] {
-Line 33, Col 35: [STRING_LITERAL] cmd
-Line 33, Col 38: [RIGHT_BRACE] }
-Line 33, Col 40: [STRING_LITERAL] world.
-Line 33, Col 46: [NEWLINE] 
+Line 33, Col 3: [STRING_LITERAL] Anony
+Line 33, Col 9: [EQUAL] =
+Line 33, Col 11: [STRING_LITERAL] Alice
+Line 33, Col 16: [COMMA] ,
+Line 33, Col 17: [STRING_LITERAL] Happy
+Line 33, Col 22: [COMMA] ,
+Line 33, Col 23: [STRING_LITERAL] Middle
+Line 33, Col 29: [RIGHT_BRACKET] ]
+Line 33, Col 31: [STRING_LITERAL] Hello 
+Line 33, Col 37: [LEFT_BRACE] {
+Line 33, Col 38: [STRING_LITERAL] cmd
+Line 33, Col 41: [RIGHT_BRACE] }
+Line 33, Col 43: [STRING_LITERAL] world.
+Line 33, Col 49: [NEWLINE] 
 Line 34, Col 1: [LEFT_BRACKET] [
 Line 34, Col 2: [STRING_LITERAL] Anony
 Line 34, Col 7: [EQUAL] =
@@ -121,7 +121,7 @@ Line 34, Col 14: [STRING_LITERAL] Happy
 Line 34, Col 19: [COMMA] ,
 Line 34, Col 20: [STRING_LITERAL] Middle
 Line 34, Col 26: [RIGHT_BRACKET] ]
-Line 34, Col 28: [STRING_LITERAL] Hello
+Line 34, Col 28: [STRING_LITERAL] Hello 
 Line 34, Col 34: [LEFT_BRACE] {
 Line 34, Col 35: [STRING_LITERAL] cmd
 Line 34, Col 38: [COLON] :
@@ -134,29 +134,96 @@ Line 34, Col 44: [RIGHT_BRACE] }
 Line 34, Col 46: [STRING_LITERAL] world.
 Line 34, Col 52: [NEWLINE] 
 Line 35, Col 1: [NEWLINE] 
-Line 36, Col 1: [NEWLINE] 
-Line 37, Col 1: [SHARP] #
-Line 37, Col 3: [STRING_LITERAL] section2
-Line 37, Col 11: [COLON] :
-Line 37, Col 12: [STRING_LITERAL] Hello again.
-Line 37, Col 24: [NEWLINE] 
-Line 38, Col 1: [NEWLINE] 
+Line 36, Col 1: [LEFT_BRACKET] [
+Line 36, Col 2: [STRING_LITERAL] Anony
+Line 36, Col 7: [EQUAL] =
+Line 36, Col 8: [STRING_LITERAL] Alice
+Line 36, Col 13: [COMMA] ,
+Line 36, Col 14: [STRING_LITERAL] Happy
+Line 36, Col 19: [COMMA] ,
+Line 36, Col 20: [STRING_LITERAL] Middle
+Line 36, Col 26: [RIGHT_BRACKET] ]
+Line 36, Col 28: [STRING_LITERAL] Hello   
+Line 36, Col 36: [LEFT_BRACE] {
+Line 36, Col 37: [STRING_LITERAL] cmd
+Line 36, Col 40: [COLON] :
+Line 36, Col 41: [STRING_LITERAL] two spaces
+Line 36, Col 51: [RIGHT_BRACE] }
+Line 36, Col 53: [STRING_LITERAL] world.
+Line 36, Col 59: [NEWLINE] 
+Line 37, Col 1: [LEFT_BRACKET] [
+Line 37, Col 2: [STRING_LITERAL] Anony
+Line 37, Col 7: [EQUAL] =
+Line 37, Col 8: [STRING_LITERAL] Alice
+Line 37, Col 13: [COMMA] ,
+Line 37, Col 14: [STRING_LITERAL] Happy
+Line 37, Col 19: [COMMA] ,
+Line 37, Col 20: [STRING_LITERAL] Middle
+Line 37, Col 26: [RIGHT_BRACKET] ]
+Line 37, Col 28: [STRING_LITERAL] Hello  
+Line 37, Col 35: [LEFT_BRACE] {
+Line 37, Col 36: [STRING_LITERAL] cmd
+Line 37, Col 39: [COLON] :
+Line 37, Col 40: [STRING_LITERAL] one space
+Line 37, Col 49: [RIGHT_BRACE] }
+Line 37, Col 50: [STRING_LITERAL] world.
+Line 37, Col 56: [NEWLINE] 
+Line 38, Col 1: [LEFT_BRACKET] [
+Line 38, Col 2: [STRING_LITERAL] Anony
+Line 38, Col 7: [EQUAL] =
+Line 38, Col 8: [STRING_LITERAL] Alice
+Line 38, Col 13: [COMMA] ,
+Line 38, Col 14: [STRING_LITERAL] Happy
+Line 38, Col 19: [COMMA] ,
+Line 38, Col 20: [STRING_LITERAL] Middle
+Line 38, Col 26: [RIGHT_BRACKET] ]
+Line 38, Col 28: [STRING_LITERAL] Hello
+Line 38, Col 33: [LEFT_BRACE] {
+Line 38, Col 34: [STRING_LITERAL] cmd
+Line 38, Col 37: [COLON] :
+Line 38, Col 38: [STRING_LITERAL] one space
+Line 38, Col 47: [RIGHT_BRACE] }
+Line 38, Col 50: [STRING_LITERAL] world.
+Line 38, Col 56: [NEWLINE] 
 Line 39, Col 1: [NEWLINE] 
-Line 40, Col 1: [SHARP] #
-Line 40, Col 3: [STRING_LITERAL] section3
-Line 40, Col 11: [COLON] :
-Line 40, Col 12: [STRING_LITERAL] Hello again.
-Line 40, Col 24: [NEWLINE] 
-Line 41, Col 1: [NEWLINE] 
-Line 42, Col 1: [STRING_LITERAL] nothing here.
-Line 42, Col 14: [NEWLINE] 
+Line 40, Col 1: [LEFT_BRACKET] [
+Line 40, Col 2: [STRING_LITERAL] Alice
+Line 40, Col 7: [RIGHT_BRACKET] ]
+Line 40, Col 9: [STRING_LITERAL] Hello  world.
+Line 40, Col 40: [NEWLINE] 
+Line 41, Col 1: [LEFT_BRACKET] [
+Line 41, Col 2: [STRING_LITERAL] Alice
+Line 41, Col 7: [RIGHT_BRACKET] ]
+Line 41, Col 9: [STRING_LITERAL] Hello world.
+Line 41, Col 38: [NEWLINE] 
+Line 42, Col 1: [LEFT_BRACKET] [
+Line 42, Col 2: [STRING_LITERAL] Alice
+Line 42, Col 7: [RIGHT_BRACKET] ]
+Line 42, Col 9: [STRING_LITERAL] Hello world.
+Line 42, Col 38: [NEWLINE] 
 Line 43, Col 1: [NEWLINE] 
-Line 44, Col 1: [SHARP] #
-Line 44, Col 3: [STRING_LITERAL] section4
-Line 44, Col 11: [COLON] :
-Line 44, Col 12: [STRING_LITERAL] Hello again.
-Line 44, Col 24: [NEWLINE] 
-
+Line 44, Col 1: [NEWLINE] 
+Line 45, Col 1: [SHARP] #
+Line 45, Col 3: [STRING_LITERAL] section2
+Line 45, Col 11: [COLON] :
+Line 45, Col 12: [STRING_LITERAL] Hello again.
+Line 45, Col 24: [NEWLINE] 
+Line 46, Col 1: [NEWLINE] 
+Line 47, Col 1: [NEWLINE] 
+Line 48, Col 1: [SHARP] #
+Line 48, Col 3: [STRING_LITERAL] section3
+Line 48, Col 11: [COLON] :
+Line 48, Col 12: [STRING_LITERAL] Hello again.
+Line 48, Col 24: [NEWLINE] 
+Line 49, Col 1: [NEWLINE] 
+Line 50, Col 1: [STRING_LITERAL] nothing here.
+Line 50, Col 14: [NEWLINE] 
+Line 51, Col 1: [NEWLINE] 
+Line 52, Col 1: [SHARP] #
+Line 52, Col 3: [STRING_LITERAL] section4
+Line 52, Col 11: [COLON] :
+Line 52, Col 12: [STRING_LITERAL] Hello again.
+Line 52, Col 24: [NEWLINE] 
 
 AST
 ===
@@ -177,16 +244,83 @@ SCRIPT
     DIALOG: char="Alice", alias="", expr="Happy", pos="Middle", text="Hello."
     DIALOG: char="Alice", alias="", expr="Happy", pos="Middle", text="Hello."
     DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
+    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello "
     COMMAND: name="cmd", args=[this]
     DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
+    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello "
     COMMAND: name="cmd", args=[]
     DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
+    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello "
     COMMAND: name="cmd", args=[a, b, c]
     DIALOG: char="", alias="", expr="", pos="", text="world."
+    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello   "
+    COMMAND: name="cmd", args=[two spaces]
+    DIALOG: char="", alias="", expr="", pos="", text="world."
+    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello  "
+    COMMAND: name="cmd", args=[one space]
+    DIALOG: char="", alias="", expr="", pos="", text="world."
+    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
+    COMMAND: name="cmd", args=[one space]
+    DIALOG: char="", alias="", expr="", pos="", text="world."
+    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello  world."
+    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello world."
+    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello world."
   SECTION: script_name="section2", display_name="Hello again."
   SECTION: script_name="section3", display_name="Hello again."
     DIALOG: char="", alias="", expr="", pos="", text="nothing here."
   SECTION: script_name="section4", display_name="Hello again."
+
+Symbol Tables: prolog_scene_a
+========================
+
+prolog_scene_a: Script
+Alice: Character
+Happy: Expression
+Middle: Position
+
+String Literals: prolog_scene_a
+========================
+
+"Anony"
+"Continued dialog."
+"Line of dialog."
+"Dialog."
+"Hello  world."
+"A lot of newlines."
+"Hello   "
+"Dialog ends here."
+"Mystery Girl"
+"Hello."
+"Hello "
+"world."
+"Hello  "
+"Hello world."
+"Hello"
+
+Symbol Tables: section2
+========================
+
+section2: Script
+
+String Literals: section2
+========================
+
+
+Symbol Tables: section3
+========================
+
+section3: Script
+
+String Literals: section3
+========================
+
+"nothing here."
+
+Symbol Tables: section4
+========================
+
+section4: Script
+
+String Literals: section4
+========================
+

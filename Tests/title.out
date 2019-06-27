@@ -21,7 +21,6 @@ Line 6, Col 2: [STRING_LITERAL] conutiunation
 Line 7, Col 5: [COLON] :
 Line 8, Col 9: [STRING_LITERAL] test title
 
-
 AST
 ===
 

@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 		t.tokenize();
 		t.dumpTokens();
 
-		fmt::print("\n\n");
+		fmt::print("\n");
 		fmt::print("AST\n");
 		fmt::print("===\n\n");
 
@@ -42,13 +42,13 @@ int main(int argc, char *argv[])
 
         for(auto &s : p.sections())
         {
-            fmt::print("\n\n");
+            fmt::print("\n");
             fmt::print("Symbol Tables: {}\n", s.scriptName());
             fmt::print("========================\n\n");
 
             s.symbolTable().dumpSymbols();
 
-            fmt::print("\n\n");
+            fmt::print("\n");
             fmt::print("String Literals: {}\n", s.scriptName());
             fmt::print("========================\n\n");
 

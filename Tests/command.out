@@ -67,7 +67,6 @@ Line 19, Col 15: [STRING_LITERAL] "xxx"
 Line 19, Col 20: [RIGHT_BRACE] }
 Line 19, Col 21: [NEWLINE] 
 
-
 AST
 ===
 

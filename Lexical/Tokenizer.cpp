@@ -250,6 +250,7 @@ void Tokenizer::readStringLiteral()
 	const std::size_t begin_u8_size = currentUtf8Size();
 	std::size_t last_non_space_size = begin_u8_size;
 	bool escape_next = false;
+    bool end_of_line = false;
 
 	// if not in command block, read til next command begin token,
 	// otherwise read til next control token
@@ -257,6 +258,7 @@ void Tokenizer::readStringLiteral()
 	{
 		if(this_char == '\n')
 		{
+            end_of_line = true;
 			break;
 		}
 		// escape next character. note that \\\n is hidden from by advance()
@@ -312,7 +314,12 @@ read_next:
 		if(!isSpaceChar(this_char))
 			last_non_space_size = currentUtf8Size();
 	}
-	const auto trim_back_space = currentUtf8Size() - last_non_space_size;
+    // only trim trailing spaces when reaching the end of line in dialog
+    // bug: command/comment ends the line
+    const auto trim_back_space =
+        currentEnvironment() != Environment::GLOBAL || end_of_line
+            ? currentUtf8Size() - last_non_space_size
+            : 0;
 	const auto len = currentUtf8Size() - begin_u8_size - trim_back_space;
 	if(len > 0)
 	{

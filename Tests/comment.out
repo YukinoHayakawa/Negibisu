@@ -70,7 +70,6 @@ Line 39, Col 67: [NEWLINE]
 Line 40, Col 1: [NEWLINE] 
 Line 41, Col 23: [NEWLINE] 
 
-
 AST
 ===
 
@@ -84,3 +83,25 @@ SCRIPT
     COMMAND: name="with", args=[a, command, in, it]
     DIALOG: char="", alias="", expr="", pos="", text="This is another line"
     COMMAND: name="with", args=[a, command, in, it]
+
+Symbol Tables: test_label
+========================
+
+test_label: Script
+
+String Literals: test_label
+========================
+
+"{{  this is a line of text  }}"
+"empty comment"
+"This is a line with inside."
+
+Symbol Tables: test
+========================
+
+test: Script
+
+String Literals: test
+========================
+
+"This is another line"
