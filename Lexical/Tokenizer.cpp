@@ -125,19 +125,39 @@ void Tokenizer::onNewLine()
 		switch(cur_env)
 		{
 			case Environment::COMMAND:
-				error("Expected a }.");
-				break;
 			case Environment::CHARACTER:
-				error("Expected a ].");
-				break;
 			case Environment::COMMENT:
-				error("Expected a }}.");
-				break;
-			default: ;
+                currentSourcePosition().error(
+                    "Expected a {}.",
+                    tokenSymbol(envCloseSymbol(cur_env))
+                );
+            default: ;
 		}
 		// reset env on newline
 		resetEnvironment();
 	}
+}
+
+TokenType Tokenizer::envOpenSymbol(const Environment env)
+{
+    switch(env)
+    {
+        case Environment::COMMAND: return TokenType::LEFT_BRACE;
+        case Environment::CHARACTER: return TokenType::LEFT_BRACKET;
+        case Environment::COMMENT: return TokenType::LEFT_DOUBLE_BRACE;
+        default: return TokenType::UNKNOWN;
+    }
+}
+
+TokenType Tokenizer::envCloseSymbol(const Environment env)
+{
+    switch(env)
+    {
+        case Environment::COMMAND: return TokenType::RIGHT_BRACE;
+        case Environment::CHARACTER: return TokenType::RIGHT_BRACKET;
+        case Environment::COMMENT: return TokenType::RIGHT_DOUBLE_BRACE;
+        default: return TokenType::UNKNOWN;
+    }
 }
 
 Tokenizer::Environment Tokenizer::currentEnvironment() const
@@ -165,13 +185,12 @@ void Tokenizer::exitEnvironment(Environment env)
 		switch(env)
 		{
 			case Environment::COMMAND:
-				error("Expected a matching {.");
-				break;
 			case Environment::CHARACTER:
-				error("Expected a matching [.");
-				break;
 			case Environment::COMMENT:
-				error("Expected a matching {{.");
+                currentSourcePosition().error(
+                    "Expected a matching {}.",
+                    tokenSymbol(envOpenSymbol(env))
+                );
 				break;
 			default:
 				break;
@@ -181,8 +200,7 @@ void Tokenizer::exitEnvironment(Environment env)
 
 void Tokenizer::beginToken()
 {
-	mTempToken.line = currentLine();
-	mTempToken.column = currentColumn();
+    mTempToken.pos = currentSourcePosition();
 	beginSubstring();
 }
 
@@ -190,6 +208,7 @@ void Tokenizer::endToken(TokenType type, std::size_t trim_back)
 {
 	mTempToken.type = type;
 	mTempToken.text = endSubstring(trim_back);
+    mTempToken.index = mTokens.size();
 	mTokens.push_back(mTempToken);
 }
 
@@ -261,7 +280,7 @@ void Tokenizer::readStringLiteral()
 			escape_next = false;
 			goto read_next;
 		}
-		if(cur() == '{' && next() == '{')
+		if(commentOpening())
 		{
 			ignoreComment();
 			continue;
@@ -308,15 +327,25 @@ TokenType Tokenizer::lastTokenType() const
 	return mTokens.back().type;
 }
 
+bool Tokenizer::commentOpening()
+{
+    return cur() == '{' && next() == '{';
+}
+
+bool Tokenizer::commentClosing()
+{
+    return cur() == '}' && next() == '}';
+}
+
 void Tokenizer::ignoreComment()
 {
-	assert(cur() == '{' && next() == '{');
+	assert(commentOpening());
 	advance(false);
 	advance(false);
 	enterEnvironment(Environment::COMMENT);
 	while(cur())
 	{
-		if(cur() == '}' && next() == '}')
+		if(commentClosing())
 		{
 			exitEnvironment(Environment::COMMENT);
 			advance(false);
@@ -325,15 +354,18 @@ void Tokenizer::ignoreComment()
 		}
 		advance(false, false, true);
 	}
-	error("Expected a }}.");
+    currentSourcePosition().error(
+        "Expected a {}.",
+        tokenSymbol(envCloseSymbol(Environment::COMMENT))
+    );
 }
 
 void Tokenizer::dumpTokens()
 {
 	for(auto &&token : mTokens)
 	{
-		fmt::print("Line {}, Col {}: [{}] {}\n",
-			token.line, token.column,
+		fmt::print("{}: [{}] {}\n",
+			token.pos,
 			tokenName(token.type),
 			token.text
 		);

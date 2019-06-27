@@ -28,18 +28,18 @@ void StringParser::skipWhiteSpace()
 
 char32_t StringParser::cur() const
 {
-	return mSource[mCurrentPos];
+	return mSource[mCharPos];
 }
 
 char32_t StringParser::next(const std::size_t lookahead) const
 {
-	const auto next_pos = mCurrentPos + lookahead;
+	const auto next_pos = mCharPos + lookahead;
 	return next_pos >= mSource.size() ? 0 : mSource[next_pos];
 }
 
 char32_t StringParser::prev() const
 {
-	return mCurrentPos > 0 ? mSource[mCurrentPos - 1] : 0;
+	return mCharPos > 0 ? mSource[mCharPos - 1] : 0;
 }
 
 void StringParser::advanceLineColumnCounter()
@@ -47,18 +47,18 @@ void StringParser::advanceLineColumnCounter()
 	// assuming unix end-line
 	if(cur() == '\n')
 	{
-		++mCurrentLine;
-		mCurrentColumn = 1;
+		++mCurrentSourcePosition.line;
+        mCurrentSourcePosition.column = 1;
 	}
 	else
 	{
-		++mCurrentColumn;
+		++mCurrentSourcePosition.column;
 	}
 }
 
 void StringParser::advanceSourceCursor()
 {
-	++mCurrentPos;
+	++mCharPos;
 }
 
 void StringParser::advanceCursor()
@@ -72,7 +72,7 @@ char32_t StringParser::advance(
 	const bool allow_continue,
 	const bool ignore_newline)
 {
-	assert(mCurrentPos < mSource.size());
+	assert(mCharPos < mSource.size());
 
 	// check newline before next advance to avoid interrupting running strings
 	if(cur() == '\n' && !ignore_newline)
@@ -105,12 +105,6 @@ char32_t StringParser::advance(
 	}
 
 	return cur();
-}
-
-void StringParser::error(const std::string &msg) const
-{
-	fmt::print("Error at Line {}, Col {}: {}\n",
-		mCurrentLine, mCurrentColumn, msg);
 }
 
 StringParser::StringParser(const std::string &name, std::istream &u8src)

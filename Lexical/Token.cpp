@@ -1,6 +1,6 @@
 ﻿#include "Token.hpp"
 
-#include <iostream>
+#include <fmt/ostream.h>
 
 namespace usagi::negibisu
 {
@@ -20,7 +20,6 @@ const char * tokenName(const TokenType token)
 		case TokenType::COMMA: return "COMMA";
 		case TokenType::COLON: return "COLON";
 		case TokenType::EQUAL: return "EQUAL";
-		case TokenType::END_OF_STREAM: return "END_OF_STREAM";
 		default: return "UNKNOWN";
 	}
 }
@@ -41,7 +40,6 @@ const char * tokenSymbol(const TokenType token)
 		case TokenType::COMMA: return ",";
 		case TokenType::COLON: return ":";
 		case TokenType::EQUAL: return "=";
-		case TokenType::END_OF_STREAM: return "END_OF_STREAM";
 		default: return "UNKNOWN";
 	}
 }

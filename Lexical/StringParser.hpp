@@ -4,6 +4,8 @@
 
 #include <Usagi/Utility/Noncopyable.hpp>
 
+#include "SourcePosition.hpp"
+
 namespace usagi::negibisu
 {
 class StringParser : Noncopyable
@@ -17,10 +19,9 @@ class StringParser : Noncopyable
 	std::string mUtf8Source;
 
 	// position tracking
-	int mCurrentLine = 1;
-	int mCurrentColumn = 1;
+    SourcePosition mCurrentSourcePosition;
 	// index of current char in the utf-32 stream
-	std::size_t mCurrentPos = 0;
+	std::size_t mCharPos = 0;
 
 	std::size_t mSubstringBegin = std::string::npos;
 
@@ -42,7 +43,12 @@ protected:
 	// position.
 	char32_t prev() const;
 
-	//
+
+    const SourcePosition & currentSourcePosition() const
+    {
+        return mCurrentSourcePosition;
+    }
+
 	/**
 	 * \brief Advance the cursor by one and return the character on the
 	 * new position. If the stream is ended, a 0 will be returned.
@@ -58,9 +64,6 @@ protected:
 		bool allow_continue = true,
 		bool ignore_newline = false);
 
-	// report error with current source position.
-	void error(const std::string &msg) const;
-
 	void beginSubstring();
 	/**
 	 * \brief
@@ -68,16 +71,6 @@ protected:
 	 * \return
 	 */
 	std::string_view endSubstring(std::size_t trim_back = 0);
-
-	int currentLine() const
-	{
-		return mCurrentLine;
-	}
-
-	int currentColumn() const
-	{
-		return mCurrentColumn;
-	}
 
 	std::size_t currentUtf8Size() const
 	{

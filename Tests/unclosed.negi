@@ -1,6 +1,6 @@
 # {unclosed
 another unclosed }
-{{ unclosed 
+{{ multiline
 comment }}
 {{ this is \
 continued }}

@@ -1,15 +1,15 @@
 ﻿#pragma once
 
-#include <string_view>
 #include <charconv>
 #include <typeinfo>
 #include <iosfwd>
+
+#include "SourcePosition.hpp"
 
 namespace usagi::negibisu
 {
 enum class TokenType
 {
-	END_OF_STREAM = 0,
 	SHARP,
 	NEWLINE,
 	LEFT_BRACKET,
@@ -22,6 +22,7 @@ enum class TokenType
 	COLON,
 	COMMA,
 	EQUAL,
+    UNKNOWN,
 };
 
 const char * tokenName(TokenType token);
@@ -29,8 +30,9 @@ const char * tokenSymbol(TokenType token);
 
 struct Token
 {
-	int line = 0, column = 0;
-	TokenType type = TokenType::END_OF_STREAM;
+    std::size_t index = -1;
+    SourcePosition pos;
+	TokenType type = TokenType::UNKNOWN;
 	std::string_view text;
 
 	template <typename T>

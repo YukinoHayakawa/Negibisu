@@ -73,23 +73,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Intermediate\Instruction.hpp" />
-    <ClInclude Include="Intermediate\Section.hpp" />
+    <ClInclude Include="Lexical\SourcePosition.hpp" />
     <ClInclude Include="Parsing\ASTNode.hpp" />
     <ClInclude Include="Parsing\CommandNode.hpp" />
     <ClInclude Include="Parsing\DialogNode.hpp" />
     <ClInclude Include="Parsing\LineNode.hpp" />
     <ClInclude Include="Parsing\ScriptNode.hpp" />
     <ClInclude Include="Parsing\SectionNode.hpp" />
-    <ClInclude Include="Semantic\AssetTracking.hpp" />
     <ClInclude Include="Semantic\SemanticContext.hpp" />
-    <ClInclude Include="Semantic\StageTracking.hpp" />
-    <ClInclude Include="StringParser.hpp" />
+    <ClInclude Include="Semantic\SymbolTable.hpp" />
+    <ClInclude Include="Lexical\StringParser.hpp" />
     <ClInclude Include="Lexical\Token.hpp" />
     <ClInclude Include="Lexical\Tokenizer.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Intermediate\Section.cpp" />
+    <ClCompile Include="Lexical\SourcePosition.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parsing\ASTNode.cpp" />
     <ClCompile Include="Parsing\CommandNode.cpp" />
@@ -98,7 +96,8 @@
     <ClCompile Include="Parsing\ScriptNode.cpp" />
     <ClCompile Include="Parsing\SectionNode.cpp" />
     <ClCompile Include="Semantic\SemanticContext.cpp" />
-    <ClCompile Include="StringParser.cpp" />
+    <ClCompile Include="Semantic\SymbolTable.cpp" />
+    <ClCompile Include="Lexical\StringParser.cpp" />
     <ClCompile Include="Lexical\Token.cpp" />
     <ClCompile Include="Lexical\Tokenizer.cpp" />
   </ItemGroup>

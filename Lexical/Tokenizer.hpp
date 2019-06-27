@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "../StringParser.hpp"
+#include "StringParser.hpp"
 #include "Token.hpp"
 
 namespace usagi::negibisu
@@ -25,6 +25,9 @@ protected:
 		TITLE,
 	};
 
+    static TokenType envOpenSymbol(Environment env);
+    static TokenType envCloseSymbol(Environment env);
+
 	std::vector<Environment> mEnv = { Environment::GLOBAL };
 
 	Environment currentEnvironment() const;
@@ -40,7 +43,9 @@ protected:
 	static bool isOperatorCharInTitle(char32_t c);
 	void readStringLiteral();
 	TokenType lastTokenType() const;
-	void ignoreComment();
+    bool commentOpening();
+    bool commentClosing();
+    void ignoreComment();
 
 	void onNewLine() override;
 	void resetEnvironment();

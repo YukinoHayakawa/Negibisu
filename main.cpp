@@ -1,7 +1,6 @@
 ﻿#include <fstream>
 #include <filesystem>
 #include <iostream>
-#include <fmt/printf.h>
 
 #include "Lexical/Tokenizer.hpp"
 #include "Parsing/ASTNode.hpp"
