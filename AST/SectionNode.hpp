@@ -9,22 +9,22 @@ namespace usagi::negibisu
 {
 class SectionNode : public ASTNode
 {
-	SymbolTable mSymbolTable;
-	TokenRef mScriptName;
-	TokenRef mDisplayName;
+    SymbolTable mSymbolTable;
+    TokenRef mScriptName;
+    TokenRef mDisplayName;
 
-	std::vector<std::unique_ptr<LineNode>> mLines;
+    std::vector<std::unique_ptr<LineNode>> mLines;
 
-	void parseTitle();
-	void parseContent();
-	void parseDialog();
-	void parseCommand();
+    void parseTitle();
+    void parseContent();
+    void parseDialog();
+    void parseCommand();
 
 public:
-	using ASTNode::ASTNode;
+    using ASTNode::ASTNode;
 
-	void parse(SymbolTable *table) override;
-	void print(std::string &indentation) override;
+    void parse(SymbolTable *table) override;
+    void print(std::string &indentation) override;
 
     const SymbolTable & symbolTable() const
     {

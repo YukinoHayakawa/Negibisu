@@ -16,29 +16,29 @@ using namespace usagi::negibisu;
 int main(int argc, char *argv[])
 {
 #ifdef _WIN32
-	win32::patchConsole();
+    win32::patchConsole();
 #endif
 
-	try
-	{
-		fmt::print("Token Stream\n");
-		fmt::print("============\n\n");
-		const auto input_name = std::filesystem::canonical(argv[1]);
-		std::ifstream in(input_name);
-		Tokenizer t(input_name.u8string(), in);
-		t.tokenize();
-		t.dumpTokens();
+    try
+    {
+        fmt::print("Token Stream\n");
+        fmt::print("============\n\n");
+        const auto input_name = std::filesystem::canonical(argv[1]);
+        std::ifstream in(input_name);
+        Tokenizer t(input_name.u8string(), in);
+        t.tokenize();
+        t.dumpTokens();
 
-		fmt::print("\n");
-		fmt::print("AST\n");
-		fmt::print("===\n\n");
+        fmt::print("\n");
+        fmt::print("AST\n");
+        fmt::print("===\n\n");
 
-		auto token_begin = t.tokens().begin();
-		auto token_end = t.tokens().end();
-		ScriptNode p { token_begin, token_end };
-		p.parse();
-		std::string indent;
-		p.print(indent);
+        auto token_begin = t.tokens().begin();
+        auto token_end = t.tokens().end();
+        ScriptNode p { token_begin, token_end };
+        p.parse();
+        std::string indent;
+        p.print(indent);
 
         for(auto &s : p.sections())
         {
@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
 
             s.symbolTable().dumpStringLiterals();
         }
-	}
-	catch(const std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+    }
+    catch(const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
-	return 0;
+    return 0;
 }

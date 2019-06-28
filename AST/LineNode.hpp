@@ -7,6 +7,6 @@ namespace usagi::negibisu
 class LineNode : public ASTNode
 {
 public:
-	using ASTNode::ASTNode;
+    using ASTNode::ASTNode;
 };
 }

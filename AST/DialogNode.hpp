@@ -6,17 +6,17 @@ namespace usagi::negibisu
 {
 class DialogNode : public LineNode
 {
-	TokenRef mCharacter;
-	TokenRef mAlias;
-	TokenRef mExpression;
-	TokenRef mPosition;
-	TokenRef mText;
-	bool mPause = false;
+    TokenRef mCharacter;
+    TokenRef mAlias;
+    TokenRef mExpression;
+    TokenRef mPosition;
+    TokenRef mText;
+    bool mPause = false;
 
 public:
-	using LineNode::LineNode;
+    using LineNode::LineNode;
 
-	void parse(SymbolTable *table) override;
-	void print(std::string &indentation) override;
+    void parse(SymbolTable *table) override;
+    void print(std::string &indentation) override;
 };;
 }

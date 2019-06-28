@@ -6,15 +6,15 @@ namespace usagi::negibisu
 {
 class ScriptNode : public ASTNode
 {
-	std::vector<SectionNode> mSections;
+    std::vector<SectionNode> mSections;
 
-	void parseSection();
+    void parseSection();
 
 public:
-	using ASTNode::ASTNode;
+    using ASTNode::ASTNode;
 
-	void parse(SymbolTable *table = nullptr) override;
-	void print(std::string &indentation) override;
+    void parse(SymbolTable *table = nullptr) override;
+    void print(std::string &indentation) override;
 
     const std::vector<SectionNode> & sections() const
     {

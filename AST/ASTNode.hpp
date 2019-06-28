@@ -19,26 +19,26 @@ class ASTNode : Noncopyable
     }
 
 protected:
-	static constexpr int INDENTATION = 2;
+    static constexpr int INDENTATION = 2;
 
-	using TokenStreamIterator = std::vector<Token>::const_iterator;
+    using TokenStreamIterator = std::vector<Token>::const_iterator;
 
-	TokenStreamIterator &mTokenBegin;
-	const TokenStreamIterator &mTokenEnd;
+    TokenStreamIterator &mTokenBegin;
+    const TokenStreamIterator &mTokenEnd;
 
-	TokenType currentType() const;
-	TokenType nextType(std::size_t lookahead = 1) const;
-	const Token & cur() const;
-	TokenRef curRef() const;
+    TokenType currentType() const;
+    TokenType nextType(std::size_t lookahead = 1) const;
+    const Token & cur() const;
+    TokenRef curRef() const;
 
-	void advance();
-	void skipNewLines();
-	bool streamEnded() const;
-	bool streamNotEnded() const;
+    void advance();
+    void skipNewLines();
+    bool streamEnded() const;
+    bool streamNotEnded() const;
 
-	void expect(TokenType token_type) const;
-	void consume(TokenType token_type);
-	TokenRef consumeString();
+    void expect(TokenType token_type) const;
+    void consume(TokenType token_type);
+    TokenRef consumeString();
 
     template <typename... Args>
     void syntaxError(Args &&... args) const
@@ -48,14 +48,14 @@ protected:
     }
 
 public:
-	ASTNode(
-		TokenStreamIterator &token_begin,
-		const TokenStreamIterator &token_end);
-	virtual ~ASTNode() = default;
+    ASTNode(
+        TokenStreamIterator &token_begin,
+        const TokenStreamIterator &token_end);
+    virtual ~ASTNode() = default;
     ASTNode(ASTNode &&) = default;
 
-	virtual void parse(SymbolTable *table) = 0;
-	virtual void print(std::string &indentation) = 0;
-	virtual void check(SymbolTable *table) { }
+    virtual void parse(SymbolTable *table) = 0;
+    virtual void print(std::string &indentation) = 0;
+    virtual void check(SymbolTable *table) { }
 };
 }
