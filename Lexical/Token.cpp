@@ -2,7 +2,7 @@
 
 #include <fmt/ostream.h>
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 const char * tokenName(const TokenType token)
 {

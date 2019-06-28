@@ -3,7 +3,7 @@
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 struct SourcePosition
 {

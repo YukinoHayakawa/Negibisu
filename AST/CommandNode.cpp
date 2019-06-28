@@ -1,6 +1,6 @@
 ﻿#include "CommandNode.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 void CommandNode::parseArgs()
 {

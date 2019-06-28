@@ -4,7 +4,7 @@
 
 #include <fmt/printf.h>
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 TokenType ASTNode::currentType() const
 {

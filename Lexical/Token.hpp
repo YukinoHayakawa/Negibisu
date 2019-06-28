@@ -6,7 +6,7 @@
 
 #include "SourcePosition.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 enum class TokenType
 {

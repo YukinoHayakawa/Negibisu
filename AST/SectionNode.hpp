@@ -5,7 +5,7 @@
 #include "LineNode.hpp"
 #include "../Semantic/SymbolTable.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 class SectionNode : public ASTNode
 {

@@ -6,7 +6,7 @@
 
 #include "../Lexical/Token.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 struct SymbolTable;
 

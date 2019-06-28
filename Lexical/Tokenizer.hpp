@@ -5,7 +5,7 @@
 #include "StringParser.hpp"
 #include "Token.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 class Tokenizer : public StringParser
 {

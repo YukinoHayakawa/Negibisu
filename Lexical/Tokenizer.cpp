@@ -2,7 +2,7 @@
 
 #include <fmt/printf.h>
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 void Tokenizer::tokenize()
 {

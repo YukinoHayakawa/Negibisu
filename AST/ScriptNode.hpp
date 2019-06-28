@@ -2,7 +2,7 @@
 
 #include "SectionNode.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 class ScriptNode : public ASTNode
 {

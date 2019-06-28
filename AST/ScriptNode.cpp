@@ -1,6 +1,6 @@
 ﻿#include "ScriptNode.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 void ScriptNode::parseSection()
 {

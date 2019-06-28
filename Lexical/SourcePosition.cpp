@@ -1,6 +1,6 @@
 ﻿#include "SourcePosition.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 std::ostream & operator<<(std::ostream &os, const SourcePosition &p)
 {

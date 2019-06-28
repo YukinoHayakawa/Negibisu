@@ -6,7 +6,7 @@
 #include <Usagi/Utility/Stream.hpp>
 #include <Usagi/Utility/Debug.hpp>
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 bool StringParser::isSpaceChar(char32_t c)
 {

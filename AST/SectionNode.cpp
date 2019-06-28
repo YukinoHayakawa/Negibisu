@@ -3,7 +3,7 @@
 #include "CommandNode.hpp"
 #include "DialogNode.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 void SectionNode::print(std::string &indentation)
 {

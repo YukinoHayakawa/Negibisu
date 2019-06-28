@@ -2,7 +2,7 @@
 
 #include "ASTNode.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 class LineNode : public ASTNode
 {

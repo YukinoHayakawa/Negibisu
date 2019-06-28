@@ -2,7 +2,7 @@
 
 #include "../Semantic/SymbolTable.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 void DialogNode::parse(SymbolTable *table)
 {

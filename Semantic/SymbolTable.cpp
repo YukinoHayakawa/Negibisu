@@ -1,6 +1,6 @@
 ﻿#include "SymbolTable.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 std::string_view to_string(SymbolType t)
 {

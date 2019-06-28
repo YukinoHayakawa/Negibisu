@@ -2,7 +2,7 @@
 
 #include "LineNode.hpp"
 
-namespace usagi::negibisu
+namespace usagi::negi
 {
 class DialogNode : public LineNode
 {

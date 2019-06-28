@@ -11,7 +11,7 @@
 #endif
 
 using namespace usagi;
-using namespace usagi::negibisu;
+using namespace usagi::negi;
 
 int main(int argc, char *argv[])
 {
