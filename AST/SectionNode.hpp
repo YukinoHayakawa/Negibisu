@@ -2,8 +2,9 @@
 
 #include <memory>
 
+#include <Negibisu/Semantic/SymbolTable.hpp>
+
 #include "LineNode.hpp"
-#include "../Semantic/SymbolTable.hpp"
 
 namespace usagi::negi
 {

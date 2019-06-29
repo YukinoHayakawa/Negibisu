@@ -4,7 +4,7 @@
 
 #include <Usagi/Utility/Noncopyable.hpp>
 
-#include "../Lexical/Token.hpp"
+#include <Negibisu/Lexical/Token.hpp>
 
 namespace usagi::negi
 {

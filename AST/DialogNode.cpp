@@ -1,6 +1,6 @@
 ﻿#include "DialogNode.hpp"
 
-#include "../Semantic/SymbolTable.hpp"
+#include <Negibisu/Semantic/SymbolTable.hpp>
 
 namespace usagi::negi
 {
