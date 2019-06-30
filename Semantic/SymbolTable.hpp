@@ -8,6 +8,8 @@
 
 #include <Negibisu/Lexical/Token.hpp>
 
+#include "SymbolNameCounter.hpp"
+
 namespace usagi::negi
 {
 enum class SymbolType
@@ -57,6 +59,7 @@ struct SymbolTable : Noncopyable
 {
     std::unordered_map<std::string_view, SymbolInfo> symbols;
     std::unordered_set<std::string_view> string_literals;
+    SymbolNameCounter name_counter;
 
     // void insert(const std::string_view &name, SymbolType type);
     const SymbolInfo & lookup(const Token *token, SymbolType type);

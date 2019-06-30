@@ -56,7 +56,7 @@ void SectionNode::parseContent()
                 case TokenType::LEFT_BRACE:
                     parseCommand();
                     continue;
-                    // next section
+                // next section
                 case TokenType::SHARP:
                     return;
                 case TokenType::NEWLINE:
@@ -92,5 +92,17 @@ void SectionNode::parse(SceneContext *ctx)
 {
     parseTitle();
     parseContent();
+}
+
+void SectionNode::check(SceneContext *ctx)
+{
+    for(auto &&l : mLines)
+        l->check(&mSceneContext);
+}
+
+void SectionNode::generate(SceneContext *ctx)
+{
+    for(auto &&l : mLines)
+        l->generate(&mSceneContext);
 }
 }

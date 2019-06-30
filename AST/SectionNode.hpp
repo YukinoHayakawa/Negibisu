@@ -25,6 +25,9 @@ public:
     using ASTNode::ASTNode;
 
     void parse(SceneContext *ctx) override;
+    void check(SceneContext *ctx) override;
+    void generate(SceneContext *ctx) override;
+
     void print(std::string &indentation) override;
 
     const SceneContext & context() const

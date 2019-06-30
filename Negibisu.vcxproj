@@ -73,6 +73,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command\CharacterCommand.hpp" />
+    <ClInclude Include="Command\ImageCommand.hpp" />
     <ClInclude Include="Lexical\SourcePosition.hpp" />
     <ClInclude Include="AST\ASTNode.hpp" />
     <ClInclude Include="AST\CommandNode.hpp" />
@@ -82,12 +84,15 @@
     <ClInclude Include="AST\SectionNode.hpp" />
     <ClInclude Include="Parsing\ParsingContext.hpp" />
     <ClInclude Include="Semantic\SceneContext.hpp" />
+    <ClInclude Include="Semantic\SymbolNameCounter.hpp" />
     <ClInclude Include="Semantic\SymbolTable.hpp" />
     <ClInclude Include="Lexical\StringParser.hpp" />
     <ClInclude Include="Lexical\Token.hpp" />
     <ClInclude Include="Lexical\Tokenizer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Command\CharacterCommand.cpp" />
+    <ClCompile Include="Command\ImageCommand.cpp" />
     <ClCompile Include="Lexical\SourcePosition.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AST\ASTNode.cpp" />
@@ -98,6 +103,7 @@
     <ClCompile Include="AST\SectionNode.cpp" />
     <ClCompile Include="Parsing\ParsingContext.cpp" />
     <ClCompile Include="Semantic\SceneContext.cpp" />
+    <ClCompile Include="Semantic\SymbolNameCounter.cpp" />
     <ClCompile Include="Semantic\SymbolTable.cpp" />
     <ClCompile Include="Lexical\StringParser.cpp" />
     <ClCompile Include="Lexical\Token.cpp" />

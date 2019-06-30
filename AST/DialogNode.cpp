@@ -31,6 +31,11 @@ void DialogNode::parse(SceneContext *ctx)
             ctx->symbol_table.lookup(mPosition.ref, SymbolType::POSITION);
         }
         consume(TokenType::RIGHT_BRACKET);
+        ctx->current_character = mCharacter;
+    }
+    else
+    {
+        mCharacter = ctx->current_character;
     }
     // bug: text interleaved by commands does not show to be the same character
     mText = consumeString();
@@ -39,7 +44,17 @@ void DialogNode::parse(SceneContext *ctx)
     {
         mPause = true;
         advance();
+        ctx->current_character = { };
     }
+}
+
+void DialogNode::check(SceneContext *ctx)
+{
+}
+
+void DialogNode::generate(SceneContext *ctx)
+{
+
 }
 
 void DialogNode::print(std::string& indentation)

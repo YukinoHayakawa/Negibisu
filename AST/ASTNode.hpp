@@ -60,7 +60,8 @@ public:
     ASTNode(ASTNode &&) = default;
 
     virtual void parse(SceneContext *ctx) = 0;
-    virtual void check(SceneContext *ctx) { }
+    virtual void check(SceneContext *ctx) = 0;
+    virtual void generate(SceneContext *ctx) = 0;
 
     virtual void print(std::string &indentation) = 0;
 };

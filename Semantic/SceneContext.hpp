@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <iostream>
+
 #include <Usagi/Utility/Noncopyable.hpp>
 
 #include "SymbolTable.hpp"
@@ -12,25 +14,13 @@ struct CharacterState
     std::string_view current_expression;
     std::string_view current_position;
     bool on_stage = false;
+};
 
-    void enterStage(TokenRef expression, TokenRef position)
-    {
-        if(on_stage) { }
-    }
-
-    void ensureOnStage(TokenRef expression, TokenRef position)
-    {
-    }
-
-    void changeExpression(TokenRef expression)
-    {
-    }
-
-    void changePosition(TokenRef expression)
-    {
-    }
-
-    void exitStage()
+class SemanticError : public std::runtime_error
+{
+public:
+    SemanticError()
+        : runtime_error("Semantic error.")
     {
     }
 };
@@ -39,7 +29,20 @@ struct SceneContext : Noncopyable
 {
     SymbolTable symbol_table;
     std::unordered_map<std::string_view, CharacterState> characters;
-    std::ostream *output = nullptr;
+    TokenRef current_character;
+
+    // todo fix this
+    std::ostream *output = &std::cout;
+
+    template <typename... Args>
+    void semanticError(TokenRef position_hint, Args &&... args) const
+    {
+        position_hint->pos.error(std::forward<Args>(args)...);
+        throw SemanticError();
+    }
+
+    CharacterState & characterState(TokenRef character);
+    CharacterState & checkCharacterOnStage(TokenRef character);
 };
 
 }

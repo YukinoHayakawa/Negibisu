@@ -17,6 +17,18 @@ void ScriptNode::parse(SceneContext *ctx)
     }
 }
 
+void ScriptNode::check(SceneContext *ctx)
+{
+    for(auto &&s : mSections)
+        s.check(nullptr);
+}
+
+void ScriptNode::generate(SceneContext *ctx)
+{
+    for(auto &&s : mSections)
+        s.generate(nullptr);
+}
+
 void ScriptNode::print(std::string& indentation)
 {
     fmt::print("{}SCRIPT\n", indentation);

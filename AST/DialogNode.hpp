@@ -17,6 +17,9 @@ public:
     using LineNode::LineNode;
 
     void parse(SceneContext *ctx) override;
+    void check(SceneContext *ctx) override;
+    void generate(SceneContext *ctx) override;
+
     void print(std::string &indentation) override;
 };;
 }
