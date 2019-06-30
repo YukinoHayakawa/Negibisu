@@ -44,5 +44,33 @@ Line 20, Col 1: [STRING_LITERAL] continuation at last line
 AST
 ===
 
-Error at Line 1, Col 1: Expected a #.
-Syntax error.
+SCRIPT
+  SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
+    DIALOG: char="", alias="", expr="", pos="", text="This is a line of dialog."
+    DIALOG: char="", alias="", expr="", pos="", text="Spaces     at the endings of the line are  trimmed but not those in between."
+    DIALOG: char="", alias="", expr="", pos="", text="这是一行中文。"
+    DIALOG: char="Yuki", alias="", expr="", pos="", text="This is Yuki speaking."
+    DIALOG: char="Yuki", alias="Mystery Girl", expr="", pos="", text="Yuki is hiding her identity."
+    DIALOG: char="Moon", alias="", expr="Smile", pos="Middle", text="Mr. Mo    on likes to laugh."
+    DIALOG: char="", alias="", expr="", pos="", text="continuation at last line "
+
+Symbol Tables: <UNNAMED>
+========================
+
+<UNNAMED>: Script
+Yuki: Character
+Middle: Position
+Moon: Character
+Smile: Expression
+
+String Literals: <UNNAMED>
+========================
+
+"This is a line of dialog."
+"Mystery Girl"
+"Spaces     at the endings of the line are  trimmed but not those in between."
+"这是一行中文。"
+"continuation at last line "
+"Mr. Mo    on likes to laugh."
+"This is Yuki speaking."
+"Yuki is hiding her identity."

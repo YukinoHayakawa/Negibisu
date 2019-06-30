@@ -51,6 +51,12 @@
     <ClCompile Include="AST\SectionNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Semantic\SceneContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parsing\ParsingContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexical\Tokenizer.hpp">
@@ -84,6 +90,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AST\SectionNode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Semantic\SceneContext.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parsing\ParsingContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

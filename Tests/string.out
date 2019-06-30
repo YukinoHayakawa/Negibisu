@@ -19,5 +19,24 @@ Line 11, Col 27: [NEWLINE]
 AST
 ===
 
-Error at Line 1, Col 1: Expected a #.
-Syntax error.
+SCRIPT
+  SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
+    DIALOG: char="", alias="", expr="", pos="", text="single line string"
+    DIALOG: char="", alias="", expr="", pos="", text="multiline string"
+    DIALOG: char="", alias="", expr="", pos="", text="string inside"
+    DIALOG: char="", alias="", expr="", pos="", text="\\ two slashes"
+    DIALOG: char="", alias="", expr="", pos="", text="meaningless escapes"
+
+Symbol Tables: <UNNAMED>
+========================
+
+<UNNAMED>: Script
+
+String Literals: <UNNAMED>
+========================
+
+"single line string"
+"meaningless escapes"
+"multiline string"
+"string inside"
+"\\ two slashes"

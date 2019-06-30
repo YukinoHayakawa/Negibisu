@@ -1,10 +1,11 @@
 ﻿#include "DialogNode.hpp"
 
 #include <Negibisu/Semantic/SymbolTable.hpp>
+#include <Negibisu/Semantic/SceneContext.hpp>
 
 namespace usagi::negi
 {
-void DialogNode::parse(SymbolTable *table)
+void DialogNode::parse(SceneContext *ctx)
 {
     if(currentType() == TokenType::LEFT_BRACKET)
     {
@@ -15,24 +16,25 @@ void DialogNode::parse(SymbolTable *table)
         {
             advance();
             mAlias = mCharacter;
-            table->addStringLiteral(mAlias.ref);
+            ctx->symbol_table.addStringLiteral(mAlias.ref);
             mCharacter = consumeString();
         }
-        table->lookup(mCharacter.ref, SymbolType::CHARACTER);
+        ctx->symbol_table.lookup(mCharacter.ref, SymbolType::CHARACTER);
         // optional expression and position change
         if(currentType() == TokenType::COMMA)
         {
             advance();
             mExpression = consumeString();
-            table->lookup(mExpression.ref, SymbolType::EXPRESSION);
+            ctx->symbol_table.lookup(mExpression.ref, SymbolType::EXPRESSION);
             consume(TokenType::COMMA);
             mPosition = consumeString();
-            table->lookup(mPosition.ref, SymbolType::POSITION);
+            ctx->symbol_table.lookup(mPosition.ref, SymbolType::POSITION);
         }
         consume(TokenType::RIGHT_BRACKET);
     }
+    // bug: text interleaved by commands does not show to be the same character
     mText = consumeString();
-    table->addStringLiteral(mText.ref);
+    ctx->symbol_table.addStringLiteral(mText.ref);
     if(currentType() == TokenType::NEWLINE)
     {
         mPause = true;

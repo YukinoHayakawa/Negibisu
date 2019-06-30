@@ -8,15 +8,15 @@ namespace usagi::negi
 {
 TokenType ASTNode::currentType() const
 {
-    if(mTokenBegin != mTokenEnd)
-        return mTokenBegin->type;
-    return TokenType::NEWLINE;
+    if(mParsingContext->cursor != mParsingContext->end)
+        return mParsingContext->cursor->type;
+    return TokenType::END_OF_STREAM;
 }
 
 TokenType ASTNode::nextType(const std::size_t lookahead) const
 {
-    const auto next = mTokenBegin + lookahead;
-    assert(next < mTokenEnd);
+    const auto next = mParsingContext->cursor + lookahead;
+    assert(next < mParsingContext->end);
     return next->type;
 }
 
@@ -24,18 +24,18 @@ const Token & ASTNode::cur() const
 {
     assert(streamNotEnded());
 
-    return *mTokenBegin;
+    return *mParsingContext->cursor;
 }
 
 TokenRef ASTNode::curRef() const
 {
-    return { &*mTokenBegin };
+    return { &*mParsingContext->cursor };
 }
 
 void ASTNode::advance()
 {
     assert(streamNotEnded());
-    ++mTokenBegin;
+    ++mParsingContext->cursor;
 }
 
 void ASTNode::skipNewLines()
@@ -46,7 +46,7 @@ void ASTNode::skipNewLines()
 
 bool ASTNode::streamEnded() const
 {
-    return mTokenBegin == mTokenEnd;
+    return mParsingContext->cursor == mParsingContext->end;
 }
 
 bool ASTNode::streamNotEnded() const
@@ -74,11 +74,23 @@ TokenRef ASTNode::consumeString()
     return ret;
 }
 
-ASTNode::ASTNode(
-    TokenStreamIterator &token_begin,
-    const TokenStreamIterator &token_end)
-    : mTokenBegin(token_begin)
-    , mTokenEnd(token_end)
+void ASTNode::proceedToNextLine()
+{
+    while(streamNotEnded())
+    {
+        switch(currentType())
+        {
+            case TokenType::NEWLINE:
+                return;
+
+            default:
+                advance();
+        }
+    }
+}
+
+ASTNode::ASTNode(ParsingContext *context)
+    : mParsingContext(context)
 {
 }
 }

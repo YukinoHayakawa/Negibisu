@@ -42,6 +42,7 @@ std::ostream & operator<<(std::ostream &os, SymbolType t);
 struct SymbolInfo
 {
     SymbolType type = SymbolType::UNKNOWN;
+    std::string object_name;
     // the position of the first usage of the referenced asset
     std::size_t first_usage = std::numeric_limits<std::size_t>::max();
     // the position of the last usage of the referenced asset
@@ -58,7 +59,7 @@ struct SymbolTable : Noncopyable
     std::unordered_set<std::string_view> string_literals;
 
     // void insert(const std::string_view &name, SymbolType type);
-    void lookup(const Token *token, SymbolType type);
+    const SymbolInfo & lookup(const Token *token, SymbolType type);
     void addStringLiteral(const Token *token);
 
     void dumpSymbols() const;

@@ -25,4 +25,36 @@ AST
 ===
 
 Error at Line 2, Col 27: Expected a line of text or a command.
-Syntax error.
+SCRIPT
+  SECTION: script_name="test", display_name="title"
+  SECTION: script_name="t est", display_name="tit le # t est"
+    DIALOG: char="", alias="", expr="", pos="", text="this is not a # title nor #this"
+  SECTION: script_name="conutiunation", display_name="test title"
+
+Symbol Tables: test
+========================
+
+test: Script
+
+String Literals: test
+========================
+
+
+Symbol Tables: t est
+========================
+
+t est: Script
+
+String Literals: t est
+========================
+
+"this is not a # title nor #this"
+
+Symbol Tables: conutiunation
+========================
+
+conutiunation: Script
+
+String Literals: conutiunation
+========================
+

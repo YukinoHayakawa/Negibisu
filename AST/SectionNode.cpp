@@ -20,52 +20,75 @@ void SectionNode::print(std::string &indentation)
 
 void SectionNode::parseTitle()
 {
-    consume(TokenType::SHARP);
-    mScriptName = consumeString();
-    consume(TokenType::COLON);
-    mDisplayName = consumeString();
-
-    mSymbolTable.lookup(mScriptName.ref, SymbolType::SCRIPT);
+    if(currentType() == TokenType::SHARP)
+    {
+        consume(TokenType::SHARP);
+        mScriptName = consumeString();
+        consume(TokenType::COLON);
+        mDisplayName = consumeString();
+    }
+    else
+    {
+        mScriptName = mParsingContext->createToken(
+            TokenType::STRING_LITERAL,
+            "<UNNAMED>"
+        );
+        mDisplayName = mParsingContext->createToken(
+            TokenType::STRING_LITERAL,
+            "<UNNAMED SECTION>"
+        );
+    }
+    mSceneContext.symbol_table.lookup(mScriptName.ref, SymbolType::SCRIPT);
 }
 
 void SectionNode::parseContent()
 {
     while(streamNotEnded())
     {
-        switch(currentType())
+        try
         {
-            case TokenType::LEFT_BRACKET:
-            case TokenType::STRING_LITERAL:
-                parseDialog();
-                continue;
-            case TokenType::LEFT_BRACE:
-                parseCommand();
-                continue;
-            // next section
-            case TokenType::SHARP:
-                return;
-            case TokenType::NEWLINE:
-                advance();
-                continue;
-            default:
-                syntaxError("Expected a line of text or a command.");
+            switch(currentType())
+            {
+                case TokenType::LEFT_BRACKET:
+                case TokenType::STRING_LITERAL:
+                    parseDialog();
+                    continue;
+                case TokenType::LEFT_BRACE:
+                    parseCommand();
+                    continue;
+                    // next section
+                case TokenType::SHARP:
+                    return;
+                case TokenType::NEWLINE:
+                    advance();
+                    continue;
+                default:
+                    syntaxError("Expected a line of text or a command.");
+            }
+        }
+        catch(const SyntaxError &)
+        {
+            proceedToNextLine();
         }
     }
 }
 
 void SectionNode::parseDialog()
 {
-    mLines.push_back(std::make_unique<DialogNode>(mTokenBegin, mTokenEnd));
-    mLines.back()->parse(&mSymbolTable);
+    // exception safe
+    auto line = std::make_unique<DialogNode>(mParsingContext);
+    line->parse(&mSceneContext);
+    mLines.push_back(std::move(line));
 }
 
 void SectionNode::parseCommand()
 {
-    mLines.push_back(std::make_unique<CommandNode>(mTokenBegin, mTokenEnd));
-    mLines.back()->parse(&mSymbolTable);
+    auto line = std::make_unique<CommandNode>(mParsingContext);
+    line->parse(&mSceneContext);
+    mLines.push_back(std::move(line));
 }
 
-void SectionNode::parse(SymbolTable *table)
+void SectionNode::parse(SceneContext *ctx)
 {
     parseTitle();
     parseContent();

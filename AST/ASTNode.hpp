@@ -1,30 +1,34 @@
 ﻿#pragma once
 
-#include <vector>
-
 #include <Usagi/Utility/Noncopyable.hpp>
 
-#include <Negibisu/Lexical/Token.hpp>
+#include <Negibisu/Parsing/ParsingContext.hpp>
 
 namespace usagi::negi
 {
-struct SymbolTable;
+struct SceneContext;
+
+class SyntaxError : public std::runtime_error
+{
+public:
+    SyntaxError()
+        : runtime_error("Syntax error.")
+    {
+    }
+};
 
 class ASTNode : Noncopyable
 {
     template <typename... Args>
     void error(Args &&... args) const
     {
-        mTokenBegin->pos.error(std::forward<Args>(args)...);
+        mParsingContext->cursor->pos.error(std::forward<Args>(args)...);
     }
 
 protected:
     static constexpr int INDENTATION = 2;
 
-    using TokenStreamIterator = std::vector<Token>::const_iterator;
-
-    TokenStreamIterator &mTokenBegin;
-    const TokenStreamIterator &mTokenEnd;
+    ParsingContext *mParsingContext = nullptr;
 
     TokenType currentType() const;
     TokenType nextType(std::size_t lookahead = 1) const;
@@ -40,22 +44,24 @@ protected:
     void consume(TokenType token_type);
     TokenRef consumeString();
 
+    void proceedToNextLine();
+
     template <typename... Args>
     void syntaxError(Args &&... args) const
     {
         error(std::forward<Args>(args)...);
-        throw std::runtime_error("Syntax error.");
+        throw SyntaxError();
     }
 
 public:
-    ASTNode(
-        TokenStreamIterator &token_begin,
-        const TokenStreamIterator &token_end);
+    explicit ASTNode(ParsingContext *context);
+
     virtual ~ASTNode() = default;
     ASTNode(ASTNode &&) = default;
 
-    virtual void parse(SymbolTable *table) = 0;
+    virtual void parse(SceneContext *ctx) = 0;
+    virtual void check(SceneContext *ctx) { }
+
     virtual void print(std::string &indentation) = 0;
-    virtual void check(SymbolTable *table) { }
 };
 }

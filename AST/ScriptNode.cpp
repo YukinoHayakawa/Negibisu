@@ -4,11 +4,11 @@ namespace usagi::negi
 {
 void ScriptNode::parseSection()
 {
-    mSections.emplace_back(mTokenBegin, mTokenEnd);
+    mSections.emplace_back(mParsingContext);
     mSections.back().parse(nullptr);
 }
 
-void ScriptNode::parse(SymbolTable *table)
+void ScriptNode::parse(SceneContext *ctx)
 {
     while(streamNotEnded())
     {

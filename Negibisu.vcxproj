@@ -80,6 +80,8 @@
     <ClInclude Include="AST\LineNode.hpp" />
     <ClInclude Include="AST\ScriptNode.hpp" />
     <ClInclude Include="AST\SectionNode.hpp" />
+    <ClInclude Include="Parsing\ParsingContext.hpp" />
+    <ClInclude Include="Semantic\SceneContext.hpp" />
     <ClInclude Include="Semantic\SymbolTable.hpp" />
     <ClInclude Include="Lexical\StringParser.hpp" />
     <ClInclude Include="Lexical\Token.hpp" />
@@ -94,6 +96,8 @@
     <ClCompile Include="AST\LineNode.cpp" />
     <ClCompile Include="AST\ScriptNode.cpp" />
     <ClCompile Include="AST\SectionNode.cpp" />
+    <ClCompile Include="Parsing\ParsingContext.cpp" />
+    <ClCompile Include="Semantic\SceneContext.cpp" />
     <ClCompile Include="Semantic\SymbolTable.cpp" />
     <ClCompile Include="Lexical\StringParser.cpp" />
     <ClCompile Include="Lexical\Token.cpp" />

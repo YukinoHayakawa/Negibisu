@@ -35,7 +35,9 @@ void SymbolInfo::extendScope(std::size_t position)
     last_usage = std::max(position, last_usage);
 }
 
-void SymbolTable::lookup(const Token *token, const SymbolType type)
+const SymbolInfo & SymbolTable::lookup(
+    const Token *token,
+    const SymbolType type)
 {
     const auto ref = symbols.try_emplace(
         token->text,
@@ -61,6 +63,8 @@ void SymbolTable::lookup(const Token *token, const SymbolType type)
         }
         symbol.extendScope(token->index);
     }
+
+    return symbol;
 }
 
 void SymbolTable::addStringLiteral(const Token *token)

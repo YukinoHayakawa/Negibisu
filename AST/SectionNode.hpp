@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <Negibisu/Semantic/SymbolTable.hpp>
+#include <Negibisu/Semantic/SceneContext.hpp>
 
 #include "LineNode.hpp"
 
@@ -10,7 +10,7 @@ namespace usagi::negi
 {
 class SectionNode : public ASTNode
 {
-    SymbolTable mSymbolTable;
+    SceneContext mSceneContext;
     TokenRef mScriptName;
     TokenRef mDisplayName;
 
@@ -24,12 +24,12 @@ class SectionNode : public ASTNode
 public:
     using ASTNode::ASTNode;
 
-    void parse(SymbolTable *table) override;
+    void parse(SceneContext *ctx) override;
     void print(std::string &indentation) override;
 
-    const SymbolTable & symbolTable() const
+    const SceneContext & context() const
     {
-        return mSymbolTable;
+        return mSceneContext;
     }
 
     std::string_view scriptName() const

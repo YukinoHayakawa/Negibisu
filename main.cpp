@@ -33,10 +33,9 @@ int main(int argc, char *argv[])
         fmt::print("AST\n");
         fmt::print("===\n\n");
 
-        auto token_begin = t.tokens().begin();
-        auto token_end = t.tokens().end();
-        ScriptNode p { token_begin, token_end };
-        p.parse();
+        ParsingContext ctx { t.tokens() };
+        ScriptNode p { &ctx };
+        p.parse(nullptr);
         std::string indent;
         p.print(indent);
 
@@ -46,13 +45,13 @@ int main(int argc, char *argv[])
             fmt::print("Symbol Tables: {}\n", s.scriptName());
             fmt::print("========================\n\n");
 
-            s.symbolTable().dumpSymbols();
+            s.context().symbol_table.dumpSymbols();
 
             fmt::print("\n");
             fmt::print("String Literals: {}\n", s.scriptName());
             fmt::print("========================\n\n");
 
-            s.symbolTable().dumpStringLiterals();
+            s.context().symbol_table.dumpStringLiterals();
         }
     }
     catch(const std::exception &e)

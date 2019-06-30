@@ -22,6 +22,7 @@ enum class TokenType
     COLON,
     COMMA,
     EQUAL,
+    END_OF_STREAM,
     UNKNOWN,
 };
 
@@ -45,6 +46,16 @@ struct Token
             ec == std::errc())
             return result;
         throw std::bad_cast();
+    }
+
+    template <typename T>
+    bool convertibleTo() const
+    {
+        T result;
+        auto [p, ec] = std::from_chars(
+            text.data(), text.data() + text.size(), result
+        );
+        return ec == std::errc();
     }
 };
 

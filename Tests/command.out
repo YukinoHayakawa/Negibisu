@@ -70,5 +70,23 @@ Line 19, Col 21: [NEWLINE]
 AST
 ===
 
-Error at Line 1, Col 1: Expected a #.
-Syntax error.
+Error at Line 3, Col 2: Expected a STRING_LITERAL.
+Error at Line 5, Col 2: Expected a STRING_LITERAL.
+Error at Line 7, Col 2: Expected a STRING_LITERAL.
+Error at Line 10, Col 1: Expected a STRING_LITERAL.
+SCRIPT
+  SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
+    COMMAND: name="command", args=[1, 2, 3]
+    COMMAND: name="test", args=[]
+    COMMAND: name="te    st", args=[]
+    COMMAND: name="test", args=[a, b, c, "xxx"]
+    COMMAND: name="test", args=[a=m, b, c, "xxx"]
+
+Symbol Tables: <UNNAMED>
+========================
+
+<UNNAMED>: Script
+
+String Literals: <UNNAMED>
+========================
+

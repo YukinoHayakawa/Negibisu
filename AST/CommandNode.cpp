@@ -26,7 +26,7 @@ void CommandNode::parseArgs()
     }
 }
 
-void CommandNode::parse(SymbolTable *table)
+void CommandNode::parse(SceneContext *ctx)
 {
     consume(TokenType::LEFT_BRACE);
     mCommandName = consumeString();
