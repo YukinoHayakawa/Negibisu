@@ -13,6 +13,7 @@ struct CharacterState
     std::string_view object_name;
     std::string_view current_expression;
     std::string_view current_position;
+    std::string_view disguised_name;
     bool on_stage = false;
 };
 
@@ -29,10 +30,15 @@ struct SceneContext : Noncopyable
 {
     SymbolTable symbol_table;
     std::unordered_map<std::string_view, CharacterState> characters;
-    TokenRef current_character;
 
     // todo fix this
     std::ostream *output = &std::cout;
+
+    template <typename... Args>
+    void print(Args &&... args) const
+    {
+        fmt::print(*output, std::forward<Args>(args)...);
+    }
 
     template <typename... Args>
     void semanticError(TokenRef position_hint, Args &&... args) const
@@ -42,7 +48,7 @@ struct SceneContext : Noncopyable
     }
 
     CharacterState & characterState(TokenRef character);
-    CharacterState & checkCharacterOnStage(TokenRef character);
+    CharacterState & ensureCharacterOnStage(TokenRef character);
 };
 
 }

@@ -8,6 +8,7 @@
 
 namespace usagi::negi
 {
+// todo extract cur next prev behavior to another base class
 class StringParser : Noncopyable
 {
     std::string mName;

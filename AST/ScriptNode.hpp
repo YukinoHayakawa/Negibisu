@@ -8,16 +8,13 @@ class ScriptNode : public ASTNode
 {
     std::vector<SectionNode> mSections;
 
-    void parseSection();
+    void parseSection(ParsingContext *ctx);
 
 public:
-    using ASTNode::ASTNode;
-
-    void parse(SceneContext *ctx) override;
+    void parse(ParsingContext *ctx) override;
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) override;
-
-    void print(std::string &indentation) override;
+    void print(PrintContext &ctx) override;
 
     const std::vector<SectionNode> & sections() const
     {

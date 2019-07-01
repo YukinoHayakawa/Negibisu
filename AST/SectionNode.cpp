@@ -1,108 +1,146 @@
 ﻿#include "SectionNode.hpp"
 
-#include "CommandNode.hpp"
-#include "DialogNode.hpp"
+#include <Negibisu/Parsing/ParsingContext.hpp>
+
+#include "PrintContext.hpp"
+#include "Command/SystemCommand.hpp"
+#include "Command/CharacterCommand.hpp"
+#include "Statement/CommandExecutionNode.hpp"
 
 namespace usagi::negi
 {
-void SectionNode::print(std::string &indentation)
+void SectionNode::print(PrintContext &ctx)
 {
-    fmt::print(
-        "{}SECTION: script_name=\"{}\", display_name=\"{}\"\n",
-        indentation,
+    ctx.print(
+        "SECTION: script_name=\"{}\", display_name=\"{}\"",
         mScriptName, mDisplayName
     );
-    indentation.append(INDENTATION, ' ');
-    for(auto &&line : mLines)
-        line->print(indentation);
-    indentation.erase(indentation.end() - INDENTATION, indentation.end());
+    ctx.push();
+    for(auto &&s : mStatements)
+        s->print(ctx);
+    ctx.pop();
 }
 
-void SectionNode::parseTitle()
+void SectionNode::parseTitle(ParsingContext *ctx)
 {
-    if(currentType() == TokenType::SHARP)
+    if(ctx->currentType() == TokenType::SHARP)
     {
-        consume(TokenType::SHARP);
-        mScriptName = consumeString();
-        consume(TokenType::COLON);
-        mDisplayName = consumeString();
+        ctx->consume(TokenType::SHARP);
+        mScriptName = ctx->consumeString();
+        ctx->consume(TokenType::COLON);
+        mDisplayName = ctx->consumeString();
     }
     else
     {
-        mScriptName = mParsingContext->createToken(
+        mScriptName = ctx->createToken(
             TokenType::STRING_LITERAL,
             "<UNNAMED>"
         );
-        mDisplayName = mParsingContext->createToken(
+        mDisplayName = ctx->createToken(
             TokenType::STRING_LITERAL,
             "<UNNAMED SECTION>"
         );
     }
-    mSceneContext.symbol_table.lookup(mScriptName.ref, SymbolType::SCRIPT);
 }
 
-void SectionNode::parseContent()
+void SectionNode::parseLine(ParsingContext *ctx)
 {
-    while(streamNotEnded())
+    ctx->line = LineContext { };
+
+    while(ctx->streamNotEnded())
     {
+        switch(ctx->currentType())
+        {
+            case TokenType::LEFT_BRACKET:
+            {
+                auto stat = std::make_unique<CharacterTag>();
+                stat->parse(ctx);
+                mStatements.push_back(std::move(stat));
+                break;
+            }
+            case TokenType::STRING_LITERAL:
+            {
+                auto text = ctx->consumeString();
+                if(ctx->line.current_character)
+                {
+                    auto stat = std::make_unique<CharacterSayCommand>(
+                        ctx->line.current_character, text);
+                    mStatements.push_back(std::move(stat));
+                }
+                else
+                {
+                    auto stat = std::make_unique<NarratorSayCommand>(
+                        text);
+                    mStatements.push_back(std::move(stat));
+                }
+                ctx->line.any_dialog = true;
+                break;
+            }
+            case TokenType::LEFT_BRACE:
+            {
+                auto stat = std::make_unique<CommandExecutionNode>();
+                stat->parse(ctx);
+                mStatements.push_back(std::move(stat));
+                break;
+            }
+            // next section
+            case TokenType::SHARP:
+            {
+                return;
+            }
+            case TokenType::NEWLINE:
+            {
+                ctx->advance();
+                if(!ctx->line.beginning)
+                    mStatements.push_back(
+                        std::make_unique<SystemWaitInputCommand>()
+                    );
+                return;
+            }
+            default:
+            {
+                ctx->syntaxError("Expected dialog text or a command.");
+            }
+        }
+        ctx->line.beginning = false;
+    }
+}
+
+void SectionNode::parseContent(ParsingContext *ctx)
+{
+    while(ctx->streamNotEnded())
+    {
+        // next section
+        if(ctx->currentType() == TokenType::SHARP)
+            return;
         try
         {
-            switch(currentType())
-            {
-                case TokenType::LEFT_BRACKET:
-                case TokenType::STRING_LITERAL:
-                    parseDialog();
-                    continue;
-                case TokenType::LEFT_BRACE:
-                    parseCommand();
-                    continue;
-                // next section
-                case TokenType::SHARP:
-                    return;
-                case TokenType::NEWLINE:
-                    advance();
-                    continue;
-                default:
-                    syntaxError("Expected a line of text or a command.");
-            }
+            parseLine(ctx);
         }
         catch(const SyntaxError &)
         {
-            proceedToNextLine();
+            ctx->proceedToNextLine();
         }
     }
 }
 
-void SectionNode::parseDialog()
+void SectionNode::parse(ParsingContext *ctx)
 {
-    // exception safe
-    auto line = std::make_unique<DialogNode>(mParsingContext);
-    line->parse(&mSceneContext);
-    mLines.push_back(std::move(line));
-}
-
-void SectionNode::parseCommand()
-{
-    auto line = std::make_unique<CommandNode>(mParsingContext);
-    line->parse(&mSceneContext);
-    mLines.push_back(std::move(line));
-}
-
-void SectionNode::parse(SceneContext *ctx)
-{
-    parseTitle();
-    parseContent();
+    parseTitle(ctx);
+    parseContent(ctx);
 }
 
 void SectionNode::check(SceneContext *ctx)
 {
-    for(auto &&l : mLines)
+    mSceneContext.symbol_table.lookup(mScriptName.ref, SymbolType::SCRIPT);
+
+    for(auto &&l : mStatements)
         l->check(&mSceneContext);
 }
 
 void SectionNode::generate(SceneContext *ctx)
 {
-    for(auto &&l : mLines)
+    for(auto &&l : mStatements)
         l->generate(&mSceneContext);
 }
 }

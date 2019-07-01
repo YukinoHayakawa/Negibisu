@@ -73,13 +73,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Command\CharacterCommand.hpp" />
-    <ClInclude Include="Command\ImageCommand.hpp" />
+    <ClInclude Include="AST\Command\CharacterCommand.hpp" />
+    <ClInclude Include="AST\Command\ImageCommand.hpp" />
+    <ClInclude Include="AST\PrintContext.hpp" />
+    <ClInclude Include="AST\Statement\CommandExecutionNode.hpp" />
+    <ClInclude Include="AST\Statement\IntrinsicCommand.hpp" />
+    <ClInclude Include="AST\Command\SystemCommand.hpp" />
+    <ClInclude Include="AST\StatementNode.hpp" />
     <ClInclude Include="Lexical\SourcePosition.hpp" />
     <ClInclude Include="AST\ASTNode.hpp" />
-    <ClInclude Include="AST\CommandNode.hpp" />
-    <ClInclude Include="AST\DialogNode.hpp" />
-    <ClInclude Include="AST\LineNode.hpp" />
     <ClInclude Include="AST\ScriptNode.hpp" />
     <ClInclude Include="AST\SectionNode.hpp" />
     <ClInclude Include="Parsing\ParsingContext.hpp" />
@@ -91,14 +93,15 @@
     <ClInclude Include="Lexical\Tokenizer.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Command\CharacterCommand.cpp" />
-    <ClCompile Include="Command\ImageCommand.cpp" />
+    <ClCompile Include="AST\Command\CharacterCommand.cpp" />
+    <ClCompile Include="AST\Command\ImageCommand.cpp" />
+    <ClCompile Include="AST\PrintContext.cpp" />
+    <ClCompile Include="AST\Statement\CommandExecutionNode.cpp" />
+    <ClCompile Include="AST\Statement\IntrinsicCommand.cpp" />
+    <ClCompile Include="AST\Command\SystemCommand.cpp" />
     <ClCompile Include="Lexical\SourcePosition.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AST\ASTNode.cpp" />
-    <ClCompile Include="AST\CommandNode.cpp" />
-    <ClCompile Include="AST\DialogNode.cpp" />
-    <ClCompile Include="AST\LineNode.cpp" />
     <ClCompile Include="AST\ScriptNode.cpp" />
     <ClCompile Include="AST\SectionNode.cpp" />
     <ClCompile Include="Parsing\ParsingContext.cpp" />

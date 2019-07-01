@@ -1,19 +1,23 @@
 ﻿#include "ScriptNode.hpp"
 
+#include <Negibisu/Parsing/ParsingContext.hpp>
+
+#include "PrintContext.hpp"
+
 namespace usagi::negi
 {
-void ScriptNode::parseSection()
+void ScriptNode::parseSection(ParsingContext *ctx)
 {
-    mSections.emplace_back(mParsingContext);
-    mSections.back().parse(nullptr);
+    mSections.emplace_back();
+    mSections.back().parse(ctx);
 }
 
-void ScriptNode::parse(SceneContext *ctx)
+void ScriptNode::parse(ParsingContext *ctx)
 {
-    while(streamNotEnded())
+    while(ctx->streamNotEnded())
     {
-        skipNewLines();
-        parseSection();
+        ctx->skipNewLines();
+        parseSection(ctx);
     }
 }
 
@@ -29,12 +33,12 @@ void ScriptNode::generate(SceneContext *ctx)
         s.generate(nullptr);
 }
 
-void ScriptNode::print(std::string& indentation)
+void ScriptNode::print(PrintContext &ctx)
 {
-    fmt::print("{}SCRIPT\n", indentation);
-    indentation.append(INDENTATION, ' ');
+    ctx.print("SCRIPT");
+    ctx.push();
     for(auto&& section : mSections)
-        section.print(indentation);
-    indentation.erase(indentation.end() - INDENTATION, indentation.end());
+        section.print(ctx);
+    ctx.pop();
 }
 }

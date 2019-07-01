@@ -4,7 +4,7 @@
 
 #include <Negibisu/Semantic/SceneContext.hpp>
 
-#include "LineNode.hpp"
+#include "StatementNode.hpp"
 
 namespace usagi::negi
 {
@@ -14,21 +14,18 @@ class SectionNode : public ASTNode
     TokenRef mScriptName;
     TokenRef mDisplayName;
 
-    std::vector<std::unique_ptr<LineNode>> mLines;
+    std::vector<std::unique_ptr<StatementNode>> mStatements;
 
-    void parseTitle();
-    void parseContent();
-    void parseDialog();
-    void parseCommand();
+    void parseTitle(ParsingContext *ctx);
+    void parseContent(ParsingContext *ctx);
+    void parseLine(ParsingContext *ctx);
 
 public:
-    using ASTNode::ASTNode;
-
-    void parse(SceneContext *ctx) override;
+    void parse(ParsingContext *ctx) override;
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) override;
 
-    void print(std::string &indentation) override;
+    void print(PrintContext &ctx) override;
 
     const SceneContext & context() const
     {

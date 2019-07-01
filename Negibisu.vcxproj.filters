@@ -36,15 +36,6 @@
     <ClCompile Include="AST\ASTNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AST\CommandNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AST\DialogNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AST\LineNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AST\ScriptNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,10 +51,22 @@
     <ClCompile Include="Semantic\SymbolNameCounter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Command\ImageCommand.cpp">
+    <ClCompile Include="AST\Command\CharacterCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Command\CharacterCommand.cpp">
+    <ClCompile Include="AST\Command\ImageCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AST\Command\SystemCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AST\Statement\IntrinsicCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AST\Statement\CommandExecutionNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AST\PrintContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,15 +89,6 @@
     <ClInclude Include="AST\ASTNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AST\CommandNode.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AST\DialogNode.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AST\LineNode.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AST\ScriptNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -110,10 +104,25 @@
     <ClInclude Include="Semantic\SymbolNameCounter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Command\ImageCommand.hpp">
+    <ClInclude Include="AST\Command\CharacterCommand.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Command\CharacterCommand.hpp">
+    <ClInclude Include="AST\Command\ImageCommand.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AST\Command\SystemCommand.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AST\StatementNode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AST\Statement\IntrinsicCommand.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AST\Statement\CommandExecutionNode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AST\PrintContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

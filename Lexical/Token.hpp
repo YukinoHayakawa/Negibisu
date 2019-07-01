@@ -67,6 +67,16 @@ struct TokenRef
     {
         return ref;
     }
+
+    operator bool() const
+    {
+        return ref;
+    }
+
+    operator const Token *() const
+    {
+        return ref;
+    }
 };
 
 std::ostream & operator<<(std::ostream &os, const Token &t);

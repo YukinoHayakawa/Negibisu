@@ -7,7 +7,7 @@ CharacterState & SceneContext::characterState(TokenRef character)
     return characters[character->text];
 }
 
-CharacterState & SceneContext::checkCharacterOnStage(TokenRef character)
+CharacterState & SceneContext::ensureCharacterOnStage(TokenRef character)
 {
     auto &state = characterState(character);
 

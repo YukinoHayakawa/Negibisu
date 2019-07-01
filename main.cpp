@@ -3,8 +3,9 @@
 #include <iostream>
 
 #include "Lexical/Tokenizer.hpp"
-#include "AST/ASTNode.hpp"
 #include "AST/ScriptNode.hpp"
+#include "Parsing/ParsingContext.hpp"
+#include "AST/PrintContext.hpp"
 
 #ifdef _WIN32
 #include <Usagi/Extension/Win32/Win32Helper.hpp>
@@ -29,15 +30,30 @@ int main(int argc, char *argv[])
         t.tokenize();
         t.dumpTokens();
 
-        fmt::print("\n");
-        fmt::print("AST\n");
-        fmt::print("===\n\n");
-
         ParsingContext ctx { t.tokens() };
-        ScriptNode p { &ctx };
-        p.parse(nullptr);
-        std::string indent;
-        p.print(indent);
+        ScriptNode p;
+        PrintContext pp { std::cout };
+
+        fmt::print("\n");
+        fmt::print("AST (Parsed)\n");
+        fmt::print("============\n\n");
+
+        p.parse(&ctx);
+        p.print(pp);
+
+        fmt::print("\n");
+        fmt::print("AST (Checked)\n");
+        fmt::print("============\n\n");
+
+        // todo continue to next line after semantic error
+        try
+        {
+            p.check(nullptr);
+        }
+        catch(SemanticError &)
+        {
+        }
+        p.print(pp);
 
         for(auto &s : p.sections())
         {

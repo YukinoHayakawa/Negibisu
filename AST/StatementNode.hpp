@@ -4,9 +4,7 @@
 
 namespace usagi::negi
 {
-class LineNode : public ASTNode
+class StatementNode : public ASTNode
 {
-public:
-    using ASTNode::ASTNode;
 };
 }
