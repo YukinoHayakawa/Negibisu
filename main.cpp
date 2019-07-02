@@ -12,12 +12,15 @@
 #endif
 
 using namespace usagi;
-using namespace usagi::negi;
+using namespace negi;
 
+#ifdef _WIN32
+int wmain(int argc, wchar_t *argv[])
+{
+    // win32::patchConsole();
+#else
 int main(int argc, char *argv[])
 {
-#ifdef _WIN32
-    win32::patchConsole();
 #endif
 
     try
