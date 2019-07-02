@@ -27,32 +27,91 @@ Line 14, Col 15: [STRING_LITERAL] Yuki
 Line 14, Col 19: [RIGHT_BRACKET] ]
 Line 14, Col 21: [STRING_LITERAL] Yuki is hiding her identity.
 Line 14, Col 49: [NEWLINE] 
-Line 15, Col 1: [NEWLINE] 
+Line 15, Col 1: [LEFT_BRACKET] [
+Line 15, Col 2: [STRING_LITERAL] Yuki
+Line 15, Col 6: [RIGHT_BRACKET] ]
+Line 15, Col 8: [STRING_LITERAL] Not anymore.
+Line 15, Col 20: [NEWLINE] 
 Line 16, Col 1: [NEWLINE] 
-Line 17, Col 1: [LEFT_BRACKET] [
-Line 17, Col 2: [STRING_LITERAL] Moon
-Line 17, Col 6: [COMMA] ,
-Line 17, Col 7: [STRING_LITERAL] Smile
-Line 17, Col 12: [COMMA] ,
-Line 17, Col 13: [STRING_LITERAL] Middle
-Line 17, Col 19: [RIGHT_BRACKET] ]
-Line 17, Col 21: [STRING_LITERAL] Mr. Mo    on likes to laugh.
-Line 18, Col 23: [NEWLINE] 
-Line 19, Col 1: [NEWLINE] 
-Line 20, Col 1: [STRING_LITERAL] continuation at last line 
+Line 17, Col 1: [NEWLINE] 
+Line 18, Col 1: [LEFT_BRACKET] [
+Line 18, Col 2: [STRING_LITERAL] Moon
+Line 18, Col 6: [COMMA] ,
+Line 18, Col 7: [STRING_LITERAL] Smile
+Line 18, Col 12: [COMMA] ,
+Line 18, Col 13: [STRING_LITERAL] Middle
+Line 18, Col 19: [RIGHT_BRACKET] ]
+Line 18, Col 21: [STRING_LITERAL] Mr. Mo    on likes to laugh.
+Line 19, Col 23: [NEWLINE] 
+Line 20, Col 1: [NEWLINE] 
+Line 21, Col 1: [STRING_LITERAL] Comma, is, not, an, operator, in, dialogs.
+Line 21, Col 43: [NEWLINE] 
+Line 22, Col 1: [NEWLINE] 
+Line 23, Col 1: [STRING_LITERAL] "but we should support quotes"
+Line 23, Col 31: [NEWLINE] 
+Line 24, Col 1: [NEWLINE] 
+Line 25, Col 1: [STRING_LITERAL] continuation at last line
 
-AST
-===
+AST (Parsed)
+============
 
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
-    DIALOG: char="", alias="", expr="", pos="", text="This is a line of dialog."
-    DIALOG: char="", alias="", expr="", pos="", text="Spaces     at the endings of the line are  trimmed but not those in between."
-    DIALOG: char="", alias="", expr="", pos="", text="这是一行中文。"
-    DIALOG: char="Yuki", alias="", expr="", pos="", text="This is Yuki speaking."
-    DIALOG: char="Yuki", alias="Mystery Girl", expr="", pos="", text="Yuki is hiding her identity."
-    DIALOG: char="Moon", alias="", expr="Smile", pos="Middle", text="Mr. Mo    on likes to laugh."
-    DIALOG: char="", alias="", expr="", pos="", text="continuation at last line "
+    NARRATOR_SAY: text="This is a line of dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Spaces     at the endings of the line are  trimmed but not those in between."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="这是一行中文。"
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Yuki", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Yuki", text="This is Yuki speaking."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Yuki", alias="Mystery Girl", expr="", pos=""
+    CHARACTER_SAY: char="Yuki", text="Yuki is hiding her identity."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Yuki", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Yuki", text="Not anymore."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Moon", alias="", expr="Smile", pos="Middle"
+    CHARACTER_SAY: char="Moon", text="Mr. Mo    on likes to laugh."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Comma, is, not, an, operator, in, dialogs."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text=but we should support quotes"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="continuation at last line"
+
+AST (Checked)
+=============
+
+SCRIPT
+  SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
+    NARRATOR_SAY: text="This is a line of dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Spaces     at the endings of the line are  trimmed but not those in between."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="这是一行中文。"
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Yuki", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Yuki", text="This is Yuki speaking."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Yuki", alias="Mystery Girl", expr="", pos=""
+      CHARACTER_SET_DISGUISE: char="Yuki", disguise="Mystery Girl"
+    CHARACTER_SAY: char="Yuki", text="Yuki is hiding her identity."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Yuki", alias="", expr="", pos=""
+      CHARACTER_REMOVE_DISGUISE: char="Yuki"
+    CHARACTER_SAY: char="Yuki", text="Not anymore."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Moon", alias="", expr="Smile", pos="Middle"
+      CHARACTER_ENTER: char="Moon", expr="Smile", pos="Middle"
+    CHARACTER_SAY: char="Moon", text="Mr. Mo    on likes to laugh."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Comma, is, not, an, operator, in, dialogs."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="but we should support quotes"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="continuation at last line"
 
 Symbol Tables: <UNNAMED>
 ========================
@@ -70,7 +129,36 @@ String Literals: <UNNAMED>
 "Mystery Girl"
 "Spaces     at the endings of the line are  trimmed but not those in between."
 "这是一行中文。"
-"continuation at last line "
+"continuation at last line"
 "Mr. Mo    on likes to laugh."
 "This is Yuki speaking."
 "Yuki is hiding her identity."
+"Not anymore."
+"Comma, is, not, an, operator, in, dialogs."
+but we should support quotes"
+
+Target Code
+===========
+
+narrator:say("This is a line of dialog.");
+_w();
+narrator:say("Spaces     at the endings of the line are  trimmed but not those in between.");
+_w();
+narrator:say("这是一行中文。");
+_w();
+b:say("This is Yuki speaking.");
+_w();
+b:setDisguise("Mystery Girl");
+b:say("Yuki is hiding her identity.");
+_w();
+b:removeDisguise();
+b:say("Not anymore.");
+_w();
+c:enterStage(e, d);
+c:say("Mr. Mo    on likes to laugh.");
+_w();
+narrator:say("Comma, is, not, an, operator, in, dialogs.");
+_w();
+narrator:say("but we should support quotes");
+_w();
+narrator:say("continuation at last line");
