@@ -73,6 +73,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AST\Command\AudioCommand.hpp" />
     <ClInclude Include="AST\Command\CharacterCommand.hpp" />
     <ClInclude Include="AST\Command\ImageCommand.hpp" />
     <ClInclude Include="AST\PrintContext.hpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="Lexical\Tokenizer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AST\Command\AudioCommand.cpp" />
     <ClCompile Include="AST\Command\CharacterCommand.cpp" />
     <ClCompile Include="AST\Command\ImageCommand.cpp" />
     <ClCompile Include="AST\PrintContext.cpp" />
