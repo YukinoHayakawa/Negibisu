@@ -520,22 +520,23 @@ void CharacterTag::check(SceneContext *ctx)
 {
     auto &state = ctx->characterState(mCharacter);
 
-    if(mDisguisedName->text != state.disguised_name)
+    if(!mDisguisedName)
     {
-        if(mDisguisedName->text.empty())
+        if(!state.disguised_name.empty())
         {
             mStatements.push_back(
                 std::make_unique<CharacterRemoveDisguiseCommand>(
                     mCharacter
                 ));
+            mStatements.back()->check(ctx);
         }
-        else
-        {
-            mStatements.push_back(
-                std::make_unique<CharacterSetDisguiseCommand>(
-                    mCharacter, mDisguisedName
-                ));
-        }
+    }
+    else if(state.disguised_name != mDisguisedName->text)
+    {
+        mStatements.push_back(
+            std::make_unique<CharacterSetDisguiseCommand>(
+                mCharacter, mDisguisedName
+            ));
         mStatements.back()->check(ctx);
     }
     if(mExpression || mPosition)
