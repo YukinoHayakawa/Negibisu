@@ -48,14 +48,7 @@ int main(int argc, char *argv[])
         fmt::print("AST (Checked)\n");
         fmt::print("=============\n\n");
 
-        // todo continue to next line after semantic error
-        try
-        {
-            p.check(nullptr);
-        }
-        catch(SemanticError &)
-        {
-        }
+        p.check(nullptr);
         p.print(pp);
 
         for(auto &s : p.sections())
