@@ -17,7 +17,7 @@ void SystemWaitInputCommand::check(SceneContext *ctx)
 
 void SystemWaitInputCommand::generate(SceneContext *ctx)
 {
-    ctx->print("w();");
+    ctx->print("_w();");
 }
 
 void SystemWaitInputCommand::print(PrintContext &ctx)

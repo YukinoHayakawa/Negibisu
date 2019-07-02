@@ -84,6 +84,7 @@ void CommandExecutionNode::check(SceneContext *ctx)
 
 void CommandExecutionNode::generate(SceneContext *ctx)
 {
+    assert(mInvocation);
     mInvocation->generate(ctx);
 }
 
