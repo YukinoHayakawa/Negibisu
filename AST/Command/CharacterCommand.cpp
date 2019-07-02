@@ -309,7 +309,7 @@ void CharacterSayCommand::check(SceneContext *ctx)
 void CharacterSayCommand::generate(SceneContext *ctx)
 {
     ctx->print(
-        "{0}:say({1});",
+        "{0}:say(\"{1}\");",
         ctx->symbol_table.lookup(
             mCharacter, SymbolType::CHARACTER
         ).object_name,
@@ -370,7 +370,7 @@ void CharacterSetDisguiseCommand::generate(SceneContext *ctx)
     if(mGenerate)
     {
         ctx->print(
-            "{0}:setDisguise({1});",
+            "{0}:setDisguise(\"{1}\");",
             ctx->symbol_table.lookup(
                 mCharacter, SymbolType::CHARACTER
             ).object_name,
@@ -469,7 +469,7 @@ void NarratorSayCommand::check(SceneContext *ctx)
 void NarratorSayCommand::generate(SceneContext *ctx)
 {
     ctx->print(
-        "narrator:disguisedSay({});",
+        "narrator:say(\"{}\");",
         mText
     );
 }

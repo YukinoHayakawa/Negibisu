@@ -38,6 +38,7 @@ struct SceneContext : Noncopyable
     void print(Args &&... args) const
     {
         fmt::print(*output, std::forward<Args>(args)...);
+        fmt::print(*output, "\n");
     }
 
     template <typename... Args>
