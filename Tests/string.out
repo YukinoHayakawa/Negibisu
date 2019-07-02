@@ -16,16 +16,37 @@ Line 10, Col 1: [NEWLINE]
 Line 11, Col 1: [STRING_LITERAL] meaningless escapes
 Line 11, Col 27: [NEWLINE] 
 
-AST
-===
+AST (Parsed)
+============
 
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
-    DIALOG: char="", alias="", expr="", pos="", text="single line string"
-    DIALOG: char="", alias="", expr="", pos="", text="multiline string"
-    DIALOG: char="", alias="", expr="", pos="", text="string inside"
-    DIALOG: char="", alias="", expr="", pos="", text="\\ two slashes"
-    DIALOG: char="", alias="", expr="", pos="", text="meaningless escapes"
+    NARRATOR_SAY: text="single line string"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="multiline string"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="string inside"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="\\ two slashes"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="meaningless escapes"
+    SYSTEM_WAIT_INPUT
+
+AST (Checked)
+=============
+
+SCRIPT
+  SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
+    NARRATOR_SAY: text="single line string"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="multiline string"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="string inside"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="\\ two slashes"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="meaningless escapes"
+    SYSTEM_WAIT_INPUT
 
 Symbol Tables: <UNNAMED>
 ========================
@@ -40,3 +61,17 @@ String Literals: <UNNAMED>
 "multiline string"
 "string inside"
 "\\ two slashes"
+
+Target Code: <UNNAMED>
+========================
+
+narrator:say("single line string");
+_w();
+narrator:say("multiline string");
+_w();
+narrator:say("string inside");
+_w();
+narrator:say("\\ two slashes");
+_w();
+narrator:say("meaningless escapes");
+_w();

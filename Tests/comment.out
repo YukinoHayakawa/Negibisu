@@ -125,6 +125,16 @@ String Literals: test_label
 "empty comment"
 "This is a line with inside."
 
+Target Code: test_label
+========================
+
+narrator:say("{{  this is a line of text  }}");
+_w();
+narrator:say("empty comment");
+_w();
+narrator:say("This is a line with inside.");
+_w();
+
 Symbol Tables: test
 ========================
 
@@ -135,13 +145,7 @@ String Literals: test
 
 "This is another line"
 
-Target Code
-===========
+Target Code: test
+========================
 
-narrator:say("{{  this is a line of text  }}");
-_w();
-narrator:say("empty comment");
-_w();
-narrator:say("This is a line with inside.");
-_w();
 Source program isn't valid. No code was generated.

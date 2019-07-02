@@ -24,8 +24,8 @@ Line 8, Col 8: [STRING_LITERAL] is also not fine
 Line 8, Col 24: [NEWLINE] 
 Line 9, Col 1: [NEWLINE] 
 
-AST
-===
+AST (Parsed)
+============
 
 Error at Line 1, Col 3: Expected a STRING_LITERAL.
 Syntax error.

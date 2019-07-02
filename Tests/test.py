@@ -19,7 +19,7 @@ for file in glob.glob("*.negi"):
         # https://stackoverflow.com/questions/7575284/check-output-from-calledprocesserror
         except subprocess.CalledProcessError as e:
             test_output.write(e.output.replace(b'\r\n', b'\n'))
-            sys.stdout.write("(crashed)")
+            sys.stdout.write(" (crashed)")
 
     if not subprocess.check_output(["git", "ls-files", out_name]):
         print(" - failed (no expected output)")

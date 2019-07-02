@@ -21,14 +21,25 @@ Line 6, Col 2: [STRING_LITERAL] conutiunation
 Line 7, Col 5: [COLON] :
 Line 8, Col 9: [STRING_LITERAL] test title
 
-AST
-===
+AST (Parsed)
+============
 
-Error at Line 2, Col 27: Expected a line of text or a command.
+Error at Line 2, Col 27: Expected dialog text or a command.
 SCRIPT
   SECTION: script_name="test", display_name="title"
   SECTION: script_name="t est", display_name="tit le # t est"
-    DIALOG: char="", alias="", expr="", pos="", text="this is not a # title nor #this"
+    NARRATOR_SAY: text="this is not a # title nor #this"
+    SYSTEM_WAIT_INPUT
+  SECTION: script_name="conutiunation", display_name="test title"
+
+AST (Checked)
+=============
+
+SCRIPT
+  SECTION: script_name="test", display_name="title"
+  SECTION: script_name="t est", display_name="tit le # t est"
+    NARRATOR_SAY: text="this is not a # title nor #this"
+    SYSTEM_WAIT_INPUT
   SECTION: script_name="conutiunation", display_name="test title"
 
 Symbol Tables: test
@@ -37,6 +48,10 @@ Symbol Tables: test
 test: Script
 
 String Literals: test
+========================
+
+
+Target Code: test
 ========================
 
 
@@ -50,11 +65,21 @@ String Literals: t est
 
 "this is not a # title nor #this"
 
+Target Code: t est
+========================
+
+narrator:say("this is not a # title nor #this");
+_w();
+
 Symbol Tables: conutiunation
 ========================
 
 conutiunation: Script
 
 String Literals: conutiunation
+========================
+
+
+Target Code: conutiunation
 ========================
 

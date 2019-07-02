@@ -225,49 +225,202 @@ Line 52, Col 11: [COLON] :
 Line 52, Col 12: [STRING_LITERAL] Hello again.
 Line 52, Col 24: [NEWLINE] 
 
-AST
-===
+AST (Parsed)
+============
 
 SCRIPT
   SECTION: script_name="prolog_scene_a", display_name="Prolog Scene Intro"
-    DIALOG: char="", alias="", expr="", pos="", text="Line of dialog."
-    DIALOG: char="", alias="", expr="", pos="", text="Continued dialog."
-    DIALOG: char="", alias="", expr="", pos="", text="A lot of newlines."
-    DIALOG: char="", alias="", expr="", pos="", text="Dialog."
-    DIALOG: char="", alias="", expr="", pos="", text="Dialog."
-    DIALOG: char="", alias="", expr="", pos="", text="Dialog."
-    DIALOG: char="", alias="", expr="", pos="", text="Dialog ends here."
-    DIALOG: char="Alice", alias="Mystery Girl", expr="", pos="", text="Hello."
-    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello."
-    DIALOG: char="", alias="", expr="", pos="", text="Hello."
-    DIALOG: char="", alias="", expr="", pos="", text="Hello."
-    DIALOG: char="Alice", alias="", expr="Happy", pos="Middle", text="Hello."
-    DIALOG: char="Alice", alias="", expr="Happy", pos="Middle", text="Hello."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello "
-    COMMAND: name="cmd", args=[this]
-    DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello "
-    COMMAND: name="cmd", args=[]
-    DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello "
-    COMMAND: name="cmd", args=[a, b, c]
-    DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello   "
-    COMMAND: name="cmd", args=[two spaces]
-    DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello  "
-    COMMAND: name="cmd", args=[one space]
-    DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="Anony", expr="Happy", pos="Middle", text="Hello"
-    COMMAND: name="cmd", args=[one space]
-    DIALOG: char="", alias="", expr="", pos="", text="world."
-    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello  world."
-    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello world."
-    DIALOG: char="Alice", alias="", expr="", pos="", text="Hello world."
+    NARRATOR_SAY: text="Line of dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Continued dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="A lot of newlines."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog ends here."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Mystery Girl", expr="", pos=""
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Hello."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello "
+    COMMAND_EXECUTION: name="cmd", args=[this]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello "
+    COMMAND_EXECUTION: name="cmd", args=[]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello "
+    COMMAND_EXECUTION: name="cmd", args=[a, b, c]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello   "
+    COMMAND_EXECUTION: name="cmd", args=[two spaces]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello  "
+    COMMAND_EXECUTION: name="cmd", args=[one space]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello"
+    COMMAND_EXECUTION: name="cmd", args=[one space]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Alice", text="Hello  world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Alice", text="Hello world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+    CHARACTER_SAY: char="Alice", text="Hello world."
+    SYSTEM_WAIT_INPUT
   SECTION: script_name="section2", display_name="Hello again."
   SECTION: script_name="section3", display_name="Hello again."
-    DIALOG: char="", alias="", expr="", pos="", text="nothing here."
+    NARRATOR_SAY: text="nothing here."
+    SYSTEM_WAIT_INPUT
+  SECTION: script_name="section4", display_name="Hello again."
+
+AST (Checked)
+=============
+
+Error at Line 32, Col 35: Undefined command: cmd
+Error at Line 33, Col 38: Undefined command: cmd
+Error at Line 34, Col 35: Undefined command: cmd
+Error at Line 36, Col 37: Undefined command: cmd
+Error at Line 37, Col 36: Undefined command: cmd
+Error at Line 38, Col 34: Undefined command: cmd
+6 semantic errors.
+SCRIPT
+  SECTION: script_name="prolog_scene_a", display_name="Prolog Scene Intro"
+    NARRATOR_SAY: text="Line of dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Continued dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="A lot of newlines."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Dialog ends here."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Mystery Girl", expr="", pos=""
+      CHARACTER_SET_DISGUISE: char="Alice", disguise="Mystery Girl"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+      CHARACTER_REMOVE_DISGUISE: char="Alice"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Hello."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="Happy", pos="Middle"
+      CHARACTER_REMOVE_DISGUISE: char="Alice"
+      CHARACTER_ENTER: char="Alice", expr="Happy", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="Happy", pos="Middle"
+      CHARACTER_REMOVE_DISGUISE: char="Alice"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_SET_DISGUISE: char="Alice", disguise="Anony"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello "
+    COMMAND_EXECUTION: name="cmd", args=[this]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello "
+    COMMAND_EXECUTION: name="cmd", args=[]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello "
+    COMMAND_EXECUTION: name="cmd", args=[a, b, c]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello   "
+    COMMAND_EXECUTION: name="cmd", args=[two spaces]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello  "
+    COMMAND_EXECUTION: name="cmd", args=[one space]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
+      CHARACTER_EXPR: char="Alice", expr="Happy"
+      CHARACTER_MOVE: char="Alice", pos="Middle"
+    CHARACTER_SAY: char="Alice", text="Hello"
+    COMMAND_EXECUTION: name="cmd", args=[one space]
+    CHARACTER_SAY: char="Alice", text="world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+      CHARACTER_REMOVE_DISGUISE: char="Alice"
+    CHARACTER_SAY: char="Alice", text="Hello  world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+      CHARACTER_REMOVE_DISGUISE: char="Alice"
+    CHARACTER_SAY: char="Alice", text="Hello world."
+    SYSTEM_WAIT_INPUT
+    CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
+      CHARACTER_REMOVE_DISGUISE: char="Alice"
+    CHARACTER_SAY: char="Alice", text="Hello world."
+    SYSTEM_WAIT_INPUT
+  SECTION: script_name="section2", display_name="Hello again."
+  SECTION: script_name="section3", display_name="Hello again."
+    NARRATOR_SAY: text="nothing here."
+    SYSTEM_WAIT_INPUT
   SECTION: script_name="section4", display_name="Hello again."
 
 Symbol Tables: prolog_scene_a
@@ -275,8 +428,8 @@ Symbol Tables: prolog_scene_a
 
 prolog_scene_a: Script
 Alice: Character
-Happy: Expression
 Middle: Position
+Happy: Expression
 
 String Literals: prolog_scene_a
 ========================
@@ -297,12 +450,21 @@ String Literals: prolog_scene_a
 "Hello world."
 "Hello"
 
+Target Code: prolog_scene_a
+========================
+
+Source program isn't valid. No code was generated.
+
 Symbol Tables: section2
 ========================
 
 section2: Script
 
 String Literals: section2
+========================
+
+
+Target Code: section2
 ========================
 
 
@@ -316,11 +478,21 @@ String Literals: section3
 
 "nothing here."
 
+Target Code: section3
+========================
+
+narrator:say("nothing here.");
+_w();
+
 Symbol Tables: section4
 ========================
 
 section4: Script
 
 String Literals: section4
+========================
+
+
+Target Code: section4
 ========================
 
