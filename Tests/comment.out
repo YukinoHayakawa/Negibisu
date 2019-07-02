@@ -69,20 +69,49 @@ Line 39, Col 66: [RIGHT_BRACE] }
 Line 39, Col 67: [NEWLINE] 
 Line 40, Col 1: [NEWLINE] 
 Line 41, Col 23: [NEWLINE] 
+Line 42, Col 1: [NEWLINE] 
+Line 43, Col 41: [NEWLINE] 
 
-AST
-===
+AST (Parsed)
+============
 
 SCRIPT
   SECTION: script_name="test_label", display_name="comments"
-    DIALOG: char="", alias="", expr="", pos="", text="{{  this is a line of text  }}"
-    DIALOG: char="", alias="", expr="", pos="", text="empty comment"
-    DIALOG: char="", alias="", expr="", pos="", text="This is a line with inside."
+    NARRATOR_SAY: text="{{  this is a line of text  }}"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="empty comment"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="This is a line with inside."
+    SYSTEM_WAIT_INPUT
   SECTION: script_name="test", display_name="work with title?"
-    DIALOG: char="", alias="", expr="", pos="", text="This is another line"
-    COMMAND: name="with", args=[a, command, in, it]
-    DIALOG: char="", alias="", expr="", pos="", text="This is another line"
-    COMMAND: name="with", args=[a, command, in, it]
+    NARRATOR_SAY: text="This is another line"
+    COMMAND_EXECUTION: name="with", args=[a, command, in, it]
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="This is another line"
+    COMMAND_EXECUTION: name="with", args=[a, command, in, it]
+    SYSTEM_WAIT_INPUT
+
+AST (Checked)
+=============
+
+Error at Line 38, Col 23: Undefined command: with
+Error at Line 39, Col 23: Undefined command: with
+2 semantic errors.
+SCRIPT
+  SECTION: script_name="test_label", display_name="comments"
+    NARRATOR_SAY: text="{{  this is a line of text  }}"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="empty comment"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="This is a line with inside."
+    SYSTEM_WAIT_INPUT
+  SECTION: script_name="test", display_name="work with title?"
+    NARRATOR_SAY: text="This is another line"
+    COMMAND_EXECUTION: name="with", args=[a, command, in, it]
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="This is another line "
+    COMMAND_EXECUTION: name="with", args=[a, command, in, it]
+    SYSTEM_WAIT_INPUT
 
 Symbol Tables: test_label
 ========================
@@ -105,3 +134,14 @@ String Literals: test
 ========================
 
 "This is another line"
+
+Target Code
+===========
+
+narrator:say("{{  this is a line of text  }}");
+_w();
+narrator:say("empty comment");
+_w();
+narrator:say("This is a line with inside.");
+_w();
+Source program isn't valid. No code was generated.
