@@ -5,16 +5,22 @@
 
 namespace usagi::negi
 {
-std::initializer_list<CommandParameterInfo>
-SystemWaitInputCommand::parameterInfo() const
+/*
+ * SystemCommand
+ */
+
+void SystemCommand::check(SceneContext *ctx)
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-    };
-    return params;
 }
 
-void SystemWaitInputCommand::check(SceneContext *ctx)
+/*
+ * SystemWaitInputCommand
+ */
+
+ParameterList SystemWaitInputCommand::parameterInfo() const
 {
+    NEGI_RETURN_PARAMS(
+    );
 }
 
 void SystemWaitInputCommand::generate(SceneContext *ctx) const
@@ -25,12 +31,5 @@ void SystemWaitInputCommand::generate(SceneContext *ctx) const
 void SystemWaitInputCommand::print(PrintContext &ctx) const
 {
     ctx.print("SYSTEM_WAIT_INPUT");
-}
-
-void SystemWaitInputCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
 }
 }

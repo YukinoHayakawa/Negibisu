@@ -17,6 +17,15 @@ struct SourcePosition
             fmt::format(std::forward<Args>(args)...)
         );
     }
+
+    template <typename... Args>
+    void warning(Args &&... args) const
+    {
+        fmt::print("Warning at {}: {}\n",
+            *this,
+            fmt::format(std::forward<Args>(args)...)
+        );
+    }
 };
 
 std::ostream &operator<<(std::ostream &os, const SourcePosition &p);

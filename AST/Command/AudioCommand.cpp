@@ -22,22 +22,11 @@ AudioPlayCommand::AudioPlayCommand(TokenRef asset_path)
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-AudioPlayCommand::parameterInfo() const
+ParameterList AudioPlayCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "assetPath", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void AudioPlayCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mAssetPath = args[0];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("assetPath", STRING, mAssetPath),
+    );
 }
 
 /*

@@ -32,24 +32,12 @@ CharacterMoveCommand::CharacterMoveCommand(
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-CharacterMoveCommand::parameterInfo() const
+ParameterList CharacterMoveCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING },
-        { "positionName", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void CharacterMoveCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
-    mPosition = args[1];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+        NEGI_PARAM("positionName", STRING, mPosition),
+    );
 }
 
 void CharacterMoveCommand::check(SceneContext *ctx)
@@ -97,24 +85,12 @@ CharacterChangeExpressionCommand::CharacterChangeExpressionCommand(
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-CharacterChangeExpressionCommand::parameterInfo() const
+ParameterList CharacterChangeExpressionCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING },
-        { "expressionName", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void CharacterChangeExpressionCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
-    mExpression = args[1];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+        NEGI_PARAM("expressionName", STRING, mExpression),
+    );
 }
 
 void CharacterChangeExpressionCommand::check(SceneContext *ctx)
@@ -164,24 +140,13 @@ CharacterEnterStageCommand::CharacterEnterStageCommand(
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-CharacterEnterStageCommand::parameterInfo() const
+ParameterList CharacterEnterStageCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING }
-    };
-    return params;
-}
-
-void CharacterEnterStageCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
-    mExpression = args[1];
-    mPosition = args[2];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+        NEGI_PARAM("expressionName", STRING, mExpression),
+        NEGI_PARAM("positionName", STRING, mPosition),
+    );
 }
 
 void CharacterEnterStageCommand::check(SceneContext *ctx)
@@ -232,22 +197,11 @@ CharacterExitStageCommand::CharacterExitStageCommand(TokenRef character)
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-CharacterExitStageCommand::parameterInfo() const
+ParameterList CharacterExitStageCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING }
-    };
-    return params;
-}
-
-void CharacterExitStageCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+    );
 }
 
 void CharacterExitStageCommand::check(SceneContext *ctx)
@@ -284,24 +238,12 @@ CharacterSayCommand::CharacterSayCommand(TokenRef character, TokenRef text)
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-CharacterSayCommand::parameterInfo() const
+ParameterList CharacterSayCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING },
-        { "text", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void CharacterSayCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
-    mText = args[1];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+        NEGI_PARAM("text", STRING, mText),
+    );
 }
 
 void CharacterSayCommand::check(SceneContext *ctx)
@@ -340,24 +282,12 @@ CharacterSetDisguiseCommand::CharacterSetDisguiseCommand(
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-CharacterSetDisguiseCommand::parameterInfo() const
+ParameterList CharacterSetDisguiseCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING },
-        { "disguisedName", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void CharacterSetDisguiseCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
-    mDisguisedName = args[1];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+        NEGI_PARAM("disguisedName", STRING, mDisguisedName),
+    );
 }
 
 void CharacterSetDisguiseCommand::check(SceneContext *ctx)
@@ -396,22 +326,11 @@ void CharacterSetDisguiseCommand::print(PrintContext &ctx) const
  * CharacterRemoveDisguiseCommand
  */
 
-std::initializer_list<CommandParameterInfo>
-CharacterRemoveDisguiseCommand::parameterInfo() const
+ParameterList CharacterRemoveDisguiseCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "characterName", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void CharacterRemoveDisguiseCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mCharacter = args[0];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+    );
 }
 
 void CharacterRemoveDisguiseCommand::check(SceneContext *ctx)
@@ -451,22 +370,11 @@ NarratorSayCommand::NarratorSayCommand(TokenRef text)
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-NarratorSayCommand::parameterInfo() const
+ParameterList NarratorSayCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "text", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void NarratorSayCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mText = args[0];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("text", STRING, mText),
+    );
 }
 
 void NarratorSayCommand::check(SceneContext *ctx)

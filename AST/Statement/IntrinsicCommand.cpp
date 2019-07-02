@@ -39,38 +39,6 @@ const std::unordered_map<
 #undef NEGI_DEFINE_BUILTIN
 }
 
-void IntrinsicCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    const auto param_info = parameterInfo();
-    assert(args.size() == param_info.size());
-
-    // check argument types
-    for(std::size_t i = 0; i < param_info.size(); ++i)
-    {
-        switch((param_info.begin() + i)->type)
-        {
-            case CommandParameterType::STRING:
-                break;
-            case CommandParameterType::INT:
-                if(!args[i]->convertibleTo<int>())
-                {
-                    ctx->semanticError(args[i], "Expected an Int.");
-                }
-                break;
-            case CommandParameterType::FLOAT:
-                if(!args[i]->convertibleTo<float>())
-                {
-                    ctx->semanticError(args[i], "Expected an Float.");
-                }
-                break;
-            default:
-                throw std::logic_error("Unexpected command parameter type.");
-        }
-    }
-}
-
 void IntrinsicCommand::parse(ParsingContext *ctx)
 {
     throw std::logic_error(

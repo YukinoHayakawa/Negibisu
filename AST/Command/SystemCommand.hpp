@@ -6,17 +6,15 @@ namespace usagi::negi
 {
 class SystemCommand : public IntrinsicCommand
 {
+public:
+    void check(SceneContext *ctx) override;
 };
 
 class SystemWaitInputCommand : public SystemCommand
 {
 public:
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
-    void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
     void print(PrintContext &ctx) const override;
 };

@@ -31,24 +31,12 @@ ImageChangeCommand::ImageChangeCommand(
 {
 }
 
-std::initializer_list<CommandParameterInfo>
-ImageChangeCommand::parameterInfo() const
+ParameterList ImageChangeCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "layerName", CommandParameterType::STRING },
-        { "imageAssetName", CommandParameterType::STRING },
-    };
-    return params;
-}
-
-void ImageChangeCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mImageLayerName = args[0];
-    mAssetPath = args[1];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("layerName", STRING, mImageLayerName),
+        NEGI_PARAM("imageAssetName", STRING, mAssetPath),
+    );
 }
 
 void ImageChangeCommand::generate(SceneContext *ctx) const
@@ -74,22 +62,11 @@ void ImageChangeCommand::print(PrintContext &ctx) const
  * ImageClearCommand
  */
 
-std::initializer_list<CommandParameterInfo>
-ImageClearCommand::parameterInfo() const
+ParameterList ImageClearCommand::parameterInfo() const
 {
-    static std::initializer_list<CommandParameterInfo> params = {
-        { "layerName", CommandParameterType::STRING }
-    };
-    return params;
-}
-
-void ImageClearCommand::fillArguments(
-    SceneContext *ctx,
-    const std::vector<TokenRef> &args)
-{
-    IntrinsicCommand::fillArguments(ctx, args);
-
-    mImageLayerName = args[0];
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("layerName", STRING, mImageLayerName),
+    );
 }
 
 void ImageClearCommand::generate(SceneContext *ctx) const

@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <vector>
+
 #include <Negibisu/AST/Statement/IntrinsicCommand.hpp>
 
 namespace usagi::negi
@@ -25,10 +27,7 @@ public:
     CharacterMoveCommand() = default;
     CharacterMoveCommand(TokenRef character, TokenRef position);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -43,10 +42,7 @@ public:
     CharacterChangeExpressionCommand() = default;
     CharacterChangeExpressionCommand(TokenRef character, TokenRef expression);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -65,10 +61,7 @@ public:
         TokenRef expression,
         TokenRef position);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -81,10 +74,7 @@ public:
     CharacterExitStageCommand() = default;
     explicit CharacterExitStageCommand(TokenRef character);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -100,10 +90,7 @@ public:
     CharacterSayCommand() = default;
     CharacterSayCommand(TokenRef character, TokenRef text);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -120,10 +107,7 @@ public:
         TokenRef character,
         TokenRef disguised_name);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -135,10 +119,7 @@ class CharacterRemoveDisguiseCommand : public CharacterCommand
 public:
     using CharacterCommand::CharacterCommand;
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;
@@ -153,10 +134,7 @@ public:
     NarratorSayCommand() = default;
     explicit NarratorSayCommand(TokenRef text);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 
     void check(SceneContext *ctx) override;
     void generate(SceneContext *ctx) const override;

@@ -48,6 +48,12 @@ struct SceneContext : Noncopyable
         throw SemanticError();
     }
 
+    template <typename... Args>
+    void semanticWarning(TokenRef position_hint, Args &&... args) const
+    {
+        position_hint->pos.warning(std::forward<Args>(args)...);
+    }
+
     CharacterState & characterState(TokenRef character);
     CharacterState & ensureCharacterOnStage(TokenRef character);
 };

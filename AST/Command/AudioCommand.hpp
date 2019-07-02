@@ -19,10 +19,7 @@ public:
     AudioPlayCommand() = default;
     explicit AudioPlayCommand(TokenRef asset_path);
 
-    std::initializer_list<CommandParameterInfo> parameterInfo() const override;
-    void fillArguments(
-        SceneContext *ctx,
-        const std::vector<TokenRef> &args) override;
+    ParameterList parameterInfo() const override;
 };
 
 class AudioPlayMusicCommand : public AudioPlayCommand

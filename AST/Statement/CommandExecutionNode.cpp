@@ -51,7 +51,10 @@ void CommandExecutionNode::check(SceneContext *ctx)
 
     if(!mInvocation)
     {
-        ctx->semanticError(mCommandName, "Undefined command: {}", mCommandName);
+        ctx->semanticWarning(mCommandName,
+            "Undefined command: \"{}\". No command will be generated.",
+            mCommandName);
+        return;
     }
 
     const auto param_info = mInvocation->parameterInfo();
@@ -78,14 +81,39 @@ void CommandExecutionNode::check(SceneContext *ctx)
         );
     }
 
-    mInvocation->fillArguments(ctx, mArgs);
+    // check argument types and assign values
+    std::size_t i = 0;
+    for(auto &&p : param_info)
+    {
+        switch((param_info.begin() + i)->type)
+        {
+            case CommandParameterType::STRING:
+                break;
+            case CommandParameterType::INT:
+                if(!mArgs[i]->convertibleTo<int>())
+                {
+                    ctx->semanticError(mArgs[i], "Expected an Int.");
+                }
+                break;
+            case CommandParameterType::FLOAT:
+                if(!mArgs[i]->convertibleTo<float>())
+                {
+                    ctx->semanticError(mArgs[i], "Expected an Float.");
+                }
+                break;
+            default:
+                throw std::logic_error("Unexpected command parameter type.");
+        }
+        mInvocation.get()->*p.value = mArgs[i];
+        ++i;
+    }
     mInvocation->check(ctx);
 }
 
 void CommandExecutionNode::generate(SceneContext *ctx) const
 {
-    assert(mInvocation);
-    mInvocation->generate(ctx);
+    if(mInvocation)
+        mInvocation->generate(ctx);
 }
 
 void CommandExecutionNode::print(PrintContext &ctx) const
