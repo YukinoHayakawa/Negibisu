@@ -66,9 +66,18 @@ Line 19, Col 14: [COMMA] ,
 Line 19, Col 15: [STRING_LITERAL] "xxx"
 Line 19, Col 20: [RIGHT_BRACE] }
 Line 19, Col 21: [NEWLINE] 
+Line 20, Col 1: [NEWLINE] 
+Line 21, Col 1: [LEFT_BRACE] {
+Line 21, Col 2: [STRING_LITERAL] changeImage
+Line 21, Col 13: [COLON] :
+Line 21, Col 14: [STRING_LITERAL] bg
+Line 21, Col 16: [COMMA] ,
+Line 21, Col 17: [STRING_LITERAL] bg/1.png
+Line 21, Col 25: [RIGHT_BRACE] }
+Line 21, Col 26: [NEWLINE] 
 
-AST
-===
+AST (Parsed)
+============
 
 Error at Line 3, Col 2: Expected a STRING_LITERAL.
 Error at Line 5, Col 2: Expected a STRING_LITERAL.
@@ -76,17 +85,55 @@ Error at Line 7, Col 2: Expected a STRING_LITERAL.
 Error at Line 10, Col 1: Expected a STRING_LITERAL.
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
-    COMMAND: name="command", args=[1, 2, 3]
-    COMMAND: name="test", args=[]
-    COMMAND: name="te    st", args=[]
-    COMMAND: name="test", args=[a, b, c, "xxx"]
-    COMMAND: name="test", args=[a=m, b, c, "xxx"]
+    COMMAND_EXECUTION: name="command", args=[1, 2, 3]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="test", args=[]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="te    st", args=[]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="test", args=[a, b, c, "xxx"]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="test", args=[a=m, b, c, "xxx"]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="changeImage", args=[bg, bg/1.png]
+    SYSTEM_WAIT_INPUT
+
+AST (Checked)
+=============
+
+Error at Line 1, Col 2: Undefined command: command
+Error at Line 12, Col 2: Undefined command: test
+Error at Line 14, Col 2: Undefined command: te    st
+Error at Line 18, Col 2: Undefined command: test
+Error at Line 19, Col 2: Undefined command: test
+5 semantic errors.
+SCRIPT
+  SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
+    COMMAND_EXECUTION: name="command", args=[1, 2, 3]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="test", args=[]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="te    st", args=[]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="test", args=[a, b, c, "xxx"]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="test", args=[a=m, b, c, "xxx"]
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="changeImage", args=[bg, bg/1.png]
+      IMAGE_CHANGE: layer="bg", asset="bg/1.png"
+    SYSTEM_WAIT_INPUT
 
 Symbol Tables: <UNNAMED>
 ========================
 
 <UNNAMED>: Script
+bg: ImageLayer
 
 String Literals: <UNNAMED>
 ========================
 
+
+Target Code
+===========
+
+Source program isn't valid. No code was generated.

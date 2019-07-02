@@ -17,3 +17,5 @@
 
 {test:a,b,c,"xxx"}
 {test:a=m,b,c,"xxx"}
+
+{changeImage:bg,bg/1.png}
