@@ -35,10 +35,11 @@ CharacterMoveCommand::CharacterMoveCommand(
 std::initializer_list<CommandParameterInfo>
 CharacterMoveCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING },
         { "positionName", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void CharacterMoveCommand::fillArguments(
@@ -99,10 +100,11 @@ CharacterChangeExpressionCommand::CharacterChangeExpressionCommand(
 std::initializer_list<CommandParameterInfo>
 CharacterChangeExpressionCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING },
         { "expressionName", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void CharacterChangeExpressionCommand::fillArguments(
@@ -165,9 +167,10 @@ CharacterEnterStageCommand::CharacterEnterStageCommand(
 std::initializer_list<CommandParameterInfo>
 CharacterEnterStageCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING }
     };
+    return params;
 }
 
 void CharacterEnterStageCommand::fillArguments(
@@ -232,9 +235,10 @@ CharacterExitStageCommand::CharacterExitStageCommand(TokenRef character)
 std::initializer_list<CommandParameterInfo>
 CharacterExitStageCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING }
     };
+    return params;
 }
 
 void CharacterExitStageCommand::fillArguments(
@@ -283,10 +287,11 @@ CharacterSayCommand::CharacterSayCommand(TokenRef character, TokenRef text)
 std::initializer_list<CommandParameterInfo>
 CharacterSayCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING },
         { "text", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void CharacterSayCommand::fillArguments(
@@ -338,10 +343,11 @@ CharacterSetDisguiseCommand::CharacterSetDisguiseCommand(
 std::initializer_list<CommandParameterInfo>
 CharacterSetDisguiseCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING },
         { "disguisedName", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void CharacterSetDisguiseCommand::fillArguments(
@@ -393,9 +399,10 @@ void CharacterSetDisguiseCommand::print(PrintContext &ctx)
 std::initializer_list<CommandParameterInfo>
 CharacterRemoveDisguiseCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "characterName", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void CharacterRemoveDisguiseCommand::fillArguments(
@@ -447,9 +454,10 @@ NarratorSayCommand::NarratorSayCommand(TokenRef text)
 std::initializer_list<CommandParameterInfo>
 NarratorSayCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "text", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void NarratorSayCommand::fillArguments(

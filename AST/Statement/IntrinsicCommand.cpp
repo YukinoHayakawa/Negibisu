@@ -60,7 +60,7 @@ void IntrinsicCommand::fillArguments(
                 }
                 break;
             default:
-                throw std::logic_error("");
+                throw std::logic_error("Unexpected command parameter type.");
         }
     }
 }

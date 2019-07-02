@@ -8,7 +8,9 @@ namespace usagi::negi
 std::initializer_list<CommandParameterInfo>
 SystemWaitInputCommand::parameterInfo() const
 {
-    return { };
+    static std::initializer_list<CommandParameterInfo> params = {
+    };
+    return params;
 }
 
 void SystemWaitInputCommand::check(SceneContext *ctx)

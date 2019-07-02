@@ -34,10 +34,11 @@ ImageChangeCommand::ImageChangeCommand(
 std::initializer_list<CommandParameterInfo>
 ImageChangeCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "layerName", CommandParameterType::STRING },
         { "imageAssetName", CommandParameterType::STRING },
     };
+    return params;
 }
 
 void ImageChangeCommand::fillArguments(
@@ -76,9 +77,10 @@ void ImageChangeCommand::print(PrintContext &ctx)
 std::initializer_list<CommandParameterInfo>
 ImageClearCommand::parameterInfo() const
 {
-    return {
+    static std::initializer_list<CommandParameterInfo> params = {
         { "layerName", CommandParameterType::STRING }
     };
+    return params;
 }
 
 void ImageClearCommand::fillArguments(
