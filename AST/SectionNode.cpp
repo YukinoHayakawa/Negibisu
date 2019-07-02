@@ -134,13 +134,37 @@ void SectionNode::check(SceneContext *ctx)
 {
     mSceneContext.symbol_table.lookup(mScriptName.ref, SymbolType::SCRIPT);
 
+    std::size_t errors = 0;
+
     for(auto &&l : mStatements)
-        l->check(&mSceneContext);
+    {
+        try
+        {
+            l->check(&mSceneContext);
+        }
+        catch(const SemanticError &)
+        {
+            ++errors;
+        }
+    }
+    if(errors)
+        mSceneContext.print("{} semantic errors.", errors);
+
+    mChecked = errors == 0;
 }
 
 void SectionNode::generate(SceneContext *ctx)
 {
-    for(auto &&l : mStatements)
-        l->generate(&mSceneContext);
+    if(!mChecked)
+    {
+        mSceneContext.print(
+            "Source program isn't valid. No code was generated."
+        );
+    }
+    else
+    {
+        for(auto &&l : mStatements)
+            l->generate(&mSceneContext);
+    }
 }
 }

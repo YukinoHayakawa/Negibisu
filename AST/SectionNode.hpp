@@ -13,6 +13,7 @@ class SectionNode : public ASTNode
     SceneContext mSceneContext;
     TokenRef mScriptName;
     TokenRef mDisplayName;
+    bool mChecked = false;
 
     std::vector<std::unique_ptr<StatementNode>> mStatements;
 
