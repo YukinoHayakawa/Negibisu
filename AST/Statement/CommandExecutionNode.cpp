@@ -82,13 +82,13 @@ void CommandExecutionNode::check(SceneContext *ctx)
     mInvocation->check(ctx);
 }
 
-void CommandExecutionNode::generate(SceneContext *ctx)
+void CommandExecutionNode::generate(SceneContext *ctx) const
 {
     assert(mInvocation);
     mInvocation->generate(ctx);
 }
 
-void CommandExecutionNode::print(PrintContext &ctx)
+void CommandExecutionNode::print(PrintContext &ctx) const
 {
     ctx.print("COMMAND_EXECUTION: name=\"{}\", args=[{}]",
         mCommandName,

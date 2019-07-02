@@ -63,7 +63,7 @@ void CharacterMoveCommand::check(SceneContext *ctx)
     state.current_position = mPosition->text;
 }
 
-void CharacterMoveCommand::generate(SceneContext *ctx)
+void CharacterMoveCommand::generate(SceneContext *ctx) const
 {
     if(mGenerate)
     {
@@ -79,7 +79,7 @@ void CharacterMoveCommand::generate(SceneContext *ctx)
     }
 }
 
-void CharacterMoveCommand::print(PrintContext &ctx)
+void CharacterMoveCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_MOVE: char=\"{}\", pos=\"{}\"",
         mCharacter, mPosition);
@@ -128,7 +128,7 @@ void CharacterChangeExpressionCommand::check(SceneContext *ctx)
     state.current_expression = mExpression->text;
 }
 
-void CharacterChangeExpressionCommand::generate(SceneContext *ctx)
+void CharacterChangeExpressionCommand::generate(SceneContext *ctx) const
 {
     if(mGenerate)
     {
@@ -144,7 +144,7 @@ void CharacterChangeExpressionCommand::generate(SceneContext *ctx)
     }
 }
 
-void CharacterChangeExpressionCommand::print(PrintContext &ctx)
+void CharacterChangeExpressionCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_EXPR: char=\"{}\", expr=\"{}\"",
         mCharacter, mExpression);
@@ -201,7 +201,7 @@ void CharacterEnterStageCommand::check(SceneContext *ctx)
     state.on_stage = true;
 }
 
-void CharacterEnterStageCommand::generate(SceneContext *ctx)
+void CharacterEnterStageCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
         "{0}:enterStage({1}, {2});",
@@ -217,7 +217,7 @@ void CharacterEnterStageCommand::generate(SceneContext *ctx)
     );
 }
 
-void CharacterEnterStageCommand::print(PrintContext &ctx)
+void CharacterEnterStageCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_ENTER: char=\"{}\", expr=\"{}\", pos=\"{}\"",
         mCharacter, mExpression, mPosition);
@@ -258,7 +258,7 @@ void CharacterExitStageCommand::check(SceneContext *ctx)
     state.on_stage = false;
 }
 
-void CharacterExitStageCommand::generate(SceneContext *ctx)
+void CharacterExitStageCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
         "{0}:exitStage();",
@@ -268,7 +268,7 @@ void CharacterExitStageCommand::generate(SceneContext *ctx)
     );
 }
 
-void CharacterExitStageCommand::print(PrintContext &ctx)
+void CharacterExitStageCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_EXIT: char=\"{}\"",
         mCharacter);
@@ -311,7 +311,7 @@ void CharacterSayCommand::check(SceneContext *ctx)
     ctx->symbol_table.addStringLiteral(mText);
 }
 
-void CharacterSayCommand::generate(SceneContext *ctx)
+void CharacterSayCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
         "{0}:say(\"{1}\");",
@@ -322,7 +322,7 @@ void CharacterSayCommand::generate(SceneContext *ctx)
     );
 }
 
-void CharacterSayCommand::print(PrintContext &ctx)
+void CharacterSayCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_SAY: char=\"{}\", text=\"{}\"",
         mCharacter, mText);
@@ -371,7 +371,7 @@ void CharacterSetDisguiseCommand::check(SceneContext *ctx)
     ctx->symbol_table.addStringLiteral(mDisguisedName);
 }
 
-void CharacterSetDisguiseCommand::generate(SceneContext *ctx)
+void CharacterSetDisguiseCommand::generate(SceneContext *ctx) const
 {
     if(mGenerate)
     {
@@ -385,7 +385,7 @@ void CharacterSetDisguiseCommand::generate(SceneContext *ctx)
     }
 }
 
-void CharacterSetDisguiseCommand::print(PrintContext &ctx)
+void CharacterSetDisguiseCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_SET_DISGUISE: "
         "char=\"{}\", disguise=\"{}\"",
@@ -422,7 +422,7 @@ void CharacterRemoveDisguiseCommand::check(SceneContext *ctx)
     mGenerate = state.disguised_name != "";
 }
 
-void CharacterRemoveDisguiseCommand::generate(SceneContext *ctx)
+void CharacterRemoveDisguiseCommand::generate(SceneContext *ctx) const
 {
     if(mGenerate)
     {
@@ -435,7 +435,7 @@ void CharacterRemoveDisguiseCommand::generate(SceneContext *ctx)
     }
 }
 
-void CharacterRemoveDisguiseCommand::print(PrintContext &ctx)
+void CharacterRemoveDisguiseCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_REMOVE_DISGUISE: "
         "char=\"{}\"",
@@ -474,7 +474,7 @@ void NarratorSayCommand::check(SceneContext *ctx)
     ctx->symbol_table.addStringLiteral(mText);
 }
 
-void NarratorSayCommand::generate(SceneContext *ctx)
+void NarratorSayCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
         "narrator:say(\"{}\");",
@@ -482,7 +482,7 @@ void NarratorSayCommand::generate(SceneContext *ctx)
     );
 }
 
-void NarratorSayCommand::print(PrintContext &ctx)
+void NarratorSayCommand::print(PrintContext &ctx) const
 {
     ctx.print("NARRATOR_SAY: text=\"{}\"",
         mText);
@@ -574,13 +574,13 @@ void CharacterTag::check(SceneContext *ctx)
     }
 }
 
-void CharacterTag::generate(SceneContext *ctx)
+void CharacterTag::generate(SceneContext *ctx) const
 {
     for(auto &&s : mStatements)
         s->generate(ctx);
 }
 
-void CharacterTag::print(PrintContext &ctx)
+void CharacterTag::print(PrintContext &ctx) const
 {
     ctx.print(
         "CHARACTER_TAG: char=\"{}\", alias=\"{}\", "

@@ -31,8 +31,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterChangeExpressionCommand : public CharacterCommand
@@ -49,8 +49,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterEnterStageCommand : public CharacterCommand
@@ -71,8 +71,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterExitStageCommand : public CharacterCommand
@@ -87,8 +87,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterSayCommand : public CharacterCommand
@@ -106,8 +106,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterSetDisguiseCommand : public CharacterCommand
@@ -126,8 +126,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterRemoveDisguiseCommand : public CharacterCommand
@@ -141,8 +141,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class NarratorSayCommand : public IntrinsicCommand
@@ -159,8 +159,8 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 
 class CharacterTag : public StatementNode
@@ -175,7 +175,7 @@ class CharacterTag : public StatementNode
 public:
     void parse(ParsingContext *ctx) override;
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 }

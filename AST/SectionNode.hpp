@@ -10,7 +10,7 @@ namespace usagi::negi
 {
 class SectionNode : public ASTNode
 {
-    SceneContext mSceneContext;
+    mutable SceneContext mSceneContext;
     TokenRef mScriptName;
     TokenRef mDisplayName;
     bool mChecked = false;
@@ -24,9 +24,9 @@ class SectionNode : public ASTNode
 public:
     void parse(ParsingContext *ctx) override;
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
+    void generate(SceneContext *ctx) const override;
 
-    void print(PrintContext &ctx) override;
+    void print(PrintContext &ctx) const override;
 
     const SceneContext & context() const
     {

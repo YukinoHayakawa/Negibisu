@@ -17,7 +17,7 @@ public:
         const std::vector<TokenRef> &args) override;
 
     void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) override;
-    void print(PrintContext &ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
 };
 }

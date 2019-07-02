@@ -27,13 +27,13 @@ void ScriptNode::check(SceneContext *ctx)
         s.check(nullptr);
 }
 
-void ScriptNode::generate(SceneContext *ctx)
+void ScriptNode::generate(SceneContext *ctx) const
 {
     for(auto &&s : mSections)
         s.generate(nullptr);
 }
 
-void ScriptNode::print(PrintContext &ctx)
+void ScriptNode::print(PrintContext &ctx) const
 {
     ctx.print("SCRIPT");
     ctx.push();

@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
         fmt::print("\n");
         fmt::print("AST (Checked)\n");
-        fmt::print("============\n\n");
+        fmt::print("=============\n\n");
 
         // todo continue to next line after semantic error
         try
@@ -68,6 +68,12 @@ int main(int argc, char *argv[])
             fmt::print("========================\n\n");
 
             s.context().symbol_table.dumpStringLiterals();
+
+
+            fmt::print("\n");
+            fmt::print("Target Code: {}\n", s.scriptName());
+            fmt::print("========================\n\n");
+            s.generate(nullptr);
         }
     }
     catch(const std::exception &e)

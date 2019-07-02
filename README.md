@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A markup lanugage for visual novels. The syntax should allow the story writer to incorporate common operations into the text of the story without compromising too much of the text readability.
+A markup language for visual novels. The syntax should allow the story writer to incorporate common operations into the text of the story without compromising too much of the text readability.
 
 ## Syntax
 
@@ -75,9 +75,9 @@ A grammar suitable for a recursive descent parser.
 ## Code Generation
 
 
-## Available Commands
+## Available Commands (Compiler Intrinsics)
 
-### 
+###
 
 
 ## Code Samples

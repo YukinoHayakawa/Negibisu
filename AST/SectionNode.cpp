@@ -9,7 +9,7 @@
 
 namespace usagi::negi
 {
-void SectionNode::print(PrintContext &ctx)
+void SectionNode::print(PrintContext &ctx) const
 {
     ctx.print(
         "SECTION: script_name=\"{}\", display_name=\"{}\"",
@@ -153,7 +153,7 @@ void SectionNode::check(SceneContext *ctx)
     mChecked = errors == 0;
 }
 
-void SectionNode::generate(SceneContext *ctx)
+void SectionNode::generate(SceneContext *ctx) const
 {
     if(!mChecked)
     {

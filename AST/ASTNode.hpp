@@ -17,7 +17,7 @@ public:
 
     virtual void parse(ParsingContext *ctx) = 0;
     virtual void check(SceneContext *ctx) = 0;
-    virtual void generate(SceneContext *ctx) = 0;
-    virtual void print(PrintContext &ctx) = 0;
+    virtual void generate(SceneContext *ctx) const = 0;
+    virtual void print(PrintContext &ctx) const = 0;
 };
 }

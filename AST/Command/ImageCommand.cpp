@@ -51,7 +51,7 @@ void ImageChangeCommand::fillArguments(
     mAssetPath = args[1];
 }
 
-void ImageChangeCommand::generate(SceneContext *ctx)
+void ImageChangeCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
         "{0}:changeImage(\"{1}\");",
@@ -62,7 +62,7 @@ void ImageChangeCommand::generate(SceneContext *ctx)
     );
 }
 
-void ImageChangeCommand::print(PrintContext &ctx)
+void ImageChangeCommand::print(PrintContext &ctx) const
 {
     ctx.print(
         "IMAGE_CHANGE: layer=\"{}\", asset=\"{}\"",
@@ -92,7 +92,7 @@ void ImageClearCommand::fillArguments(
     mImageLayerName = args[0];
 }
 
-void ImageClearCommand::generate(SceneContext *ctx)
+void ImageClearCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
         "{0}:changeImage();",
@@ -102,7 +102,7 @@ void ImageClearCommand::generate(SceneContext *ctx)
     );
 }
 
-void ImageClearCommand::print(PrintContext &ctx)
+void ImageClearCommand::print(PrintContext &ctx) const
 {
     ctx.print(
         "IMAGE_CLEAR: layer=\"{}\"",

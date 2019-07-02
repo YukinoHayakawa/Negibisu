@@ -17,12 +17,12 @@ void SystemWaitInputCommand::check(SceneContext *ctx)
 {
 }
 
-void SystemWaitInputCommand::generate(SceneContext *ctx)
+void SystemWaitInputCommand::generate(SceneContext *ctx) const
 {
     ctx->print("_w();");
 }
 
-void SystemWaitInputCommand::print(PrintContext &ctx)
+void SystemWaitInputCommand::print(PrintContext &ctx) const
 {
     ctx.print("SYSTEM_WAIT_INPUT");
 }
