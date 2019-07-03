@@ -65,13 +65,15 @@ String Literals: <UNNAMED>
 Target Code: <UNNAMED>
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
 narrator:say("single line string");
-_w();
+wait();
 narrator:say("multiline string");
-_w();
+wait();
 narrator:say("string inside");
-_w();
+wait();
 narrator:say("\\ two slashes");
-_w();
+wait();
 narrator:say("meaningless escapes");
-_w();
+wait();

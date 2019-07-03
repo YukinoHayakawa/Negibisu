@@ -140,25 +140,31 @@ but we should support quotes"
 Target Code: <UNNAMED>
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
+local r1 = scene:loadCharacter("Yuki");
+local r3 = scene:getPosition("Middle");
+local r2 = scene:loadCharacter("Moon");
+local r4 = scene:loadExpression("Smile");
 narrator:say("This is a line of dialog.");
-_w();
+wait();
 narrator:say("Spaces     at the endings of the line are  trimmed but not those in between.");
-_w();
+wait();
 narrator:say("这是一行中文。");
-_w();
-b:say("This is Yuki speaking.");
-_w();
-b:setDisguise("Mystery Girl");
-b:say("Yuki is hiding her identity.");
-_w();
-b:removeDisguise();
-b:say("Not anymore.");
-_w();
-c:enterStage(e, d);
-c:say("Mr. Mo    on likes to laugh.");
-_w();
+wait();
+r1:say("This is Yuki speaking.");
+wait();
+r1:setDisguise("Mystery Girl");
+r1:say("Yuki is hiding her identity.");
+wait();
+r1:removeDisguise();
+r1:say("Not anymore.");
+wait();
+r2:enterStage(r4, r3);
+r2:say("Mr. Mo    on likes to laugh.");
+wait();
 narrator:say("Comma, is, not, an, operator, in, dialogs.");
-_w();
-narrator:say("but we should support quotes");
-_w();
+wait();
+narrator:say(but we should support quotes);
+wait();
 narrator:say("continuation at last line");

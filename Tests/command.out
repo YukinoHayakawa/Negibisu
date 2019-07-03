@@ -101,12 +101,11 @@ SCRIPT
 AST (Checked)
 =============
 
-Error at Line 1, Col 2: Undefined command: command
-Error at Line 12, Col 2: Undefined command: test
-Error at Line 14, Col 2: Undefined command: te    st
-Error at Line 18, Col 2: Undefined command: test
-Error at Line 19, Col 2: Undefined command: test
-5 semantic errors.
+Warning at Line 1, Col 2: Undefined command: "command". No command will be generated.
+Warning at Line 12, Col 2: Undefined command: "test". No command will be generated.
+Warning at Line 14, Col 2: Undefined command: "te    st". No command will be generated.
+Warning at Line 18, Col 2: Undefined command: "test". No command will be generated.
+Warning at Line 19, Col 2: Undefined command: "test". No command will be generated.
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
     COMMAND_EXECUTION: name="command", args=[1, 2, 3]
@@ -136,4 +135,13 @@ String Literals: <UNNAMED>
 Target Code: <UNNAMED>
 ========================
 
-Source program isn't valid. No code was generated.
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
+local r1 = scene:loadImageLayer("bg");
+wait();
+wait();
+wait();
+wait();
+wait();
+r1:changeImage("bg/1.png");
+wait();

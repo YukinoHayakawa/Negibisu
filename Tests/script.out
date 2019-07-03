@@ -311,13 +311,12 @@ SCRIPT
 AST (Checked)
 =============
 
-Error at Line 32, Col 35: Undefined command: cmd
-Error at Line 33, Col 38: Undefined command: cmd
-Error at Line 34, Col 35: Undefined command: cmd
-Error at Line 36, Col 37: Undefined command: cmd
-Error at Line 37, Col 36: Undefined command: cmd
-Error at Line 38, Col 34: Undefined command: cmd
-6 semantic errors.
+Warning at Line 32, Col 35: Undefined command: "cmd". No command will be generated.
+Warning at Line 33, Col 38: Undefined command: "cmd". No command will be generated.
+Warning at Line 34, Col 35: Undefined command: "cmd". No command will be generated.
+Warning at Line 36, Col 37: Undefined command: "cmd". No command will be generated.
+Warning at Line 37, Col 36: Undefined command: "cmd". No command will be generated.
+Warning at Line 38, Col 34: Undefined command: "cmd". No command will be generated.
 SCRIPT
   SECTION: script_name="prolog_scene_a", display_name="Prolog Scene Intro"
     NARRATOR_SAY: text="Line of dialog."
@@ -347,12 +346,10 @@ SCRIPT
     NARRATOR_SAY: text="Hello."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="", expr="Happy", pos="Middle"
-      CHARACTER_REMOVE_DISGUISE: char="Alice"
       CHARACTER_ENTER: char="Alice", expr="Happy", pos="Middle"
     CHARACTER_SAY: char="Alice", text="Hello."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="", expr="Happy", pos="Middle"
-      CHARACTER_REMOVE_DISGUISE: char="Alice"
       CHARACTER_EXPR: char="Alice", expr="Happy"
       CHARACTER_MOVE: char="Alice", pos="Middle"
     CHARACTER_SAY: char="Alice", text="Hello."
@@ -410,11 +407,9 @@ SCRIPT
     CHARACTER_SAY: char="Alice", text="Hello  world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
-      CHARACTER_REMOVE_DISGUISE: char="Alice"
     CHARACTER_SAY: char="Alice", text="Hello world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="", expr="", pos=""
-      CHARACTER_REMOVE_DISGUISE: char="Alice"
     CHARACTER_SAY: char="Alice", text="Hello world."
     SYSTEM_WAIT_INPUT
   SECTION: script_name="section2", display_name="Hello again."
@@ -453,7 +448,70 @@ String Literals: prolog_scene_a
 Target Code: prolog_scene_a
 ========================
 
-Source program isn't valid. No code was generated.
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
+local r1 = scene:loadCharacter("Alice");
+local r2 = scene:getPosition("Middle");
+local r3 = scene:loadExpression("Happy");
+narrator:say("Line of dialog.");
+wait();
+narrator:say("Continued dialog.");
+wait();
+narrator:say("A lot of newlines.");
+wait();
+narrator:say("Dialog.");
+wait();
+narrator:say("Dialog.");
+wait();
+narrator:say("Dialog.");
+wait();
+narrator:say("Dialog ends here.");
+wait();
+r1:setDisguise("Mystery Girl");
+r1:say("Hello.");
+wait();
+r1:removeDisguise();
+r1:say("Hello.");
+wait();
+narrator:say("Hello.");
+wait();
+narrator:say("Hello.");
+wait();
+r1:enterStage(r3, r2);
+r1:say("Hello.");
+wait();
+r1:changeExpression(r3);
+r1:changePosition(r2);
+r1:say("Hello.");
+wait();
+r1:setDisguise("Anony");
+r1:say("Hello.");
+wait();
+r1:say("Hello ");
+r1:say("world.");
+wait();
+r1:say("Hello ");
+r1:say("world.");
+wait();
+r1:say("Hello ");
+r1:say("world.");
+wait();
+r1:say("Hello   ");
+r1:say("world.");
+wait();
+r1:say("Hello  ");
+r1:say("world.");
+wait();
+r1:say("Hello");
+r1:say("world.");
+wait();
+r1:removeDisguise();
+r1:say("Hello  world.");
+wait();
+r1:say("Hello world.");
+wait();
+r1:say("Hello world.");
+wait();
 
 Symbol Tables: section2
 ========================
@@ -467,6 +525,8 @@ String Literals: section2
 Target Code: section2
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
 
 Symbol Tables: section3
 ========================
@@ -481,8 +541,10 @@ String Literals: section3
 Target Code: section3
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
 narrator:say("nothing here.");
-_w();
+wait();
 
 Symbol Tables: section4
 ========================
@@ -496,3 +558,5 @@ String Literals: section4
 Target Code: section4
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");

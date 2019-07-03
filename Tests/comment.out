@@ -94,9 +94,8 @@ SCRIPT
 AST (Checked)
 =============
 
-Error at Line 38, Col 23: Undefined command: with
-Error at Line 39, Col 23: Undefined command: with
-2 semantic errors.
+Warning at Line 38, Col 23: Undefined command: "with". No command will be generated.
+Warning at Line 39, Col 23: Undefined command: "with". No command will be generated.
 SCRIPT
   SECTION: script_name="test_label", display_name="comments"
     NARRATOR_SAY: text="{{  this is a line of text  }}"
@@ -109,7 +108,7 @@ SCRIPT
     NARRATOR_SAY: text="This is another line"
     COMMAND_EXECUTION: name="with", args=[a, command, in, it]
     SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="This is another line "
+    NARRATOR_SAY: text="This is another line"
     COMMAND_EXECUTION: name="with", args=[a, command, in, it]
     SYSTEM_WAIT_INPUT
 
@@ -128,12 +127,14 @@ String Literals: test_label
 Target Code: test_label
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
 narrator:say("{{  this is a line of text  }}");
-_w();
+wait();
 narrator:say("empty comment");
-_w();
+wait();
 narrator:say("This is a line with inside.");
-_w();
+wait();
 
 Symbol Tables: test
 ========================
@@ -148,4 +149,9 @@ String Literals: test
 Target Code: test
 ========================
 
-Source program isn't valid. No code was generated.
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
+narrator:say("This is another line");
+wait();
+narrator:say("This is another line");
+wait();

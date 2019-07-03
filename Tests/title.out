@@ -54,6 +54,8 @@ String Literals: test
 Target Code: test
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
 
 Symbol Tables: t est
 ========================
@@ -68,8 +70,10 @@ String Literals: t est
 Target Code: t est
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
 narrator:say("this is not a # title nor #this");
-_w();
+wait();
 
 Symbol Tables: conutiunation
 ========================
@@ -83,3 +87,5 @@ String Literals: conutiunation
 Target Code: conutiunation
 ========================
 
+local scene = game:currentScene();
+local narrator = scene:loadCharacter("narrator");
