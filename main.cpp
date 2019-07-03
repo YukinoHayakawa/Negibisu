@@ -4,14 +4,12 @@
 
 #include <boost/program_options.hpp>
 
+#include <Usagi/Utility/Utf8Main.hpp>
+
 #include "Lexical/Tokenizer.hpp"
 #include "AST/ScriptNode.hpp"
 #include "Parsing/ParsingContext.hpp"
 #include "AST/PrintContext.hpp"
-
-#ifdef _WIN32
-#include <Usagi/Extension/Win32/Win32Helper.hpp>
-#endif
 
 namespace po = boost::program_options;
 using namespace usagi;
@@ -96,30 +94,22 @@ void debugCompileFile(const std::filesystem::path &path)
     }
 }
 
-#ifdef _WIN32
-int wmain(int argc, wchar_t *argv[])
+int usagi_main(const std::vector<std::string> &args)
 {
-    // win32::patchConsole();
-#else
-int main(int argc, char *argv[])
-{
-#endif
-
     // Declare the supported options.
     po::options_description desc("Negibisu script compiler options");
     desc.add_options()
         ("help,h", "show available options")
         ("debug,d", "output parsed tokens and AST")
-        ("input-file,i", "input file")
+        ("input-file,i", po::value<std::vector<std::string>>(), "input file")
     ;
 
     po::positional_options_description p;
     p.add("input-file", -1);
 
     po::variables_map vm;
-    po::store(po::basic_command_line_parser<
-        std::remove_pointer_t<std::remove_pointer_t<decltype(argv)>>
-    >(argc, argv).options(desc).positional(p).run(), vm);
+    po::store(po::basic_command_line_parser<char>(args)
+        .options(desc).positional(p).run(), vm, false);
     po::notify(vm);
 
     if(vm.count("help"))
@@ -133,8 +123,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    const auto input_path = std::filesystem::canonical(
-        vm["input-file"].as<std::string>()
+    // todo multiple files
+    const auto inputs = vm["input-file"].as<std::vector<std::string>>();
+    const auto input_path = canonical(
+        std::filesystem::u8path(inputs[0])
     );
     if(vm.count("debug"))
         debugCompileFile(input_path);
