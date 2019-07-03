@@ -22,6 +22,7 @@ enum class TokenType
     COLON,
     COMMA,
     EQUAL,
+    DOUBLE_QUOTE,
     END_OF_STREAM,
     UNKNOWN,
 };

@@ -21,6 +21,7 @@ const char * tokenName(const TokenType token)
         case TokenType::COLON: return "COLON";
         case TokenType::EQUAL: return "EQUAL";
         case TokenType::END_OF_STREAM: return "END_OF_STREAM";
+        case TokenType::DOUBLE_QUOTE: return "DOUBLE_QUOTE";
         default: return "UNKNOWN";
     }
 }
@@ -41,6 +42,7 @@ const char * tokenSymbol(const TokenType token)
         case TokenType::COMMA: return ",";
         case TokenType::COLON: return ":";
         case TokenType::EQUAL: return "=";
+        case TokenType::DOUBLE_QUOTE: return "\"";
         default: return "UNKNOWN";
     }
 }
