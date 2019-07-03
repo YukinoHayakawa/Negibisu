@@ -2,6 +2,8 @@
 #include <filesystem>
 #include <iostream>
 
+#include <boost/program_options.hpp>
+
 #include "Lexical/Tokenizer.hpp"
 #include "AST/ScriptNode.hpp"
 #include "Parsing/ParsingContext.hpp"
@@ -11,25 +13,43 @@
 #include <Usagi/Extension/Win32/Win32Helper.hpp>
 #endif
 
+namespace po = boost::program_options;
 using namespace usagi;
 using namespace negi;
 
-#ifdef _WIN32
-int wmain(int argc, wchar_t *argv[])
+void compileFile(const std::filesystem::path &path)
 {
-    // win32::patchConsole();
-#else
-int main(int argc, char *argv[])
-{
-#endif
+    try
+    {
+        std::ifstream in(path);
+        Tokenizer t(path.u8string(), in);
+        t.tokenize();
+        ParsingContext ctx { t.tokens() };
+        ScriptNode p;
+        PrintContext pp { std::cout };
 
+        p.parse(&ctx);
+        p.check(nullptr);
+
+        for(auto &s : p.sections())
+        {
+            s.generate(nullptr);
+        }
+    }
+    catch(const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+}
+
+void debugCompileFile(const std::filesystem::path &path)
+{
     try
     {
         fmt::print("Token Stream\n");
         fmt::print("============\n\n");
-        const auto input_name = std::filesystem::canonical(argv[1]);
-        std::ifstream in(input_name);
-        Tokenizer t(input_name.u8string(), in);
+        std::ifstream in(path);
+        Tokenizer t(path.u8string(), in);
         t.tokenize();
         t.dumpTokens();
 
@@ -76,6 +96,52 @@ int main(int argc, char *argv[])
     {
         std::cout << e.what() << std::endl;
     }
+}
+
+#ifdef _WIN32
+int wmain(int argc, wchar_t *argv[])
+{
+    // win32::patchConsole();
+#else
+int main(int argc, char *argv[])
+{
+#endif
+
+    // Declare the supported options.
+    po::options_description desc("Negibisu script compiler options");
+    desc.add_options()
+        ("help,h", "show available options")
+        ("debug,d", "output parsed tokens and AST")
+        ("input-file,i", "input file")
+    ;
+
+    po::positional_options_description p;
+    p.add("input-file", -1);
+
+    po::variables_map vm;
+    po::store(po::basic_command_line_parser<
+        std::remove_pointer_t<std::remove_pointer_t<decltype(argv)>>
+    >(argc, argv).options(desc).positional(p).run(), vm);
+    po::notify(vm);
+
+    if(vm.count("help"))
+    {
+        std::cout << desc << std::endl;
+        return 1;
+    }
+    if(!vm.count("input-file"))
+    {
+        std::cerr << "No input file." << std::endl;
+        return 1;
+    }
+
+    const auto input_path = std::filesystem::canonical(
+        vm["input-file"].as<std::string>()
+    );
+    if(vm.count("debug"))
+        debugCompileFile(input_path);
+    else
+        compileFile(input_path);
 
     return 0;
 }
