@@ -8,7 +8,10 @@ void Tokenizer::tokenize()
 {
     while(cur())
     {
-        skipWhiteSpace();
+        if(cur() == '\n')
+            advance();
+        if(currentEnvironment() != Environment::QUOTED_STRING)
+            skipWhiteSpace();
         beginToken();
         const auto this_char = cur();
         // todo: preprocessor directives
@@ -71,6 +74,21 @@ void Tokenizer::tokenize()
             endToken(TokenType::RIGHT_BRACKET);
             continue;
         }
+        if(this_char == '"')
+        {
+            advance();
+            if(currentEnvironment() == Environment::QUOTED_STRING)
+            {
+                exitEnvironment(Environment::QUOTED_STRING);
+            }
+            else
+            {
+                enterEnvironment(Environment::QUOTED_STRING);
+                beginToken();
+                readStringLiteral();
+            }
+            continue;
+        }
         if(currentEnvironment() == Environment::COMMAND
             || currentEnvironment() == Environment::CHARACTER)
         {
@@ -127,6 +145,7 @@ void Tokenizer::onNewLine()
             case Environment::COMMAND:
             case Environment::CHARACTER:
             case Environment::COMMENT:
+            case Environment::QUOTED_STRING:
                 currentSourcePosition().error(
                     "Expected a {}.",
                     tokenSymbol(envCloseSymbol(cur_env))
@@ -145,6 +164,8 @@ TokenType Tokenizer::envOpenSymbol(const Environment env)
         case Environment::COMMAND: return TokenType::LEFT_BRACE;
         case Environment::CHARACTER: return TokenType::LEFT_BRACKET;
         case Environment::COMMENT: return TokenType::LEFT_DOUBLE_BRACE;
+        case Environment::QUOTED_STRING:
+            return TokenType::DOUBLE_QUOTE;
         default: return TokenType::UNKNOWN;
     }
 }
@@ -156,6 +177,8 @@ TokenType Tokenizer::envCloseSymbol(const Environment env)
         case Environment::COMMAND: return TokenType::RIGHT_BRACE;
         case Environment::CHARACTER: return TokenType::RIGHT_BRACKET;
         case Environment::COMMENT: return TokenType::RIGHT_DOUBLE_BRACE;
+        case Environment::QUOTED_STRING:
+            return TokenType::DOUBLE_QUOTE;
         default: return TokenType::UNKNOWN;
     }
 }
@@ -233,20 +256,22 @@ bool Tokenizer::isOperatorCharInTitle(char32_t c)
         || c == ':';
 }
 
+bool Tokenizer::isOperatorCharInQuotedString(char32_t c)
+{
+    return isEnvironmentBoundaryChar(c);
+}
+
 bool Tokenizer::isEnvironmentBoundaryChar(char32_t c)
 {
     return c == '['
         || c == ']'
         || c == '{'
-        || c == '}';
+        || c == '}'
+        || c == '"';
 }
 
 void Tokenizer::readStringLiteral()
 {
-    // we executed skipWhiteSpace() before, so \n can only be at least the
-    // second character
-    assert(!isSpaceChar(cur()));
-
     const std::size_t begin_u8_size = currentUtf8Size();
     std::size_t last_non_space_size = begin_u8_size;
     bool escape_next = false;
@@ -307,6 +332,11 @@ void Tokenizer::readStringLiteral()
             if(isOperatorCharInTitle(this_char))
                 break;
         }
+        else if(currentEnvironment() == Environment::QUOTED_STRING)
+        {
+            if(isOperatorCharInQuotedString(this_char))
+                break;
+        }
         // move onto next char
         advance();
 
@@ -314,12 +344,10 @@ read_next:
         if(!isSpaceChar(this_char))
             last_non_space_size = currentUtf8Size();
     }
-    // only trim trailing spaces when reaching the end of line in dialog
-    // bug: command/comment ends the line
-    const auto trim_back_space =
-        currentEnvironment() != Environment::GLOBAL || end_of_line
-            ? currentUtf8Size() - last_non_space_size
-            : 0;
+    // trailing spaces are trimmed unless they are quoted.
+    std::size_t trim_back_space = 0;
+    if(currentEnvironment() != Environment::QUOTED_STRING)
+        trim_back_space = currentUtf8Size() - last_non_space_size;
     const auto len = currentUtf8Size() - begin_u8_size - trim_back_space;
     if(len > 0)
     {

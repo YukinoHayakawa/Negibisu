@@ -23,6 +23,7 @@ protected:
         CHARACTER,
         COMMENT,
         TITLE,
+        QUOTED_STRING,
     };
 
     static TokenType envOpenSymbol(Environment env);
@@ -41,6 +42,7 @@ protected:
     static bool isOperatorCharInCharacterName(char32_t c);
     static bool isOperatorCharInCommand(char32_t c);
     static bool isOperatorCharInTitle(char32_t c);
+    static bool isOperatorCharInQuotedString(char32_t c);
     void readStringLiteral();
     TokenType lastTokenType() const;
     bool commentOpening();
