@@ -91,10 +91,11 @@ char32_t StringParser::advance(
     if(cur() == '\\')
     {
         // continue current line, move cursor to the beginning of next line
-        if(allow_continue && next() == '\n')
+        if(allow_continue)
         {
             advanceCursor();
-            advanceCursor();
+            if(cur() == '\n')
+                advanceCursor();
         }
     }
     else if(cur() == 7)
