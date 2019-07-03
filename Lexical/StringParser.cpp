@@ -88,7 +88,7 @@ char32_t StringParser::advance(
     // move to the next character
     advanceCursor();
 
-    if(cur() == '\\')
+    if(cur() == '\\' && (next() == '\n' || next() == '\0'))
     {
         // continue current line, move cursor to the beginning of next line
         if(allow_continue)
