@@ -155,16 +155,54 @@ void SectionNode::check(SceneContext *ctx)
 
 void SectionNode::generate(SceneContext *ctx) const
 {
+    ctx = &mSceneContext;
+
     if(!mChecked)
     {
-        mSceneContext.print(
+        ctx->print(
             "Source program isn't valid. No code was generated."
         );
+        return;
     }
-    else
+    // generate variable decelerations
+    ctx->print(R"(local scene = game:currentScene();)");
+    ctx->print(R"(local narrator = scene:loadCharacter("narrator");)");
+
+    for(auto &&r : ctx->symbol_table.symbols)
     {
-        for(auto &&l : mStatements)
-            l->generate(&mSceneContext);
+        switch(r.second.type)
+        {
+            case SymbolType::CHARACTER:
+                ctx->print(
+                    R"(local {} = scene:loadCharacter("{}");)",
+                    r.second.object_name, r.first
+                );
+                break;
+            case SymbolType::POSITION:
+                ctx->print(
+                    R"(local {} = scene:getPosition("{}");)",
+                    r.second.object_name, r.first
+                );
+                break;
+            case SymbolType::IMAGE_LAYER:
+                ctx->print(
+                    R"(local {} = scene:loadImageLayer("{}");)",
+                    r.second.object_name, r.first
+                );
+                break;
+            case SymbolType::EXPRESSION:
+                ctx->print(
+                    R"(local {} = scene:loadExpression("{}");)",
+                    r.second.object_name, r.first
+                );
+                break;
+            case SymbolType::SCRIPT:
+                break;
+            default: throw std::logic_error("Unexpected type");
+        }
     }
+
+    for(auto &&l : mStatements)
+        l->generate(ctx);
 }
 }

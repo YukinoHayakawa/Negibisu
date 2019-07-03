@@ -25,7 +25,7 @@ ParameterList SystemWaitInputCommand::parameterInfo() const
 
 void SystemWaitInputCommand::generate(SceneContext *ctx) const
 {
-    ctx->print("_w();");
+    ctx->print("wait();");
 }
 
 void SystemWaitInputCommand::print(PrintContext &ctx) const

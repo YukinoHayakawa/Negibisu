@@ -49,8 +49,7 @@ const SymbolInfo & SymbolTable::lookup(
     if(ref.second)
     {
         symbol.type = type;
-        symbol.object_name = name_counter.current();
-        ++name_counter;
+        symbol.object_name = fmt::format("r{}", mResourceIndex++);
     }
     else
     {

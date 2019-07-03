@@ -36,7 +36,7 @@ ParameterList AudioPlayCommand::parameterInfo() const
 void AudioPlayMusicCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
-        "sys:playMusic(\"{}\");",
+        "scene:playMusic(\"{}\");",
         mAssetPath
     );
 }
@@ -56,7 +56,7 @@ void AudioPlayMusicCommand::print(PrintContext &ctx) const
 void AudioPlaySoundEffectCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
-        "sys:playSoundEffect(\"{}\");",
+        "scene:playSoundEffect(\"{}\");",
         mAssetPath
     );
 }

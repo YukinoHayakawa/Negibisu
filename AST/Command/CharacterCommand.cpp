@@ -339,6 +339,7 @@ void CharacterRemoveDisguiseCommand::check(SceneContext *ctx)
 
     auto &state = ctx->characterState(mCharacter);
     mGenerate = state.disguised_name != "";
+    state.disguised_name = { };
 }
 
 void CharacterRemoveDisguiseCommand::generate(SceneContext *ctx) const
