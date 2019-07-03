@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <iostream>
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 
@@ -12,7 +14,7 @@ struct SourcePosition
     template <typename... Args>
     void error(Args &&... args) const
     {
-        fmt::print("Error at {}: {}\n",
+        fmt::print(std::cerr, "Error at {}: {}\n",
             *this,
             fmt::format(std::forward<Args>(args)...)
         );
@@ -21,7 +23,7 @@ struct SourcePosition
     template <typename... Args>
     void warning(Args &&... args) const
     {
-        fmt::print("Warning at {}: {}\n",
+        fmt::print(std::cerr, "Warning at {}: {}\n",
             *this,
             fmt::format(std::forward<Args>(args)...)
         );

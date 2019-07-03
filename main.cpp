@@ -26,8 +26,6 @@ void compileFile(const std::filesystem::path &path)
         t.tokenize();
         ParsingContext ctx { t.tokens() };
         ScriptNode p;
-        PrintContext pp { std::cout };
-
         p.parse(&ctx);
         p.check(nullptr);
 
@@ -38,7 +36,7 @@ void compileFile(const std::filesystem::path &path)
     }
     catch(const std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 }
 
@@ -46,6 +44,7 @@ void debugCompileFile(const std::filesystem::path &path)
 {
     try
     {
+        PrintContext pp { std::cout };
         fmt::print("Token Stream\n");
         fmt::print("============\n\n");
         std::ifstream in(path);
@@ -55,7 +54,6 @@ void debugCompileFile(const std::filesystem::path &path)
 
         ParsingContext ctx { t.tokens() };
         ScriptNode p;
-        PrintContext pp { std::cout };
 
         fmt::print("\n");
         fmt::print("AST (Parsed)\n");
@@ -94,7 +92,7 @@ void debugCompileFile(const std::filesystem::path &path)
     }
     catch(const std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 }
 
