@@ -51,7 +51,7 @@ Line 18, Col 9: [STRING_LITERAL] b
 Line 18, Col 10: [COMMA] ,
 Line 18, Col 11: [STRING_LITERAL] c
 Line 18, Col 12: [COMMA] ,
-Line 18, Col 13: [STRING_LITERAL] "xxx"
+Line 18, Col 14: [STRING_LITERAL] xxx
 Line 18, Col 18: [RIGHT_BRACE] }
 Line 18, Col 19: [NEWLINE] 
 Line 19, Col 1: [LEFT_BRACE] {
@@ -63,7 +63,7 @@ Line 19, Col 11: [STRING_LITERAL] b
 Line 19, Col 12: [COMMA] ,
 Line 19, Col 13: [STRING_LITERAL] c
 Line 19, Col 14: [COMMA] ,
-Line 19, Col 15: [STRING_LITERAL] "xxx"
+Line 19, Col 16: [STRING_LITERAL] xxx
 Line 19, Col 20: [RIGHT_BRACE] }
 Line 19, Col 21: [NEWLINE] 
 Line 20, Col 1: [NEWLINE] 
@@ -91,9 +91,9 @@ SCRIPT
     SYSTEM_WAIT_INPUT
     COMMAND_EXECUTION: name="te    st", args=[]
     SYSTEM_WAIT_INPUT
-    COMMAND_EXECUTION: name="test", args=[a, b, c, "xxx"]
+    COMMAND_EXECUTION: name="test", args=[a, b, c, xxx]
     SYSTEM_WAIT_INPUT
-    COMMAND_EXECUTION: name="test", args=[a=m, b, c, "xxx"]
+    COMMAND_EXECUTION: name="test", args=[a=m, b, c, xxx]
     SYSTEM_WAIT_INPUT
     COMMAND_EXECUTION: name="changeImage", args=[bg, bg/1.png]
     SYSTEM_WAIT_INPUT
@@ -114,9 +114,9 @@ SCRIPT
     SYSTEM_WAIT_INPUT
     COMMAND_EXECUTION: name="te    st", args=[]
     SYSTEM_WAIT_INPUT
-    COMMAND_EXECUTION: name="test", args=[a, b, c, "xxx"]
+    COMMAND_EXECUTION: name="test", args=[a, b, c, xxx]
     SYSTEM_WAIT_INPUT
-    COMMAND_EXECUTION: name="test", args=[a=m, b, c, "xxx"]
+    COMMAND_EXECUTION: name="test", args=[a=m, b, c, xxx]
     SYSTEM_WAIT_INPUT
     COMMAND_EXECUTION: name="changeImage", args=[bg, bg/1.png]
       IMAGE_CHANGE: layer="bg", asset="bg/1.png"

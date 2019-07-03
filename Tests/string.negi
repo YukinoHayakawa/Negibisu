@@ -9,3 +9,31 @@ string {{ with a comment }}inside
 \\\\ two slashes
 
 meaningless \e\s\c\a\p\e\s
+
+    Spaces     at the endings of the line are  trimmed but not those in between.         \
+
+
+
+这是一行中文。
+
+
+Comma, is, not, an, operator, in, dialogs.
+
+"but we should support quotes"
+
+    "    quoted string will have spaces preserved     "
+
+ extra space trimmed.     {cmd}
+ extra space trimmed.     {{ comment }}
+
+
+" command {changeImage:a,b} in quotes   "
+
+    {cmd} extra space trimmed.     {cmd}
+   {{ comment }}  extra space trimmed.     {{ comment }}
+
+   this line of dialog. {changeImage:a,b} a command in between.
+
+   "two" here "strings" mixed with unquoted string
+
+    continuation at last line    \

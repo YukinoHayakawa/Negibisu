@@ -1,67 +1,47 @@
 Token Stream
 ============
 
-Line 1, Col 1: [STRING_LITERAL] This is a line of dialog.
-Line 1, Col 26: [NEWLINE] 
+Line 1, Col 1: [STRING_LITERAL] This is a line of narration.
+Line 1, Col 29: [NEWLINE] 
 Line 2, Col 1: [NEWLINE] 
 Line 3, Col 1: [NEWLINE] 
-Line 4, Col 5: [STRING_LITERAL] Spaces     at the endings of the line are  trimmed but not those in between.
+Line 4, Col 1: [LEFT_BRACKET] [
+Line 4, Col 2: [STRING_LITERAL] Yuki
+Line 4, Col 6: [RIGHT_BRACKET] ]
+Line 4, Col 8: [STRING_LITERAL] This is Yuki speaking.
+Line 4, Col 30: [NEWLINE] 
 Line 5, Col 1: [NEWLINE] 
 Line 6, Col 1: [NEWLINE] 
-Line 7, Col 1: [NEWLINE] 
-Line 8, Col 1: [STRING_LITERAL] 这是一行中文。
-Line 8, Col 8: [NEWLINE] 
+Line 7, Col 1: [LEFT_BRACKET] [
+Line 7, Col 2: [STRING_LITERAL] Mystery Girl
+Line 7, Col 14: [EQUAL] =
+Line 7, Col 15: [STRING_LITERAL] Yuki
+Line 7, Col 19: [RIGHT_BRACKET] ]
+Line 7, Col 21: [STRING_LITERAL] Yuki is hiding her identity.
+Line 7, Col 49: [NEWLINE] 
+Line 8, Col 1: [LEFT_BRACKET] [
+Line 8, Col 2: [STRING_LITERAL] Yuki
+Line 8, Col 6: [RIGHT_BRACKET] ]
+Line 8, Col 8: [STRING_LITERAL] Not anymore.
+Line 8, Col 20: [NEWLINE] 
 Line 9, Col 1: [NEWLINE] 
 Line 10, Col 1: [NEWLINE] 
 Line 11, Col 1: [LEFT_BRACKET] [
-Line 11, Col 2: [STRING_LITERAL] Yuki
-Line 11, Col 6: [RIGHT_BRACKET] ]
-Line 11, Col 8: [STRING_LITERAL] This is Yuki speaking.
-Line 11, Col 30: [NEWLINE] 
-Line 12, Col 1: [NEWLINE] 
-Line 13, Col 1: [NEWLINE] 
-Line 14, Col 1: [LEFT_BRACKET] [
-Line 14, Col 2: [STRING_LITERAL] Mystery Girl
-Line 14, Col 14: [EQUAL] =
-Line 14, Col 15: [STRING_LITERAL] Yuki
-Line 14, Col 19: [RIGHT_BRACKET] ]
-Line 14, Col 21: [STRING_LITERAL] Yuki is hiding her identity.
-Line 14, Col 49: [NEWLINE] 
-Line 15, Col 1: [LEFT_BRACKET] [
-Line 15, Col 2: [STRING_LITERAL] Yuki
-Line 15, Col 6: [RIGHT_BRACKET] ]
-Line 15, Col 8: [STRING_LITERAL] Not anymore.
-Line 15, Col 20: [NEWLINE] 
-Line 16, Col 1: [NEWLINE] 
-Line 17, Col 1: [NEWLINE] 
-Line 18, Col 1: [LEFT_BRACKET] [
-Line 18, Col 2: [STRING_LITERAL] Moon
-Line 18, Col 6: [COMMA] ,
-Line 18, Col 7: [STRING_LITERAL] Smile
-Line 18, Col 12: [COMMA] ,
-Line 18, Col 13: [STRING_LITERAL] Middle
-Line 18, Col 19: [RIGHT_BRACKET] ]
-Line 18, Col 21: [STRING_LITERAL] Mr. Mo    on likes to laugh.
-Line 19, Col 23: [NEWLINE] 
-Line 20, Col 1: [NEWLINE] 
-Line 21, Col 1: [STRING_LITERAL] Comma, is, not, an, operator, in, dialogs.
-Line 21, Col 43: [NEWLINE] 
-Line 22, Col 1: [NEWLINE] 
-Line 23, Col 1: [STRING_LITERAL] "but we should support quotes"
-Line 23, Col 31: [NEWLINE] 
-Line 24, Col 1: [NEWLINE] 
-Line 25, Col 1: [STRING_LITERAL] continuation at last line
+Line 11, Col 2: [STRING_LITERAL] Moon
+Line 11, Col 6: [COMMA] ,
+Line 11, Col 7: [STRING_LITERAL] Smile
+Line 11, Col 12: [COMMA] ,
+Line 11, Col 13: [STRING_LITERAL] Middle
+Line 11, Col 19: [RIGHT_BRACKET] ]
+Line 11, Col 21: [STRING_LITERAL] Mr. Mo    on likes to laugh.
+Line 12, Col 23: [NEWLINE] 
 
 AST (Parsed)
 ============
 
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
-    NARRATOR_SAY: text="This is a line of dialog."
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="Spaces     at the endings of the line are  trimmed but not those in between."
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="这是一行中文。"
+    NARRATOR_SAY: text="This is a line of narration."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Yuki", alias="", expr="", pos=""
     CHARACTER_SAY: char="Yuki", text="This is Yuki speaking."
@@ -75,22 +55,13 @@ SCRIPT
     CHARACTER_TAG: char="Moon", alias="", expr="Smile", pos="Middle"
     CHARACTER_SAY: char="Moon", text="Mr. Mo    on likes to laugh."
     SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="Comma, is, not, an, operator, in, dialogs."
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text=but we should support quotes"
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="continuation at last line"
 
 AST (Checked)
 =============
 
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
-    NARRATOR_SAY: text="This is a line of dialog."
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="Spaces     at the endings of the line are  trimmed but not those in between."
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="这是一行中文。"
+    NARRATOR_SAY: text="This is a line of narration."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Yuki", alias="", expr="", pos=""
     CHARACTER_SAY: char="Yuki", text="This is Yuki speaking."
@@ -107,11 +78,6 @@ SCRIPT
       CHARACTER_ENTER: char="Moon", expr="Smile", pos="Middle"
     CHARACTER_SAY: char="Moon", text="Mr. Mo    on likes to laugh."
     SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="Comma, is, not, an, operator, in, dialogs."
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="but we should support quotes"
-    SYSTEM_WAIT_INPUT
-    NARRATOR_SAY: text="continuation at last line"
 
 Symbol Tables: <UNNAMED>
 ========================
@@ -125,17 +91,12 @@ Smile: Expression
 String Literals: <UNNAMED>
 ========================
 
-"This is a line of dialog."
-"Mystery Girl"
-"Spaces     at the endings of the line are  trimmed but not those in between."
-"这是一行中文。"
-"continuation at last line"
+"This is a line of narration."
 "Mr. Mo    on likes to laugh."
 "This is Yuki speaking."
+"Mystery Girl"
 "Yuki is hiding her identity."
 "Not anymore."
-"Comma, is, not, an, operator, in, dialogs."
-but we should support quotes"
 
 Target Code: <UNNAMED>
 ========================
@@ -146,11 +107,7 @@ local r1 = scene:loadCharacter("Yuki");
 local r3 = scene:getPosition("Middle");
 local r2 = scene:loadCharacter("Moon");
 local r4 = scene:loadExpression("Smile");
-narrator:say("This is a line of dialog.");
-wait();
-narrator:say("Spaces     at the endings of the line are  trimmed but not those in between.");
-wait();
-narrator:say("这是一行中文。");
+narrator:say("This is a line of narration.");
 wait();
 r1:say("This is Yuki speaking.");
 wait();
@@ -163,8 +120,3 @@ wait();
 r2:enterStage(r4, r3);
 r2:say("Mr. Mo    on likes to laugh.");
 wait();
-narrator:say("Comma, is, not, an, operator, in, dialogs.");
-wait();
-narrator:say(but we should support quotes);
-wait();
-narrator:say("continuation at last line");

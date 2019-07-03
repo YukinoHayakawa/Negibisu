@@ -5,12 +5,13 @@ Error at Line 1, Col 12: Expected a }.
 Error at Line 2, Col 18: Expected a matching {.
 Error at Line 7, Col 11: Expected a ].
 Error at Line 8, Col 24: Expected a ].
-Error at Line 20, Col 1: Expected a }}.
+Error at Line 10, Col 19: Expected a ".
+Error at Line 22, Col 1: Expected a }}.
 Line 1, Col 1: [SHARP] #
 Line 1, Col 3: [LEFT_BRACE] {
 Line 1, Col 4: [STRING_LITERAL] unclosed
 Line 1, Col 12: [NEWLINE] 
-Line 2, Col 1: [STRING_LITERAL] another unclosed 
+Line 2, Col 1: [STRING_LITERAL] another unclosed
 Line 2, Col 18: [RIGHT_BRACE] }
 Line 2, Col 19: [NEWLINE] 
 Line 4, Col 11: [NEWLINE] 
@@ -18,11 +19,14 @@ Line 6, Col 13: [NEWLINE]
 Line 7, Col 1: [LEFT_BRACKET] [
 Line 7, Col 2: [STRING_LITERAL] who is me
 Line 7, Col 11: [NEWLINE] 
-Line 8, Col 1: [STRING_LITERAL] this 
+Line 8, Col 1: [STRING_LITERAL] this
 Line 8, Col 6: [LEFT_BRACKET] [
 Line 8, Col 8: [STRING_LITERAL] is also not fine
 Line 8, Col 24: [NEWLINE] 
 Line 9, Col 1: [NEWLINE] 
+Line 10, Col 2: [STRING_LITERAL]  unclosed quotes 
+Line 10, Col 19: [NEWLINE] 
+Line 11, Col 1: [NEWLINE] 
 
 AST (Parsed)
 ============

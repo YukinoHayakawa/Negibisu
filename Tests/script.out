@@ -89,7 +89,7 @@ Line 32, Col 14: [STRING_LITERAL] Happy
 Line 32, Col 19: [COMMA] ,
 Line 32, Col 20: [STRING_LITERAL] Middle
 Line 32, Col 26: [RIGHT_BRACKET] ]
-Line 32, Col 28: [STRING_LITERAL] Hello 
+Line 32, Col 28: [STRING_LITERAL] Hello
 Line 32, Col 34: [LEFT_BRACE] {
 Line 32, Col 35: [STRING_LITERAL] cmd
 Line 32, Col 38: [COLON] :
@@ -106,7 +106,7 @@ Line 33, Col 17: [STRING_LITERAL] Happy
 Line 33, Col 22: [COMMA] ,
 Line 33, Col 23: [STRING_LITERAL] Middle
 Line 33, Col 29: [RIGHT_BRACKET] ]
-Line 33, Col 31: [STRING_LITERAL] Hello 
+Line 33, Col 31: [STRING_LITERAL] Hello
 Line 33, Col 37: [LEFT_BRACE] {
 Line 33, Col 38: [STRING_LITERAL] cmd
 Line 33, Col 41: [RIGHT_BRACE] }
@@ -121,7 +121,7 @@ Line 34, Col 14: [STRING_LITERAL] Happy
 Line 34, Col 19: [COMMA] ,
 Line 34, Col 20: [STRING_LITERAL] Middle
 Line 34, Col 26: [RIGHT_BRACKET] ]
-Line 34, Col 28: [STRING_LITERAL] Hello 
+Line 34, Col 28: [STRING_LITERAL] Hello
 Line 34, Col 34: [LEFT_BRACE] {
 Line 34, Col 35: [STRING_LITERAL] cmd
 Line 34, Col 38: [COLON] :
@@ -143,7 +143,7 @@ Line 36, Col 14: [STRING_LITERAL] Happy
 Line 36, Col 19: [COMMA] ,
 Line 36, Col 20: [STRING_LITERAL] Middle
 Line 36, Col 26: [RIGHT_BRACKET] ]
-Line 36, Col 28: [STRING_LITERAL] Hello   
+Line 36, Col 28: [STRING_LITERAL] Hello
 Line 36, Col 36: [LEFT_BRACE] {
 Line 36, Col 37: [STRING_LITERAL] cmd
 Line 36, Col 40: [COLON] :
@@ -160,7 +160,7 @@ Line 37, Col 14: [STRING_LITERAL] Happy
 Line 37, Col 19: [COMMA] ,
 Line 37, Col 20: [STRING_LITERAL] Middle
 Line 37, Col 26: [RIGHT_BRACKET] ]
-Line 37, Col 28: [STRING_LITERAL] Hello  
+Line 37, Col 28: [STRING_LITERAL] Hello
 Line 37, Col 35: [LEFT_BRACE] {
 Line 37, Col 36: [STRING_LITERAL] cmd
 Line 37, Col 39: [COLON] :
@@ -264,27 +264,27 @@ SCRIPT
     CHARACTER_SAY: char="Alice", text="Hello."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[this]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[a, b, c]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello   "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[two spaces]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello  "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[one space]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
@@ -363,35 +363,35 @@ SCRIPT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
       CHARACTER_EXPR: char="Alice", expr="Happy"
       CHARACTER_MOVE: char="Alice", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[this]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
       CHARACTER_EXPR: char="Alice", expr="Happy"
       CHARACTER_MOVE: char="Alice", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
       CHARACTER_EXPR: char="Alice", expr="Happy"
       CHARACTER_MOVE: char="Alice", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[a, b, c]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
       CHARACTER_EXPR: char="Alice", expr="Happy"
       CHARACTER_MOVE: char="Alice", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello   "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[two spaces]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
     CHARACTER_TAG: char="Alice", alias="Anony", expr="Happy", pos="Middle"
       CHARACTER_EXPR: char="Alice", expr="Happy"
       CHARACTER_MOVE: char="Alice", pos="Middle"
-    CHARACTER_SAY: char="Alice", text="Hello  "
+    CHARACTER_SAY: char="Alice", text="Hello"
     COMMAND_EXECUTION: name="cmd", args=[one space]
     CHARACTER_SAY: char="Alice", text="world."
     SYSTEM_WAIT_INPUT
@@ -435,15 +435,12 @@ String Literals: prolog_scene_a
 "Dialog."
 "Hello  world."
 "A lot of newlines."
-"Hello   "
 "Dialog ends here."
 "Mystery Girl"
 "Hello."
-"Hello "
-"world."
-"Hello  "
 "Hello world."
 "Hello"
+"world."
 
 Target Code: prolog_scene_a
 ========================
@@ -487,19 +484,19 @@ wait();
 r1:setDisguise("Anony");
 r1:say("Hello.");
 wait();
-r1:say("Hello ");
+r1:say("Hello");
 r1:say("world.");
 wait();
-r1:say("Hello ");
+r1:say("Hello");
 r1:say("world.");
 wait();
-r1:say("Hello ");
+r1:say("Hello");
 r1:say("world.");
 wait();
-r1:say("Hello   ");
+r1:say("Hello");
 r1:say("world.");
 wait();
-r1:say("Hello  ");
+r1:say("Hello");
 r1:say("world.");
 wait();
 r1:say("Hello");

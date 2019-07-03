@@ -15,6 +15,73 @@ Line 9, Col 17: [NEWLINE]
 Line 10, Col 1: [NEWLINE] 
 Line 11, Col 1: [STRING_LITERAL] meaningless escapes
 Line 11, Col 27: [NEWLINE] 
+Line 12, Col 1: [NEWLINE] 
+Line 13, Col 5: [STRING_LITERAL] Spaces     at the endings of the line are  trimmed but not those in between.
+Line 14, Col 1: [NEWLINE] 
+Line 15, Col 1: [NEWLINE] 
+Line 16, Col 1: [NEWLINE] 
+Line 17, Col 1: [STRING_LITERAL] 这是一行中文。
+Line 17, Col 8: [NEWLINE] 
+Line 18, Col 1: [NEWLINE] 
+Line 19, Col 1: [NEWLINE] 
+Line 20, Col 1: [STRING_LITERAL] Comma, is, not, an, operator, in, dialogs.
+Line 20, Col 43: [NEWLINE] 
+Line 21, Col 1: [NEWLINE] 
+Line 22, Col 2: [STRING_LITERAL] but we should support quotes
+Line 22, Col 31: [NEWLINE] 
+Line 23, Col 1: [NEWLINE] 
+Line 24, Col 6: [STRING_LITERAL]     quoted string will have spaces preserved     
+Line 24, Col 56: [NEWLINE] 
+Line 25, Col 1: [NEWLINE] 
+Line 26, Col 2: [STRING_LITERAL] extra space trimmed.
+Line 26, Col 27: [LEFT_BRACE] {
+Line 26, Col 28: [STRING_LITERAL] cmd
+Line 26, Col 31: [RIGHT_BRACE] }
+Line 26, Col 32: [NEWLINE] 
+Line 27, Col 2: [STRING_LITERAL] extra space trimmed.
+Line 27, Col 40: [NEWLINE] 
+Line 28, Col 1: [NEWLINE] 
+Line 29, Col 1: [NEWLINE] 
+Line 30, Col 2: [STRING_LITERAL]  command 
+Line 30, Col 11: [LEFT_BRACE] {
+Line 30, Col 12: [STRING_LITERAL] changeImage
+Line 30, Col 23: [COLON] :
+Line 30, Col 24: [STRING_LITERAL] a
+Line 30, Col 25: [COMMA] ,
+Line 30, Col 26: [STRING_LITERAL] b
+Line 30, Col 27: [RIGHT_BRACE] }
+Line 30, Col 28: [STRING_LITERAL]  in quotes   
+Line 30, Col 42: [NEWLINE] 
+Line 31, Col 1: [NEWLINE] 
+Line 32, Col 5: [LEFT_BRACE] {
+Line 32, Col 6: [STRING_LITERAL] cmd
+Line 32, Col 9: [RIGHT_BRACE] }
+Line 32, Col 11: [STRING_LITERAL] extra space trimmed.
+Line 32, Col 36: [LEFT_BRACE] {
+Line 32, Col 37: [STRING_LITERAL] cmd
+Line 32, Col 40: [RIGHT_BRACE] }
+Line 32, Col 41: [NEWLINE] 
+Line 33, Col 19: [STRING_LITERAL] extra space trimmed.
+Line 33, Col 57: [NEWLINE] 
+Line 34, Col 1: [NEWLINE] 
+Line 35, Col 4: [STRING_LITERAL] this line of dialog.
+Line 35, Col 25: [LEFT_BRACE] {
+Line 35, Col 26: [STRING_LITERAL] changeImage
+Line 35, Col 37: [COLON] :
+Line 35, Col 38: [STRING_LITERAL] a
+Line 35, Col 39: [COMMA] ,
+Line 35, Col 40: [STRING_LITERAL] b
+Line 35, Col 41: [RIGHT_BRACE] }
+Line 35, Col 43: [STRING_LITERAL] a command in between.
+Line 35, Col 64: [NEWLINE] 
+Line 36, Col 1: [NEWLINE] 
+Line 37, Col 5: [STRING_LITERAL] two
+Line 37, Col 10: [STRING_LITERAL] here
+Line 37, Col 16: [STRING_LITERAL] strings
+Line 37, Col 25: [STRING_LITERAL] mixed with unquoted string
+Line 37, Col 51: [NEWLINE] 
+Line 38, Col 1: [NEWLINE] 
+Line 39, Col 5: [STRING_LITERAL] continuation at last line
 
 AST (Parsed)
 ============
@@ -31,10 +98,48 @@ SCRIPT
     SYSTEM_WAIT_INPUT
     NARRATOR_SAY: text="meaningless escapes"
     SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Spaces     at the endings of the line are  trimmed but not those in between."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="这是一行中文。"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Comma, is, not, an, operator, in, dialogs."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="but we should support quotes"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="    quoted string will have spaces preserved     "
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="extra space trimmed."
+    COMMAND_EXECUTION: name="cmd", args=[]
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="extra space trimmed."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text=" command "
+    COMMAND_EXECUTION: name="changeImage", args=[a, b]
+    NARRATOR_SAY: text=" in quotes   "
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="cmd", args=[]
+    NARRATOR_SAY: text="extra space trimmed."
+    COMMAND_EXECUTION: name="cmd", args=[]
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="extra space trimmed."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="this line of dialog."
+    COMMAND_EXECUTION: name="changeImage", args=[a, b]
+    NARRATOR_SAY: text="a command in between."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="two"
+    NARRATOR_SAY: text="here"
+    NARRATOR_SAY: text="strings"
+    NARRATOR_SAY: text="mixed with unquoted string"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="continuation at last line"
 
 AST (Checked)
 =============
 
+Warning at Line 26, Col 28: Undefined command: "cmd". No command will be generated.
+Warning at Line 32, Col 6: Undefined command: "cmd". No command will be generated.
+Warning at Line 32, Col 37: Undefined command: "cmd". No command will be generated.
 SCRIPT
   SECTION: script_name="<UNNAMED>", display_name="<UNNAMED SECTION>"
     NARRATOR_SAY: text="single line string"
@@ -47,26 +152,80 @@ SCRIPT
     SYSTEM_WAIT_INPUT
     NARRATOR_SAY: text="meaningless escapes"
     SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Spaces     at the endings of the line are  trimmed but not those in between."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="这是一行中文。"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="Comma, is, not, an, operator, in, dialogs."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="but we should support quotes"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="    quoted string will have spaces preserved     "
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="extra space trimmed."
+    COMMAND_EXECUTION: name="cmd", args=[]
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="extra space trimmed."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text=" command "
+    COMMAND_EXECUTION: name="changeImage", args=[a, b]
+      IMAGE_CHANGE: layer="a", asset="b"
+    NARRATOR_SAY: text=" in quotes   "
+    SYSTEM_WAIT_INPUT
+    COMMAND_EXECUTION: name="cmd", args=[]
+    NARRATOR_SAY: text="extra space trimmed."
+    COMMAND_EXECUTION: name="cmd", args=[]
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="extra space trimmed."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="this line of dialog."
+    COMMAND_EXECUTION: name="changeImage", args=[a, b]
+      IMAGE_CHANGE: layer="a", asset="b"
+    NARRATOR_SAY: text="a command in between."
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="two"
+    NARRATOR_SAY: text="here"
+    NARRATOR_SAY: text="strings"
+    NARRATOR_SAY: text="mixed with unquoted string"
+    SYSTEM_WAIT_INPUT
+    NARRATOR_SAY: text="continuation at last line"
 
 Symbol Tables: <UNNAMED>
 ========================
 
 <UNNAMED>: Script
+a: ImageLayer
 
 String Literals: <UNNAMED>
 ========================
 
+"这是一行中文。"
 "single line string"
 "meaningless escapes"
+"two"
 "multiline string"
+"Spaces     at the endings of the line are  trimmed but not those in between."
+"this line of dialog."
 "string inside"
 "\\ two slashes"
+"Comma, is, not, an, operator, in, dialogs."
+"but we should support quotes"
+"    quoted string will have spaces preserved     "
+"extra space trimmed."
+"mixed with unquoted string"
+" command "
+"here"
+" in quotes   "
+"a command in between."
+"strings"
+"continuation at last line"
 
 Target Code: <UNNAMED>
 ========================
 
 local scene = game:currentScene();
 local narrator = scene:loadCharacter("narrator");
+local r1 = scene:loadImageLayer("a");
 narrator:say("single line string");
 wait();
 narrator:say("multiline string");
@@ -77,3 +236,35 @@ narrator:say("\\ two slashes");
 wait();
 narrator:say("meaningless escapes");
 wait();
+narrator:say("Spaces     at the endings of the line are  trimmed but not those in between.");
+wait();
+narrator:say("这是一行中文。");
+wait();
+narrator:say("Comma, is, not, an, operator, in, dialogs.");
+wait();
+narrator:say("but we should support quotes");
+wait();
+narrator:say("    quoted string will have spaces preserved     ");
+wait();
+narrator:say("extra space trimmed.");
+wait();
+narrator:say("extra space trimmed.");
+wait();
+narrator:say(" command ");
+r1:changeImage("b");
+narrator:say(" in quotes   ");
+wait();
+narrator:say("extra space trimmed.");
+wait();
+narrator:say("extra space trimmed.");
+wait();
+narrator:say("this line of dialog.");
+r1:changeImage("b");
+narrator:say("a command in between.");
+wait();
+narrator:say("two");
+narrator:say("here");
+narrator:say("strings");
+narrator:say("mixed with unquoted string");
+wait();
+narrator:say("continuation at last line");
