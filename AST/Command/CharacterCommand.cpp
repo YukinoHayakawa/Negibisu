@@ -56,7 +56,7 @@ void CharacterMoveCommand::generate(SceneContext *ctx) const
     if(mGenerate)
     {
         ctx->print(
-            "{0}:changePosition(\"{1}\");",
+            "{0}:changePosition({1});",
             ctx->symbol_table.lookup(
                 mCharacter, SymbolType::CHARACTER
             ).object_name,
@@ -109,7 +109,7 @@ void CharacterChangeExpressionCommand::generate(SceneContext *ctx) const
     if(mGenerate)
     {
         ctx->print(
-            "{0}:changeExpression(\"{1}\");",
+            "{0}:changeExpression({1});",
             ctx->symbol_table.lookup(
                 mCharacter, SymbolType::CHARACTER
             ).object_name,
