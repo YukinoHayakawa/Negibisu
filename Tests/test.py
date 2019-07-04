@@ -13,7 +13,7 @@ for file in glob.glob("*.negi"):
     with open(out_name, "wb") as test_output:
         try:
             output = subprocess.check_output(
-                ["../../../../x64/Debug/Negibisu", file]
+                ["../../../../x64/Debug/Negibisu", file, '--debug']
             )
             test_output.write(output.replace(b'\r\n', b'\n'))
         # https://stackoverflow.com/questions/7575284/check-output-from-calledprocesserror

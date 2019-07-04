@@ -15,6 +15,8 @@ namespace po = boost::program_options;
 using namespace usagi;
 using namespace negi;
 
+// todo write a class for compiling files
+
 void compileFile(const std::filesystem::path &path)
 {
     try
@@ -96,7 +98,6 @@ void debugCompileFile(const std::filesystem::path &path)
 
 int usagi_main(const std::vector<std::string> &args)
 {
-    // Declare the supported options.
     po::options_description desc("Negibisu script compiler options");
     desc.add_options()
         ("help,h", "show available options")
@@ -108,9 +109,9 @@ int usagi_main(const std::vector<std::string> &args)
     p.add("input-file", -1);
 
     po::variables_map vm;
-    po::store(po::basic_command_line_parser<char>(args)
+    store(po::basic_command_line_parser<char>(args)
         .options(desc).positional(p).run(), vm, false);
-    po::notify(vm);
+    notify(vm);
 
     if(vm.count("help"))
     {
