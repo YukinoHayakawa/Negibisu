@@ -2,11 +2,6 @@
 
 namespace usagi::negi
 {
-PrintContext::PrintContext(std::ostream &output)
-    : mOutput(output)
-{
-}
-
 void PrintContext::push()
 {
     mIndentation.append(INDENTATION, ' ');

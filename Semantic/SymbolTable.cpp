@@ -73,19 +73,19 @@ void SymbolTable::addStringLiteral(const Token *token)
     string_literals.emplace(token->text);
 }
 
-void SymbolTable::dumpSymbols() const
+void SymbolTable::dumpSymbols(std::ostream &output) const
 {
     for(auto &&s : symbols)
     {
-        fmt::print("{}: {}\n", s.first, s.second.type);
+        fmt::print(output, "{}: {}\n", s.first, s.second.type);
     }
 }
 
-void SymbolTable::dumpStringLiterals() const
+void SymbolTable::dumpStringLiterals(std::ostream &output) const
 {
     for(auto &&s : string_literals)
     {
-        fmt::print("\"{}\"\n", s);
+        fmt::print(output, "\"{}\"\n", s);
     }
 }
 }

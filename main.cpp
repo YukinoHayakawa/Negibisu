@@ -7,94 +7,117 @@
 #include <Usagi/Utility/Utf8Main.hpp>
 
 #include "Lexical/Tokenizer.hpp"
-#include "AST/ScriptNode.hpp"
 #include "Parsing/ParsingContext.hpp"
+#include "AST/ScriptNode.hpp"
 #include "AST/PrintContext.hpp"
 
 namespace po = boost::program_options;
+namespace fs = std::filesystem;
+
 using namespace usagi;
 using namespace negi;
 
-// todo write a class for compiling files
+std::string gOutputFile;
+bool gDebug = false;
 
-void compileFile(const std::filesystem::path &path)
+class Compiler
 {
-    try
-    {
-        std::ifstream in(path);
-        Tokenizer t(path.u8string(), in);
-        t.tokenize();
-        ParsingContext ctx { t.tokens() };
-        ScriptNode p;
-        p.parse(&ctx);
-        p.check(nullptr);
+    const fs::path mInputPath;
+    const fs::path mOutputPath;
+    std::ifstream mInputStream;
+    std::ofstream mOutputStream;
+    Tokenizer mTokenizer;
+    ScriptNode mScript;
+    PrintContext mPrintContext;
+    std::ostream *mOutputTarget = &std::cout;
 
-        for(auto &s : p.sections())
+public:
+    Compiler(
+        fs::path input_path,
+        fs::path output_path)
+        : mInputPath(std::move(input_path))
+        , mOutputPath(std::move(output_path))
+        , mInputStream(mInputPath)
+        , mTokenizer(mInputPath.u8string(), mInputStream)
+    {
+        if(!mOutputPath.empty())
         {
-            s.generate(nullptr);
+            mOutputStream.open(mOutputPath, std::ios::binary);
+            mOutputTarget = &mOutputStream;
+        }
+        mPrintContext.output = mOutputTarget;
+    }
+
+#define OUTPUT(...) fmt::print(*mOutputTarget, __VA_ARGS__)
+    void compile()
+    {
+        try
+        {
+            // lexical analysis
+            mTokenizer.tokenize();
+            if(gDebug)
+            {
+                OUTPUT("Token Stream\n");
+                OUTPUT("============\n\n");
+                mTokenizer.dumpTokens(*mOutputTarget);
+            }
+
+            // syntactic analysis
+            ParsingContext pc { mTokenizer.tokens() };
+            mScript.parse(&pc);
+            if(gDebug)
+            {
+                OUTPUT("\n");
+                OUTPUT("AST (Parsed)\n");
+                OUTPUT("============\n\n");
+                mScript.print(mPrintContext);
+            }
+
+            // semantic analysis
+            mScript.check(nullptr);
+            if(gDebug)
+            {
+                OUTPUT("\n");
+                OUTPUT("AST (Checked)\n");
+                OUTPUT("=============\n\n");
+                mScript.print(mPrintContext);
+            }
+
+            // code generation
+            for(auto &s : mScript.sections())
+            {
+                s.context().output = mOutputTarget;
+
+                if(gDebug)
+                {
+                    OUTPUT("\n");
+                    OUTPUT("Symbol Tables: {}\n",
+                        s.scriptName());
+                    OUTPUT("========================\n\n");
+
+                    s.context().symbol_table.dumpSymbols(*mOutputTarget);
+
+                    OUTPUT("\n");
+                    OUTPUT("String Literals: {}\n",
+                        s.scriptName());
+                    OUTPUT("========================\n\n");
+
+                    s.context().symbol_table.dumpStringLiterals(*mOutputTarget);
+
+                    OUTPUT("\n");
+                    OUTPUT("Target Code: {}\n", s.scriptName());
+                    OUTPUT("========================\n\n");
+                }
+                s.generate(nullptr);
+            }
+        }
+        catch(const std::exception &e)
+        {
+            std::cerr << e.what() << std::endl;
         }
     }
-    catch(const std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-}
-
-void debugCompileFile(const std::filesystem::path &path)
-{
-    try
-    {
-        PrintContext pp { std::cout };
-        fmt::print("Token Stream\n");
-        fmt::print("============\n\n");
-        std::ifstream in(path);
-        Tokenizer t(path.u8string(), in);
-        t.tokenize();
-        t.dumpTokens();
-
-        ParsingContext ctx { t.tokens() };
-        ScriptNode p;
-
-        fmt::print("\n");
-        fmt::print("AST (Parsed)\n");
-        fmt::print("============\n\n");
-
-        p.parse(&ctx);
-        p.print(pp);
-
-        fmt::print("\n");
-        fmt::print("AST (Checked)\n");
-        fmt::print("=============\n\n");
-
-        p.check(nullptr);
-        p.print(pp);
-
-        for(auto &s : p.sections())
-        {
-            fmt::print("\n");
-            fmt::print("Symbol Tables: {}\n", s.scriptName());
-            fmt::print("========================\n\n");
-
-            s.context().symbol_table.dumpSymbols();
-
-            fmt::print("\n");
-            fmt::print("String Literals: {}\n", s.scriptName());
-            fmt::print("========================\n\n");
-
-            s.context().symbol_table.dumpStringLiterals();
-
-
-            fmt::print("\n");
-            fmt::print("Target Code: {}\n", s.scriptName());
-            fmt::print("========================\n\n");
-            s.generate(nullptr);
-        }
-    }
-    catch(const std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-}
+};
+#undef OUTPUT
 
 int usagi_main(const std::vector<std::string> &args)
 {
@@ -102,7 +125,8 @@ int usagi_main(const std::vector<std::string> &args)
     desc.add_options()
         ("help,h", "show available options")
         ("debug,d", "output parsed tokens and AST")
-        ("input-file,i", po::value<std::vector<std::string>>(), "input file")
+        ("input-file,i", po::value<std::string>(), "input file")
+        ("output-file,o", po::value<std::string>(&gOutputFile), "output file")
     ;
 
     po::positional_options_description p;
@@ -124,15 +148,15 @@ int usagi_main(const std::vector<std::string> &args)
         return 1;
     }
 
-    // todo multiple files
-    const auto inputs = vm["input-file"].as<std::vector<std::string>>();
-    const auto input_path = canonical(
-        std::filesystem::u8path(inputs[0])
-    );
-    if(vm.count("debug"))
-        debugCompileFile(input_path);
-    else
-        compileFile(input_path);
+    gDebug = vm.count("debug");
+
+    Compiler c {
+        fs::u8path(vm["input-file"].as<std::string>()),
+        vm.count("output-file")
+            ? fs::u8path(vm["output-file"].as<std::string>())
+            : ""
+    };
+    c.compile();
 
     return 0;
 }

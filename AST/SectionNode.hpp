@@ -28,7 +28,7 @@ public:
 
     void print(PrintContext &ctx) const override;
 
-    const SceneContext & context() const
+    SceneContext & context() const
     {
         return mSceneContext;
     }

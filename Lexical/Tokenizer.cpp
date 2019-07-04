@@ -395,11 +395,11 @@ void Tokenizer::ignoreComment()
     );
 }
 
-void Tokenizer::dumpTokens()
+void Tokenizer::dumpTokens(std::ostream &output)
 {
     for(auto &&token : mTokens)
     {
-        fmt::print("{}: [{}] {}\n",
+        fmt::print(output, "{}: [{}] {}\n",
             token.pos,
             tokenName(token.type),
             token.text

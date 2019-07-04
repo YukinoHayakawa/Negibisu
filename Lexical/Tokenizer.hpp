@@ -56,7 +56,7 @@ public:
     using StringParser::StringParser;
 
     void tokenize();
-    void dumpTokens();
+    void dumpTokens(std::ostream &output);
     const std::vector<Token> & tokens() const { return mTokens; }
 };
 }

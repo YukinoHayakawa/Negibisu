@@ -31,8 +31,7 @@ struct SceneContext : Noncopyable
     SymbolTable symbol_table;
     std::unordered_map<std::string_view, CharacterState> characters;
 
-    // todo fix this
-    std::ostream *output = &std::cout;
+    std::ostream *output = nullptr;
 
     template <typename... Args>
     void print(Args &&... args) const

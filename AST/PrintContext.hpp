@@ -10,11 +10,10 @@ class PrintContext
 {
     static constexpr int INDENTATION = 2;
 
-    std::ostream &mOutput;
     std::string mIndentation;
 
 public:
-    explicit PrintContext(std::ostream &output);
+    std::ostream *output = nullptr;
 
     void push();
     void pop();
@@ -22,9 +21,9 @@ public:
     template <typename... Args>
     void print(Args &&... args) const
     {
-        fmt::print(mOutput, mIndentation);
-        fmt::print(mOutput, std::forward<Args>(args)...);
-        fmt::print(mOutput, "\n");
+        fmt::print(*output, mIndentation);
+        fmt::print(*output, std::forward<Args>(args)...);
+        fmt::print(*output, "\n");
     }
 };
 }

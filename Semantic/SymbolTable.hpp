@@ -66,7 +66,7 @@ public:
     const SymbolInfo & lookup(const Token *token, SymbolType type);
     void addStringLiteral(const Token *token);
 
-    void dumpSymbols() const;
-    void dumpStringLiterals() const;
+    void dumpSymbols(std::ostream &output) const;
+    void dumpStringLiterals(std::ostream &output) const;
 };
 }
