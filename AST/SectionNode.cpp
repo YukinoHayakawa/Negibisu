@@ -186,7 +186,7 @@ void SectionNode::generate(SceneContext *ctx) const
                 break;
             case SymbolType::IMAGE_LAYER:
                 ctx->print(
-                    R"(local {} = scene:loadImageLayer("{}");)",
+                    R"(local {} = scene:getImageLayer("{}");)",
                     r.second.object_name, r.first
                 );
                 break;
