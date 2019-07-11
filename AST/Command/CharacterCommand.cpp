@@ -271,83 +271,83 @@ void CharacterSayCommand::print(PrintContext &ctx) const
 }
 
 /*
- * CharacterSetDisguiseCommand
+ * CharacterSetAliasCommand
  */
 
-CharacterSetDisguiseCommand::CharacterSetDisguiseCommand(
+CharacterSetAliasCommand::CharacterSetAliasCommand(
     TokenRef character,
-    TokenRef disguised_name)
+    TokenRef alias)
     : CharacterCommand(std::move(character))
-    , mDisguisedName(std::move(disguised_name))
+    , mAlias(std::move(alias))
 {
 }
 
-ParameterList CharacterSetDisguiseCommand::parameterInfo() const
+ParameterList CharacterSetAliasCommand::parameterInfo() const
 {
     NEGI_RETURN_PARAMS(
         NEGI_PARAM("characterName", STRING, mCharacter),
-        NEGI_PARAM("disguisedName", STRING, mDisguisedName),
+        NEGI_PARAM("alias", STRING, mAlias),
     );
 }
 
-void CharacterSetDisguiseCommand::check(SceneContext *ctx)
+void CharacterSetAliasCommand::check(SceneContext *ctx)
 {
     CharacterCommand::check(ctx);
 
     auto &state = ctx->characterState(mCharacter);
-    mGenerate = state.disguised_name != mDisguisedName->text;
-    state.disguised_name = mDisguisedName->text;
+    mGenerate = state.alias != mAlias->text;
+    state.alias = mAlias->text;
 
-    ctx->symbol_table.addStringLiteral(mDisguisedName);
+    ctx->symbol_table.addStringLiteral(mAlias);
 }
 
-void CharacterSetDisguiseCommand::generate(SceneContext *ctx) const
+void CharacterSetAliasCommand::generate(SceneContext *ctx) const
 {
     if(mGenerate)
     {
         ctx->print(
-            "{0}:setDisguise(\"{1}\");",
+            "{0}:setAlias(\"{1}\");",
             ctx->symbol_table.lookup(
                 mCharacter, SymbolType::CHARACTER
             ).object_name,
-            mDisguisedName
+            mAlias
         );
     }
 }
 
-void CharacterSetDisguiseCommand::print(PrintContext &ctx) const
+void CharacterSetAliasCommand::print(PrintContext &ctx) const
 {
-    ctx.print("CHARACTER_SET_DISGUISE: "
-        "char=\"{}\", disguise=\"{}\"",
-        mCharacter, mDisguisedName);
+    ctx.print("CHARACTER_SET_ALIAS: "
+        "char=\"{}\", alias=\"{}\"",
+        mCharacter, mAlias);
 }
 
 /*
- * CharacterRemoveDisguiseCommand
+ * CharacterRemoveAliasCommand
  */
 
-ParameterList CharacterRemoveDisguiseCommand::parameterInfo() const
+ParameterList CharacterRemoveAliasCommand::parameterInfo() const
 {
     NEGI_RETURN_PARAMS(
         NEGI_PARAM("characterName", STRING, mCharacter),
     );
 }
 
-void CharacterRemoveDisguiseCommand::check(SceneContext *ctx)
+void CharacterRemoveAliasCommand::check(SceneContext *ctx)
 {
     CharacterCommand::check(ctx);
 
     auto &state = ctx->characterState(mCharacter);
-    mGenerate = state.disguised_name != "";
-    state.disguised_name = { };
+    mGenerate = state.alias != "";
+    state.alias = { };
 }
 
-void CharacterRemoveDisguiseCommand::generate(SceneContext *ctx) const
+void CharacterRemoveAliasCommand::generate(SceneContext *ctx) const
 {
     if(mGenerate)
     {
         ctx->print(
-            "{0}:removeDisguise();",
+            "{0}:removeAlias();",
             ctx->symbol_table.lookup(
                 mCharacter, SymbolType::CHARACTER
             ).object_name
@@ -355,9 +355,9 @@ void CharacterRemoveDisguiseCommand::generate(SceneContext *ctx) const
     }
 }
 
-void CharacterRemoveDisguiseCommand::print(PrintContext &ctx) const
+void CharacterRemoveAliasCommand::print(PrintContext &ctx) const
 {
-    ctx.print("CHARACTER_REMOVE_DISGUISE: "
+    ctx.print("CHARACTER_REMOVE_ALIAS: "
         "char=\"{}\"",
         mCharacter);
 }
@@ -418,7 +418,7 @@ void CharacterTag::parse(ParsingContext *ctx)
     if(ctx->currentType() == TokenType::EQUAL)
     {
         ctx->advance();
-        mDisguisedName = mCharacter;
+        mAlias = mCharacter;
         mCharacter = ctx->consumeString();
     }
     // optional expression and position change
@@ -437,22 +437,22 @@ void CharacterTag::check(SceneContext *ctx)
 {
     auto &state = ctx->characterState(mCharacter);
 
-    if(!mDisguisedName)
+    if(!mAlias)
     {
-        if(!state.disguised_name.empty())
+        if(!state.alias.empty())
         {
             mStatements.push_back(
-                std::make_unique<CharacterRemoveDisguiseCommand>(
+                std::make_unique<CharacterRemoveAliasCommand>(
                     mCharacter
                 ));
             mStatements.back()->check(ctx);
         }
     }
-    else if(state.disguised_name != mDisguisedName->text)
+    else if(state.alias != mAlias->text)
     {
         mStatements.push_back(
-            std::make_unique<CharacterSetDisguiseCommand>(
-                mCharacter, mDisguisedName
+            std::make_unique<CharacterSetAliasCommand>(
+                mCharacter, mAlias
             ));
         mStatements.back()->check(ctx);
     }
@@ -495,7 +495,7 @@ void CharacterTag::print(PrintContext &ctx) const
         "CHARACTER_TAG: char=\"{}\", alias=\"{}\", "
         "expr=\"{}\", pos=\"{}\"",
         mCharacter,
-        mDisguisedName,
+        mAlias,
         mExpression,
         mPosition
     );

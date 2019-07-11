@@ -97,15 +97,15 @@ public:
     void print(PrintContext &ctx) const override;
 };
 
-class CharacterSetDisguiseCommand : public CharacterCommand
+class CharacterSetAliasCommand : public CharacterCommand
 {
-    TokenRef mDisguisedName;
+    TokenRef mAlias;
 
 public:
-    CharacterSetDisguiseCommand() = default;
-    CharacterSetDisguiseCommand(
+    CharacterSetAliasCommand() = default;
+    CharacterSetAliasCommand(
         TokenRef character,
-        TokenRef disguised_name);
+        TokenRef alias);
 
     ParameterList parameterInfo() const override;
 
@@ -114,7 +114,7 @@ public:
     void print(PrintContext &ctx) const override;
 };
 
-class CharacterRemoveDisguiseCommand : public CharacterCommand
+class CharacterRemoveAliasCommand : public CharacterCommand
 {
 public:
     using CharacterCommand::CharacterCommand;
@@ -144,7 +144,7 @@ public:
 class CharacterTag : public StatementNode
 {
     TokenRef mCharacter;
-    TokenRef mDisguisedName;
+    TokenRef mAlias;
     TokenRef mExpression;
     TokenRef mPosition;
 

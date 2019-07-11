@@ -13,7 +13,7 @@ struct CharacterState
     std::string_view object_name;
     std::string_view current_expression;
     std::string_view current_position;
-    std::string_view disguised_name;
+    std::string_view alias;
     bool on_stage = false;
 };
 
