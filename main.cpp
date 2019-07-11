@@ -18,6 +18,7 @@ using namespace usagi;
 using namespace negi;
 
 std::string gOutputFolder;
+std::string gPrefix;
 bool gDebug = false;
 
 class Compiler
@@ -82,7 +83,8 @@ public:
             // code generation
             for(auto &s : mScript.sections())
             {
-                auto path = mOutputFolderPath / s.scriptName();
+                auto path = mOutputFolderPath / gPrefix;
+                path += s.scriptName();
                 path.replace_extension(".lua");
                 std::ofstream output { path };
                 s.context().output = &output;
@@ -127,6 +129,8 @@ int usagi_main(const std::vector<std::string> &args)
         ("input-file,i", po::value<std::string>(), "input file path")
         ("output-folder,o", po::value<std::string>()->default_value("."), 
             "output folder which will contain all compiled section scripts")
+        ("output-prefix,p", po::value<std::string>(&gPrefix)->default_value("scene_"),
+            "string which will be prepended to each output filename")
     ;
 
     po::positional_options_description p;
