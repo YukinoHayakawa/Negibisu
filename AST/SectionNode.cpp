@@ -1,5 +1,6 @@
 ﻿#include "SectionNode.hpp"
 
+#include <Usagi/Core/Logging.hpp>
 #include <Negibisu/Parsing/ParsingContext.hpp>
 
 #include "PrintContext.hpp"
@@ -127,11 +128,13 @@ void SectionNode::parseContent(ParsingContext *ctx)
 void SectionNode::parse(ParsingContext *ctx)
 {
     parseTitle(ctx);
+    LOG(info, "Parsing section: {} - {}", mScriptName, mDisplayName);
     parseContent(ctx);
 }
 
 void SectionNode::check(SceneContext *ctx)
 {
+    LOG(info, "Checking section: {} - {}", mScriptName, mDisplayName);
     mSceneContext.symbol_table.lookup(mScriptName.ref, SymbolType::SCRIPT);
 
     std::size_t errors = 0;
@@ -155,6 +158,7 @@ void SectionNode::check(SceneContext *ctx)
 
 void SectionNode::generate(SceneContext *ctx) const
 {
+    LOG(info, "Generating section: {} - {}", mScriptName, mDisplayName);
     ctx = &mSceneContext;
 
     if(!mChecked)
