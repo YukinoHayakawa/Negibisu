@@ -17,35 +17,31 @@ namespace fs = std::filesystem;
 using namespace usagi;
 using namespace negi;
 
-std::string gOutputFile;
+std::string gOutputFolder;
 bool gDebug = false;
 
 class Compiler
 {
     const fs::path mInputPath;
-    const fs::path mOutputPath;
+    const fs::path mOutputFolderPath;
     std::ifstream mInputStream;
     std::ofstream mOutputStream;
     Tokenizer mTokenizer;
     ScriptNode mScript;
     PrintContext mPrintContext;
-    std::ostream *mOutputTarget = &std::cout;
-
+    std::ostream *mOutputTarget = nullptr;
+    
 public:
     Compiler(
         fs::path input_path,
-        fs::path output_path)
+        fs::path output_folder_path)
         : mInputPath(std::move(input_path))
-        , mOutputPath(std::move(output_path))
+        , mOutputFolderPath(std::move(output_folder_path))
         , mInputStream(mInputPath)
         , mTokenizer(mInputPath.u8string(), mInputStream)
     {
-        if(!mOutputPath.empty())
-        {
-            mOutputStream.open(mOutputPath, std::ios::binary);
-            mOutputTarget = &mOutputStream;
-        }
-        mPrintContext.output = mOutputTarget;
+        fs::create_directories(mOutputFolderPath);
+        mPrintContext.output = &std::cout;
     }
 
 #define OUTPUT(...) fmt::print(*mOutputTarget, __VA_ARGS__)
@@ -86,7 +82,10 @@ public:
             // code generation
             for(auto &s : mScript.sections())
             {
-                s.context().output = mOutputTarget;
+                auto path = mOutputFolderPath / s.scriptName();
+                path.replace_extension(".lua");
+                std::ofstream output { path };
+                s.context().output = &output;
 
                 if(gDebug)
                 {
@@ -95,14 +94,14 @@ public:
                         s.scriptName());
                     OUTPUT("========================\n\n");
 
-                    s.context().symbol_table.dumpSymbols(*mOutputTarget);
+                    s.context().symbol_table.dumpSymbols(output);
 
                     OUTPUT("\n");
                     OUTPUT("String Literals: {}\n",
                         s.scriptName());
                     OUTPUT("========================\n\n");
 
-                    s.context().symbol_table.dumpStringLiterals(*mOutputTarget);
+                    s.context().symbol_table.dumpStringLiterals(output);
 
                     OUTPUT("\n");
                     OUTPUT("Target Code: {}\n", s.scriptName());
@@ -125,8 +124,9 @@ int usagi_main(const std::vector<std::string> &args)
     desc.add_options()
         ("help,h", "show available options")
         ("debug,d", "output parsed tokens and AST")
-        ("input-file,i", po::value<std::string>(), "input file")
-        ("output-file,o", po::value<std::string>(&gOutputFile), "output file")
+        ("input-file,i", po::value<std::string>(), "input file path")
+        ("output-folder,o", po::value<std::string>()->default_value("."), 
+            "output folder which will contain all compiled section scripts")
     ;
 
     po::positional_options_description p;
@@ -152,9 +152,7 @@ int usagi_main(const std::vector<std::string> &args)
 
     Compiler c {
         fs::u8path(vm["input-file"].as<std::string>()),
-        vm.count("output-file")
-            ? fs::u8path(vm["output-file"].as<std::string>())
-            : ""
+        fs::u8path(vm["output-folder"].as<std::string>())
     };
     c.compile();
 
