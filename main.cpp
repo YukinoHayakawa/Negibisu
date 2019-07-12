@@ -19,7 +19,7 @@ using namespace usagi;
 using namespace negi;
 
 std::string gOutputFolder;
-std::string gPrefix;
+// std::string gPrefix;
 bool gDebug = false;
 
 class Compiler
@@ -32,7 +32,7 @@ class Compiler
     ScriptNode mScript;
     PrintContext mPrintContext;
     std::ostream *mOutputTarget = nullptr;
-    
+
 public:
     Compiler(
         fs::path input_path,
@@ -84,8 +84,8 @@ public:
             // code generation
             for(auto &s : mScript.sections())
             {
-                auto path = mOutputFolderPath / gPrefix;
-                path += s.scriptName();
+                auto path = mOutputFolderPath; // / gPrefix;
+                path /= s.scriptName();
                 path.replace_extension(".lua");
                 std::ofstream output { path };
                 s.context().output = &output;
@@ -128,10 +128,11 @@ int usagi_main(const std::vector<std::string> &args)
         ("help,h", "show available options")
         ("debug,d", "output parsed tokens and AST")
         ("input-file,i", po::value<std::string>(), "input file path")
-        ("output-folder,o", po::value<std::string>()->default_value("."), 
+        ("output-folder,o", po::value<std::string>()->default_value("."),
             "output folder which will contain all compiled section scripts")
-        ("output-prefix,p", po::value<std::string>(&gPrefix)->default_value("scene_"),
-            "string which will be prepended to each output filename")
+        // // bug: code generator of section doesn't know this prefix
+        // ("output-prefix,p", po::value<std::string>(&gPrefix)->default_value("scene_"),
+        //     "string which will be prepended to each output filename")
         ("list-commands,c", "list available commands and exit")
     ;
 
