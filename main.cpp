@@ -10,6 +10,7 @@
 #include "Parsing/ParsingContext.hpp"
 #include "AST/ScriptNode.hpp"
 #include "AST/PrintContext.hpp"
+#include "AST/Statement/IntrinsicCommand.hpp"
 
 namespace po = boost::program_options;
 namespace fs = std::filesystem;
@@ -131,6 +132,7 @@ int usagi_main(const std::vector<std::string> &args)
             "output folder which will contain all compiled section scripts")
         ("output-prefix,p", po::value<std::string>(&gPrefix)->default_value("scene_"),
             "string which will be prepended to each output filename")
+        ("list-commands,c", "list available commands and exit")
     ;
 
     po::positional_options_description p;
@@ -144,7 +146,12 @@ int usagi_main(const std::vector<std::string> &args)
     if(vm.count("help"))
     {
         std::cout << desc << std::endl;
-        return 1;
+        return 0;
+    }
+    if(vm.count("list-commands"))
+    {
+        outputAvailableCommands();
+        return 0;
     }
     if(!vm.count("input-file"))
     {

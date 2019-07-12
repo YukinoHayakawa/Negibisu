@@ -56,4 +56,6 @@ public:
     // returns empty pointer if not found
     static std::unique_ptr<IntrinsicCommand> find(std::string_view name);
 };
+
+void outputAvailableCommands();
 }

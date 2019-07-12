@@ -35,7 +35,7 @@ ParameterList ImageChangeCommand::parameterInfo() const
 {
     NEGI_RETURN_PARAMS(
         NEGI_PARAM("layerName", STRING, mImageLayerName),
-        NEGI_PARAM("imageAssetName", STRING, mAssetPath),
+        NEGI_PARAM("imageAssetPath", STRING, mAssetPath),
     );
 }
 

@@ -56,4 +56,28 @@ std::unique_ptr<IntrinsicCommand> IntrinsicCommand::find(std::string_view name)
     }
     return std::move(cmd);
 }
+
+void outputAvailableCommands()
+{
+    for(auto &&c : BUILTIN_COMMANDS)
+    {
+        fmt::print("{{{}", c.first);
+        auto params = c.second()->parameterInfo();
+        if(params.size())
+        {
+            fmt::print(":");
+            std::size_t i = 0;
+            for(auto &&p : params)
+            {
+                fmt::print("{}{}",
+                    p.name, ++i == params.size() ? "}}\n" : ","
+                );
+            }
+        }
+        else
+        {
+            fmt::print("}}\n");
+        }
+    }
+}
 }
