@@ -56,7 +56,7 @@ struct SymbolInfo
 class SymbolTable : Noncopyable
 {
     // SymbolNameCounter name_counter;
-    std::size_t mResourceIndex = 0;
+    // std::size_t mResourceIndex = 0;
 
 public:
     std::unordered_map<std::string_view, SymbolInfo> symbols;

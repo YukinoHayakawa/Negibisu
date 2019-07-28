@@ -49,7 +49,12 @@ const SymbolInfo & SymbolTable::lookup(
     if(ref.second)
     {
         symbol.type = type;
-        symbol.object_name = fmt::format("r{}", mResourceIndex++);
+        symbol.object_name = fmt::format(
+            "res_{:08x}",
+            static_cast<std::uint32_t>(
+                std::hash<std::string_view>()(token->text)
+            )
+        );
     }
     else
     {
