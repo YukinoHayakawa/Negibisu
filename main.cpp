@@ -31,7 +31,7 @@ class Compiler
     Tokenizer mTokenizer;
     ScriptNode mScript;
     PrintContext mPrintContext;
-    std::ostream *mOutputTarget = nullptr;
+    std::ostream *mDebugOutput = &std::cout;
 
 public:
     Compiler(
@@ -43,10 +43,10 @@ public:
         , mTokenizer(mInputPath.u8string(), mInputStream)
     {
         fs::create_directories(mOutputFolderPath);
-        mPrintContext.output = &std::cout;
+        mPrintContext.output = mDebugOutput;
     }
 
-#define OUTPUT(...) fmt::print(*mOutputTarget, __VA_ARGS__)
+#define OUTPUT(...) fmt::print(*mDebugOutput, __VA_ARGS__)
     void compile()
     {
         try
@@ -57,7 +57,7 @@ public:
             {
                 OUTPUT("Token Stream\n");
                 OUTPUT("============\n\n");
-                mTokenizer.dumpTokens(*mOutputTarget);
+                mTokenizer.dumpTokens(*mDebugOutput);
             }
 
             // syntactic analysis
@@ -87,7 +87,7 @@ public:
                 auto path = mOutputFolderPath; // / gPrefix;
                 path /= s.scriptName();
                 path.replace_extension(".lua");
-                std::ofstream output { path };
+                std::ofstream output { path, std::ios::binary };
                 s.context().output = &output;
 
                 if(gDebug)
@@ -97,18 +97,24 @@ public:
                         s.scriptName());
                     OUTPUT("========================\n\n");
 
-                    s.context().symbol_table.dumpSymbols(output);
+                    s.context().symbol_table.dumpSymbols(*mDebugOutput);
 
                     OUTPUT("\n");
                     OUTPUT("String Literals: {}\n",
                         s.scriptName());
                     OUTPUT("========================\n\n");
 
-                    s.context().symbol_table.dumpStringLiterals(output);
+                    s.context().symbol_table.dumpStringLiterals(*mDebugOutput);
 
-                    OUTPUT("\n");
-                    OUTPUT("Target Code: {}\n", s.scriptName());
-                    OUTPUT("========================\n\n");
+                    // OUTPUT("\n");
+                    // OUTPUT("Referenced Assets: {}\n",
+                    //     s.scriptName());
+                    // OUTPUT("========================\n\n");
+                    //
+                    // s.context().symbol_table.
+                    // OUTPUT("\n");
+                    // OUTPUT("Target Code: {}\n", s.scriptName());
+                    // OUTPUT("========================\n\n");
                 }
                 s.generate(nullptr);
             }
