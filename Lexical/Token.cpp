@@ -1,6 +1,6 @@
 ﻿#include "Token.hpp"
 
-#include <fmt/ostream.h>
+#include <Usagi/Core/Format.hpp>
 
 namespace usagi::negi
 {

@@ -46,7 +46,7 @@ struct Token
                 text.data(), text.data() + text.size(), result);
             ec == std::errc())
             return result;
-        throw std::bad_cast();
+        USAGI_THROW(std::bad_cast());
     }
 
     template <typename T>

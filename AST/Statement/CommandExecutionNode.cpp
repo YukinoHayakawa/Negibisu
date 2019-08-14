@@ -102,7 +102,7 @@ void CommandExecutionNode::check(SceneContext *ctx)
                 }
                 break;
             default:
-                throw std::logic_error("Unexpected command parameter type.");
+                USAGI_THROW(std::logic_error("Unexpected command parameter type."));
         }
         mInvocation.get()->*p.value = mArgs[i];
         ++i;

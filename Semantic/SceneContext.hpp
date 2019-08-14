@@ -44,7 +44,7 @@ struct SceneContext : Noncopyable
     void semanticError(TokenRef position_hint, Args &&... args) const
     {
         position_hint->pos.error(std::forward<Args>(args)...);
-        throw SemanticError();
+        USAGI_THROW(SemanticError());
     }
 
     template <typename... Args>

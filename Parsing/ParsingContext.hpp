@@ -66,7 +66,7 @@ struct ParsingContext
     void syntaxError(Args &&... args) const
     {
         error(std::forward<Args>(args)...);
-        throw SyntaxError();
+        USAGI_THROW(SyntaxError());
     }
 
     LineContext line;

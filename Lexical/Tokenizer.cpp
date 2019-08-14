@@ -1,6 +1,6 @@
 ﻿#include "Tokenizer.hpp"
 
-#include <fmt/printf.h>
+#include <Usagi/Core/Format.hpp>
 
 namespace usagi::negi
 {

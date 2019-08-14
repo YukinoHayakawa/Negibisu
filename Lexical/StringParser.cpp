@@ -109,7 +109,7 @@ char32_t StringParser::advance(
 }
 
 StringParser::StringParser(const std::string &name, std::istream &u8src)
-    : StringParser(name, readStreamAsString(u8src))
+    : StringParser(name, readStreamToString(u8src))
 {
 }
 

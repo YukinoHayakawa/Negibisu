@@ -41,9 +41,9 @@ const std::unordered_map<
 
 void IntrinsicCommand::parse(ParsingContext *ctx)
 {
-    throw std::logic_error(
+    USAGI_THROW(std::logic_error(
         "Intrinsic command must be constructed by explicitly providing "
-        "arguments.");
+        "arguments."));
 }
 
 std::unique_ptr<IntrinsicCommand> IntrinsicCommand::find(std::string_view name)

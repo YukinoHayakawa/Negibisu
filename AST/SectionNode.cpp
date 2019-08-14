@@ -202,7 +202,7 @@ void SectionNode::generate(SceneContext *ctx) const
                 break;
             case SymbolType::SCRIPT:
                 break;
-            default: throw std::logic_error("Unexpected type");
+            default: USAGI_THROW(std::logic_error("Unexpected type"));
         }
     }
 

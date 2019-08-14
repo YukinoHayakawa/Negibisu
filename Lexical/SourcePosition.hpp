@@ -2,8 +2,7 @@
 
 #include <iostream>
 
-#include <fmt/format.h>
-#include <fmt/ostream.h>
+#include <Usagi/Core/Format.hpp>
 
 namespace usagi::negi
 {
