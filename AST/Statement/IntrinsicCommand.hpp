@@ -9,6 +9,7 @@ enum class CommandParameterType
 {
     VOID = 0,
     STRING,
+    BOOL,
     INT,
     FLOAT,
 };

@@ -200,6 +200,12 @@ void SectionNode::generate(SceneContext *ctx) const
                     r.second.object_name, r.first
                 );
                 break;
+            case SymbolType::AUDIO_TRACK:
+                ctx->print(
+                    R"(local {} = scene:getAudioTrack("{}");)",
+                    r.second.object_name, r.first
+                );
+                break;
             case SymbolType::SCRIPT:
                 break;
             default: USAGI_THROW(std::logic_error("Unexpected type"));

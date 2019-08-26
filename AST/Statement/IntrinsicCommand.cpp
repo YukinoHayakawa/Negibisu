@@ -33,8 +33,9 @@ const std::unordered_map<
     NEGI_DEFINE_BUILTIN("move", CharacterMoveCommand),
     NEGI_DEFINE_BUILTIN("expr", CharacterChangeExpressionCommand),
     // audio
-    NEGI_DEFINE_BUILTIN("music", AudioPlayMusicCommand),
-    NEGI_DEFINE_BUILTIN("sound", AudioPlaySoundEffectCommand),
+    NEGI_DEFINE_BUILTIN("playMusic", AudioPlayMusicCommand),
+    NEGI_DEFINE_BUILTIN("stopMusic", AudioStopCommand),
+    NEGI_DEFINE_BUILTIN("playSound", AudioPlaySoundEffectCommand),
 };
 #undef NEGI_DEFINE_BUILTIN
 }

@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <limits>
+#include <set>
 
 #include <Usagi/Utility/Noncopyable.hpp>
 
@@ -20,12 +21,14 @@ enum class SymbolType
     // Description of character expressions, including the positioning of
     // expression images.
     EXPRESSION,
-    // One-time character voice.
-    VOICE,
-    // Short sound effects.
-    SOUND_EFFECT,
-    // Background musics.
-    MUSIC,
+    // // One-time character voice.
+    // VOICE,
+    // // Short sound effects.
+    // SOUND_EFFECT,
+    // // Background musics.
+    // MUSIC,
+    // General audio track
+    AUDIO_TRACK,
     // Other scripts of scenes or story blocks.
     SCRIPT,
     // Scene description file, including character position definitions.
@@ -36,7 +39,18 @@ enum class SymbolType
     UNKNOWN,
 };
 
+enum class AssetType
+{
+    IMAGE,
+    CHARACTER,
+    SCENE,
+    SCRIPT,
+    EXPRESSION,
+    AUDIO,
+};
+
 std::string_view to_string(SymbolType t);
+std::string_view to_string(AssetType t);
 std::ostream & operator<<(std::ostream &os, SymbolType t);
 
 struct SymbolInfo
@@ -61,12 +75,15 @@ class SymbolTable : Noncopyable
 public:
     std::unordered_map<std::string_view, SymbolInfo> symbols;
     std::unordered_set<std::string_view> string_literals;
+    std::set<std::pair<AssetType, std::string_view>> asset_refs;
 
     // void insert(const std::string_view &name, SymbolType type);
     const SymbolInfo & lookup(const Token *token, SymbolType type);
     void addStringLiteral(const Token *token);
+    void addAssetRef(AssetType type, const Token *token);
 
     void dumpSymbols(std::ostream &output) const;
     void dumpStringLiterals(std::ostream &output) const;
+    void dumpAssetRefs(std::ostream &output) const;
 };
 }

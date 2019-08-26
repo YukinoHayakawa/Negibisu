@@ -14,11 +14,12 @@ TokenRef ParsingContext::createToken(
     std::string_view text)
 {
     extra_tokens.push_back({
-        .index = tokens.size(),
-        .type = type,
-        .text = text
+        /*.index = */ tokens.size(),
+        /* .pos */ { },
+        /*.type = */ type,
+        /*.text = */ text
     });
-    return { .ref = &extra_tokens.back() };
+    return { /*.ref =*/ &extra_tokens.back() };
 }
 
 TokenType ParsingContext::currentType() const

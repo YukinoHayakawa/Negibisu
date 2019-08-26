@@ -9,15 +9,30 @@ std::string_view to_string(SymbolType t)
         case SymbolType::CHARACTER: return "Character";
         case SymbolType::IMAGE_LAYER: return "ImageLayer";
         case SymbolType::EXPRESSION: return "Expression";
-        case SymbolType::VOICE: return "Voice";
-        case SymbolType::SOUND_EFFECT: return "SoundEffect";
-        case SymbolType::MUSIC: return "Music";
+        // case SymbolType::VOICE: return "Voice";
+        // case SymbolType::SOUND_EFFECT: return "SoundEffect";
+        // case SymbolType::MUSIC: return "Music";
         case SymbolType::SCRIPT: return "Script";
         case SymbolType::SCENE: return "Scene";
         case SymbolType::POSITION: return "Position";
         case SymbolType::GAME_TEXT: return "GameText";
         case SymbolType::IDENTIFIER: return "Identifier";
         case SymbolType::UNKNOWN: return "Unknown";
+        case SymbolType::AUDIO_TRACK: return "AudioTrack";
+        default: return "Unknown";
+    }
+}
+
+std::string_view to_string(AssetType t)
+{
+    switch(t)
+    {
+        case AssetType::IMAGE: return "IMAGE";
+        case AssetType::CHARACTER: return "CHARACTER";
+        case AssetType::SCENE: return "SCENE";
+        case AssetType::SCRIPT: return "SCRIPT";
+        case AssetType::EXPRESSION: return "EXPRESSION";
+        case AssetType::AUDIO: return "AUDIO";
         default: return "Unknown";
     }
 }
@@ -78,6 +93,11 @@ void SymbolTable::addStringLiteral(const Token *token)
     string_literals.emplace(token->text);
 }
 
+void SymbolTable::addAssetRef(AssetType type, const Token *token)
+{
+    asset_refs.insert({ type, token->text });
+}
+
 void SymbolTable::dumpSymbols(std::ostream &output) const
 {
     for(auto &&s : symbols)
@@ -91,6 +111,14 @@ void SymbolTable::dumpStringLiterals(std::ostream &output) const
     for(auto &&s : string_literals)
     {
         fmt::print(output, "\"{}\"\n", s);
+    }
+}
+
+void SymbolTable::dumpAssetRefs(std::ostream &output) const
+{
+    for(auto &&a : asset_refs)
+    {
+        fmt::print(output, "{}\n{}\n", to_string(a.first), a.second);
     }
 }
 }
