@@ -36,6 +36,13 @@ ParameterList AudioPlayCommand::parameterInfo() const
     );
 }
 
+void AudioPlayCommand::check(SceneContext *ctx)
+{
+    AudioCommand::check(ctx);
+
+    ctx->symbol_table.addAssetRef(AssetType::AUDIO, mAssetPath);
+}
+
 /*
  * AudioStopCommand
  */
@@ -75,7 +82,7 @@ void AudioStopCommand::print(PrintContext &ctx) const
 void AudioPlayMusicCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
-        "{0}:play({1}, true);",
+        "{0}:play(\"{1}\", true);",
         ctx->symbol_table.lookup(
             mAudioTrack, SymbolType::AUDIO_TRACK
         ).object_name,
@@ -98,7 +105,7 @@ void AudioPlayMusicCommand::print(PrintContext &ctx) const
 void AudioPlaySoundEffectCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
-        "{0}:play({1}, false);",
+        "{0}:play(\"{1}\", false);",
         ctx->symbol_table.lookup(
             mAudioTrack, SymbolType::AUDIO_TRACK
         ).object_name,

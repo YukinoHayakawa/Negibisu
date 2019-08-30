@@ -45,6 +45,7 @@ enum class AssetType
     CHARACTER,
     SCENE,
     SCRIPT,
+    SCENE_SCRIPT,
     EXPRESSION,
     AUDIO,
 };

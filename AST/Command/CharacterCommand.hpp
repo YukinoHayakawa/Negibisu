@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <vector>
+#include <optional>
 
 #include <Negibisu/AST/Statement/IntrinsicCommand.hpp>
 
@@ -41,6 +42,27 @@ class CharacterChangeExpressionCommand : public CharacterCommand
 public:
     CharacterChangeExpressionCommand() = default;
     CharacterChangeExpressionCommand(TokenRef character, TokenRef expression);
+
+    ParameterList parameterInfo() const override;
+
+    void check(SceneContext *ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
+};
+
+class CharacterSetStateCommand : public CharacterCommand
+{
+    TokenRef mExpression;
+    TokenRef mPosition;
+    std::optional<CharacterChangeExpressionCommand> mCmdExpr;
+    std::optional<CharacterMoveCommand> mCmdMove;
+
+public:
+    CharacterSetStateCommand() = default;
+    CharacterSetStateCommand(
+        TokenRef character,
+        TokenRef expression,
+        TokenRef position);
 
     ParameterList parameterInfo() const override;
 

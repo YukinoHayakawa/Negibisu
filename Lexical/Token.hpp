@@ -84,3 +84,5 @@ std::ostream & operator<<(std::ostream &os, const Token &t);
 // checks iterator validity before output
 std::ostream & operator<<(std::ostream &os, const TokenRef &t);
 }
+
+USAGI_FMT_USE_STREAM_OP(usagi::negi::TokenRef)

@@ -44,6 +44,7 @@ public:
     {
         fs::create_directories(mOutputFolderPath);
         mPrintContext.output = mDebugOutput;
+        mInputStream.exceptions(std::ios::badbit);
     }
 
 #define OUTPUT(...) fmt::print(*mDebugOutput, __VA_ARGS__)
@@ -88,6 +89,8 @@ public:
                 path /= s.scriptName();
                 path.replace_extension(".lua");
                 std::ofstream output { path, std::ios::binary };
+                path.replace_extension(".asset-refs.txt");
+                std::ofstream asset_ref { path, std::ios::binary };
                 s.context().output = &output;
 
                 if(gDebug)
@@ -117,6 +120,7 @@ public:
                     // OUTPUT("========================\n\n");
                 }
                 s.generate(nullptr);
+                s.context().symbol_table.dumpAssetRefs(asset_ref);
             }
         }
         catch(const std::exception &e)

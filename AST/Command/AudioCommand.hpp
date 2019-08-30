@@ -26,6 +26,8 @@ public:
     explicit AudioPlayCommand(TokenRef asset_path);
 
     ParameterList parameterInfo() const override;
+
+    void check(SceneContext *ctx) override;
 };
 
 class AudioStopCommand : public AudioCommand

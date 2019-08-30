@@ -136,6 +136,8 @@ void SectionNode::check(SceneContext *ctx)
 {
     LOG(info, "Checking section: {} - {}", mScriptName, mDisplayName);
     mSceneContext.symbol_table.lookup(mScriptName.ref, SymbolType::SCRIPT);
+    mSceneContext.symbol_table.addAssetRef(AssetType::SCENE, mScriptName);
+    mSceneContext.symbol_table.addAssetRef(AssetType::SCENE_SCRIPT, mScriptName);
 
     std::size_t errors = 0;
 

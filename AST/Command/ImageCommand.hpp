@@ -27,6 +27,7 @@ public:
     ParameterList parameterInfo() const override;
 
     void generate(SceneContext *ctx) const override;
+    void check(SceneContext *ctx) override;
     void print(PrintContext &ctx) const override;
 };
 

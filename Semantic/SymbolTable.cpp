@@ -33,6 +33,7 @@ std::string_view to_string(AssetType t)
         case AssetType::SCRIPT: return "SCRIPT";
         case AssetType::EXPRESSION: return "EXPRESSION";
         case AssetType::AUDIO: return "AUDIO";
+        case AssetType::SCENE_SCRIPT: return "SCENE_SCRIPT";
         default: return "Unknown";
     }
 }

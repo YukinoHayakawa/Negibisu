@@ -32,6 +32,7 @@ const std::unordered_map<
     NEGI_DEFINE_BUILTIN("exit", CharacterExitStageCommand),
     NEGI_DEFINE_BUILTIN("move", CharacterMoveCommand),
     NEGI_DEFINE_BUILTIN("expr", CharacterChangeExpressionCommand),
+    NEGI_DEFINE_BUILTIN("state", CharacterSetStateCommand),
     // audio
     NEGI_DEFINE_BUILTIN("playMusic", AudioPlayMusicCommand),
     NEGI_DEFINE_BUILTIN("stopMusic", AudioStopCommand),
@@ -71,7 +72,7 @@ void outputAvailableCommands()
             for(auto &&p : params)
             {
                 fmt::print("{}{}",
-                    p.name, ++i == params.size() ? "}}\n" : ","
+                    p.name, ++i == params.size() ? "}\n" : ","
                 );
             }
         }

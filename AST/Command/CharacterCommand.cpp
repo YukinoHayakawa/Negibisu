@@ -18,6 +18,7 @@ CharacterCommand::CharacterCommand(TokenRef character)
 void CharacterCommand::check(SceneContext *ctx)
 {
     ctx->symbol_table.lookup(mCharacter, SymbolType::CHARACTER);
+    ctx->symbol_table.addAssetRef(AssetType::CHARACTER, mCharacter);
 }
 
 /*
@@ -124,6 +125,51 @@ void CharacterChangeExpressionCommand::print(PrintContext &ctx) const
 {
     ctx.print("CHARACTER_EXPR: char=\"{}\", expr=\"{}\"",
         mCharacter, mExpression);
+}
+
+/*
+* CharacterSetStateCommand
+*/
+
+CharacterSetStateCommand::CharacterSetStateCommand(
+    TokenRef character,
+    TokenRef expression,
+    TokenRef position)
+    : CharacterCommand(std::move(character))
+    , mExpression(std::move(expression))
+    , mPosition(std::move(position))
+{
+}
+
+ParameterList CharacterSetStateCommand::parameterInfo() const
+{
+    NEGI_RETURN_PARAMS(
+        NEGI_PARAM("characterName", STRING, mCharacter),
+        NEGI_PARAM("expressionName", STRING, mExpression),
+        NEGI_PARAM("positionName", STRING, mPosition),
+    );
+}
+
+void CharacterSetStateCommand::check(SceneContext *ctx)
+{
+    CharacterCommand::check(ctx);
+
+    mCmdExpr.emplace(mCharacter, mExpression);
+    mCmdMove.emplace(mCharacter, mPosition);
+    mCmdExpr->check(ctx);
+    mCmdMove->check(ctx);
+}
+
+void CharacterSetStateCommand::generate(SceneContext *ctx) const
+{
+    mCmdExpr->generate(ctx);
+    mCmdMove->generate(ctx);
+}
+
+void CharacterSetStateCommand::print(PrintContext &ctx) const
+{
+    ctx.print("CHARACTER_STATE: char=\"{}\", expr=\"{}\", pos=\"{}\"",
+        mCharacter, mExpression, mPosition);
 }
 
 /*

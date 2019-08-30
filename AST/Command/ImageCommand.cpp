@@ -50,6 +50,13 @@ void ImageChangeCommand::generate(SceneContext *ctx) const
     );
 }
 
+void ImageChangeCommand::check(SceneContext *ctx)
+{
+    ImageCommand::check(ctx);
+
+    ctx->symbol_table.addAssetRef(AssetType::IMAGE, mAssetPath);
+}
+
 void ImageChangeCommand::print(PrintContext &ctx) const
 {
     ctx.print(

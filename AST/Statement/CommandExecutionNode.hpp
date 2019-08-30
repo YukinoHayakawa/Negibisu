@@ -15,7 +15,6 @@ class CommandExecutionNode : public StatementNode
 
 protected:
     TokenRef mCommandName;
-    // todo for memory efficiency, do not use vector
     std::vector<TokenRef> mArgs;
     std::unique_ptr<IntrinsicCommand> mInvocation;
 
