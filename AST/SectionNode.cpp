@@ -33,11 +33,11 @@ void SectionNode::parseTitle(ParsingContext *ctx)
     }
     else
     {
-        mScriptName = ctx->createToken(
+        mScriptName = ctx->createTokenFromStringView(
             TokenType::STRING_LITERAL,
             "<UNNAMED>"
         );
-        mDisplayName = ctx->createToken(
+        mDisplayName = ctx->createTokenFromStringView(
             TokenType::STRING_LITERAL,
             "<UNNAMED SECTION>"
         );
@@ -70,8 +70,11 @@ void SectionNode::parseLine(ParsingContext *ctx)
                 }
                 else
                 {
-                    auto stat = std::make_unique<NarratorSayCommand>(
-                        text);
+                    auto stat = std::make_unique<CharacterSayCommand>(
+                        ctx->createTokenFromStringView(
+                            TokenType::STRING_LITERAL,
+                            ctx->config_narrator_name
+                        ), text);
                     mStatements.push_back(std::move(stat));
                 }
                 ctx->line.any_dialog = true;
@@ -172,7 +175,6 @@ void SectionNode::generate(SceneContext *ctx) const
     }
     // generate variable decelerations
     ctx->print(R"(local scene = game:currentScene();)");
-    ctx->print(R"(local narrator = scene:loadCharacter("narrator");)");
 
     for(auto &&r : ctx->symbol_table.symbols)
     {

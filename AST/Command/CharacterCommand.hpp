@@ -162,21 +162,6 @@ public:
     void print(PrintContext &ctx) const override;
 };
 
-class NarratorSayCommand : public IntrinsicCommand
-{
-    TokenRef mText;
-
-public:
-    NarratorSayCommand() = default;
-    explicit NarratorSayCommand(TokenRef text);
-
-    ParameterList parameterInfo() const override;
-
-    void check(SceneContext *ctx) override;
-    void generate(SceneContext *ctx) const override;
-    void print(PrintContext &ctx) const override;
-};
-
 class CharacterTag : public StatementNode
 {
     TokenRef mCharacter;

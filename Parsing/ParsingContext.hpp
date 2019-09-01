@@ -29,6 +29,9 @@ struct ParsingContext
     // modifying token vector will invalidate the pointers, therefore put
     // extra tokens in a list.
     std::list<Token> extra_tokens;
+    std::list<std::string> extra_strings;
+
+    std::string config_narrator_name;
 
     using TokenStreamIterator = std::vector<Token>::const_iterator;
 
@@ -54,7 +57,8 @@ struct ParsingContext
 
     explicit ParsingContext(const std::vector<Token> &tokens);
 
-    TokenRef createToken(TokenType type, std::string_view text);
+    TokenRef createTokenFromStringView(TokenType type, std::string_view text);
+    TokenRef createTokenFromString(TokenType type, std::string text);
 
     template <typename... Args>
     void error(Args &&... args) const

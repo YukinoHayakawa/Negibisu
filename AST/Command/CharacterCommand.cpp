@@ -450,41 +450,6 @@ void CharacterRemoveAliasCommand::print(PrintContext &ctx) const
 }
 
 /*
- * NarratorSayCommand
- */
-
-NarratorSayCommand::NarratorSayCommand(TokenRef text)
-    : mText(std::move(text))
-{
-}
-
-ParameterList NarratorSayCommand::parameterInfo() const
-{
-    NEGI_RETURN_PARAMS(
-        NEGI_PARAM("text", STRING, mText),
-    );
-}
-
-void NarratorSayCommand::check(SceneContext *ctx)
-{
-    ctx->symbol_table.addStringLiteral(mText);
-}
-
-void NarratorSayCommand::generate(SceneContext *ctx) const
-{
-    ctx->print(
-        "narrator:say(\"{}\");",
-        mText
-    );
-}
-
-void NarratorSayCommand::print(PrintContext &ctx) const
-{
-    ctx.print("NARRATOR_SAY: text=\"{}\"",
-        mText);
-}
-
-/*
  * CharacterTag
  */
 

@@ -19,6 +19,7 @@ using namespace usagi;
 using namespace negi;
 
 std::string gOutputFolder;
+std::string gNarratorName;
 // std::string gPrefix;
 bool gDebug = false;
 
@@ -63,6 +64,9 @@ public:
 
             // syntactic analysis
             ParsingContext pc { mTokenizer.tokens() };
+            // setup config
+            pc.config_narrator_name = gNarratorName;
+
             mScript.parse(&pc);
             if(gDebug)
             {
@@ -135,15 +139,24 @@ int usagi_main(const std::vector<std::string> &args)
 {
     po::options_description desc("Negibisu script compiler options");
     desc.add_options()
-        ("help,h", "show available options")
-        ("debug,d", "output parsed tokens and AST")
-        ("input-file,i", po::value<std::string>(), "input file path")
-        ("output-folder,o", po::value<std::string>()->default_value("."),
+        // help
+        ("help,h",
+            "show available options")
+        ("list-commands,c",
+            "list available commands and exit")
+        // debugging
+        ("debug,d",
+            "output parsed tokens and AST")
+        ("input-file,i",
+            po::value<std::string>(),
+            "input file path")
+        ("output-folder,o",
+            po::value<std::string>()->default_value("."),
             "output folder which will contain all compiled section scripts")
-        // // bug: code generator of section doesn't know this prefix
-        // ("output-prefix,p", po::value<std::string>(&gPrefix)->default_value("scene_"),
-        //     "string which will be prepended to each output filename")
-        ("list-commands,c", "list available commands and exit")
+        // scene config
+        ("narrator-name,nn",
+            po::value<std::string>(&gNarratorName)->default_value("Narrator"),
+            "set narrator name")
     ;
 
     po::positional_options_description p;

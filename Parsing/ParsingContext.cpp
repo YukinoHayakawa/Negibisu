@@ -9,7 +9,7 @@ ParsingContext::ParsingContext(const std::vector<Token> &tokens)
 {
 }
 
-TokenRef ParsingContext::createToken(
+TokenRef ParsingContext::createTokenFromStringView(
     TokenType type,
     std::string_view text)
 {
@@ -20,6 +20,13 @@ TokenRef ParsingContext::createToken(
         /*.text = */ text
     });
     return { /*.ref =*/ &extra_tokens.back() };
+}
+
+TokenRef ParsingContext::createTokenFromString(TokenType type, std::string text)
+{
+    extra_strings.push_back(std::move(text));
+    return createTokenFromStringView(type,
+        std::string_view(extra_strings.back()));
 }
 
 TokenType ParsingContext::currentType() const
