@@ -99,6 +99,7 @@ void CharacterChangeExpressionCommand::check(SceneContext *ctx)
     CharacterCommand::check(ctx);
 
     ctx->symbol_table.lookup(mExpression, SymbolType::EXPRESSION);
+    ctx->symbol_table.addAssetRef(AssetType::EXPRESSION, mExpression);
 
     auto &state = ctx->ensureCharacterOnStage(mCharacter);
     mGenerate = state.current_expression != mExpression->text;
@@ -201,6 +202,7 @@ void CharacterEnterStageCommand::check(SceneContext *ctx)
 
     ctx->symbol_table.lookup(mPosition, SymbolType::POSITION);
     ctx->symbol_table.lookup(mExpression, SymbolType::EXPRESSION);
+    ctx->symbol_table.addAssetRef(AssetType::EXPRESSION, mExpression);
 
     auto &state = ctx->characterState(mCharacter);
     if(state.on_stage)
