@@ -4,7 +4,9 @@ namespace usagi::negi
 {
 CharacterState & SceneContext::characterState(TokenRef character)
 {
-    return characters[character->text];
+    auto && ref = characters[character->text];
+    ref.last_ref = character;
+    return ref;
 }
 
 CharacterState & SceneContext::ensureCharacterOnStage(TokenRef character)

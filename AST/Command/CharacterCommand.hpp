@@ -103,6 +103,20 @@ public:
     void print(PrintContext &ctx) const override;
 };
 
+class CharacterAllExitStageCommand : public IntrinsicCommand
+{
+    std::vector<TokenRef> mCharacters;
+
+public:
+    CharacterAllExitStageCommand() = default;
+
+    ParameterList parameterInfo() const override;
+
+    void check(SceneContext *ctx) override;
+    void generate(SceneContext *ctx) const override;
+    void print(PrintContext &ctx) const override;
+};
+
 class CharacterSayCommand : public CharacterCommand
 {
 protected:

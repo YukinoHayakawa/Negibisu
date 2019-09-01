@@ -275,6 +275,47 @@ void CharacterExitStageCommand::print(PrintContext &ctx) const
 }
 
 /*
+ * CharacterAllExitStageCommand
+ */
+
+ParameterList CharacterAllExitStageCommand::parameterInfo() const
+{
+    NEGI_RETURN_PARAMS(
+    );
+}
+
+void CharacterAllExitStageCommand::check(SceneContext *ctx)
+{
+    for(auto &&c : ctx->characters)
+    {
+        if(c.second.on_stage)
+        {
+            mCharacters.emplace_back(c.second.last_ref);
+        }
+    }
+}
+
+void CharacterAllExitStageCommand::generate(SceneContext *ctx) const
+{
+    for(auto &&c : mCharacters)
+    {
+        ctx->print(
+            "{0}:exitStage();",
+            ctx->symbol_table.lookup(
+                c, SymbolType::CHARACTER
+            ).object_name
+        );
+    }
+}
+
+void CharacterAllExitStageCommand::print(PrintContext &ctx) const
+{
+    ctx.print("CHARACTER_EXIT_ALL: [{}]",
+        fmt::join(mCharacters, ",")
+    );
+}
+
+/*
  * CharacterSayCommand
  */
 

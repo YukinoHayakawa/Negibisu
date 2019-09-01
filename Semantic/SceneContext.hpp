@@ -10,6 +10,7 @@ namespace usagi::negi
 {
 struct CharacterState
 {
+    TokenRef last_ref;
     std::string_view object_name;
     std::string_view current_expression;
     std::string_view current_position;

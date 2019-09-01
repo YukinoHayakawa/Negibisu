@@ -30,6 +30,7 @@ const std::unordered_map<
     // character
     NEGI_DEFINE_BUILTIN("enter", CharacterEnterStageCommand),
     NEGI_DEFINE_BUILTIN("exit", CharacterExitStageCommand),
+    NEGI_DEFINE_BUILTIN("exitAll", CharacterAllExitStageCommand),
     NEGI_DEFINE_BUILTIN("move", CharacterMoveCommand),
     NEGI_DEFINE_BUILTIN("expr", CharacterChangeExpressionCommand),
     NEGI_DEFINE_BUILTIN("state", CharacterSetStateCommand),
