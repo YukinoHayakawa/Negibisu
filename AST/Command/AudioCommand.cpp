@@ -55,6 +55,7 @@ AudioStopCommand::AudioStopCommand(TokenRef asset_path)
 ParameterList AudioStopCommand::parameterInfo() const
 {
     NEGI_RETURN_PARAMS(
+        NEGI_PARAM("audioTrack", STRING, mAudioTrack),
     );
 }
 
