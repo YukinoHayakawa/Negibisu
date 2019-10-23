@@ -66,7 +66,7 @@ void SectionNode::parseLine(ParsingContext *ctx)
                 {
                     auto stat = std::make_unique<CharacterSayCommand>(
                         ctx->line.current_character, text,
-                        ctx->line.beginning == false);
+                        ctx->line.any_dialog);
                     mStatements.push_back(std::move(stat));
                 }
                 else
@@ -75,7 +75,7 @@ void SectionNode::parseLine(ParsingContext *ctx)
                         ctx->createTokenFromStringView(
                             TokenType::STRING_LITERAL,
                             ctx->config_narrator_name
-                        ), text, ctx->line.beginning == false);
+                        ), text, ctx->line.any_dialog);
                     mStatements.push_back(std::move(stat));
                 }
                 ctx->line.any_dialog = true;
