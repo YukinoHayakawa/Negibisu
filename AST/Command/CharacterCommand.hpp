@@ -121,10 +121,11 @@ class CharacterSayCommand : public CharacterCommand
 {
 protected:
     TokenRef mText;
+    bool mAppend = false;
 
 public:
     CharacterSayCommand() = default;
-    CharacterSayCommand(TokenRef character, TokenRef text);
+    CharacterSayCommand(TokenRef character, TokenRef text, bool append = false);
 
     ParameterList parameterInfo() const override;
 

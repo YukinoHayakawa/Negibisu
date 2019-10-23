@@ -321,17 +321,22 @@ void CharacterAllExitStageCommand::print(PrintContext &ctx) const
  * CharacterSayCommand
  */
 
-CharacterSayCommand::CharacterSayCommand(TokenRef character, TokenRef text)
+CharacterSayCommand::CharacterSayCommand(
+    TokenRef character,
+    TokenRef text,
+    bool append)
     : CharacterCommand(std::move(character))
     , mText(std::move(text))
+    , mAppend(append)
 {
 }
 
 ParameterList CharacterSayCommand::parameterInfo() const
 {
     NEGI_RETURN_PARAMS(
-        NEGI_PARAM("characterName", STRING, mCharacter),
-        NEGI_PARAM("text", STRING, mText),
+        // NEGI_PARAM("characterName", STRING, mCharacter),
+        // NEGI_PARAM("text", STRING, mText),
+        // NEGI_PARAM("append", BOOL, mAppend),
     );
 }
 
@@ -345,18 +350,20 @@ void CharacterSayCommand::check(SceneContext *ctx)
 void CharacterSayCommand::generate(SceneContext *ctx) const
 {
     ctx->print(
-        "{0}:say(\"{1}\");",
+        "{0}:{2}(\"{1}\");",
         ctx->symbol_table.lookup(
             mCharacter, SymbolType::CHARACTER
         ).object_name,
-        mText
+        mText,
+        mAppend ? "continueSay" : "say"
     );
 }
 
 void CharacterSayCommand::print(PrintContext &ctx) const
 {
-    ctx.print("CHARACTER_SAY: char=\"{}\", text=\"{}\"",
-        mCharacter, mText);
+    ctx.print("CHARACTER_SAY: char=\"{}\", text=\"{}\", append=\"{}\"",
+        mCharacter, mText, mAppend
+    );
 }
 
 /*

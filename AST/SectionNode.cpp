@@ -65,7 +65,8 @@ void SectionNode::parseLine(ParsingContext *ctx)
                 if(ctx->line.current_character)
                 {
                     auto stat = std::make_unique<CharacterSayCommand>(
-                        ctx->line.current_character, text);
+                        ctx->line.current_character, text,
+                        ctx->line.beginning == false);
                     mStatements.push_back(std::move(stat));
                 }
                 else
@@ -74,7 +75,7 @@ void SectionNode::parseLine(ParsingContext *ctx)
                         ctx->createTokenFromStringView(
                             TokenType::STRING_LITERAL,
                             ctx->config_narrator_name
-                        ), text);
+                        ), text, ctx->line.beginning == false);
                     mStatements.push_back(std::move(stat));
                 }
                 ctx->line.any_dialog = true;
@@ -169,7 +170,7 @@ void SectionNode::generate(SceneContext *ctx) const
     if(!mChecked)
     {
         ctx->print(
-            "Source program isn't valid. No code was generated."
+            "Source program was invalid. No code was generated."
         );
         return;
     }
