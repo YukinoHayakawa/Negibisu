@@ -41,7 +41,8 @@ public:
         : mInputPath(std::move(input_path))
         , mOutputFolderPath(std::move(output_folder_path))
         , mInputStream(mInputPath)
-        , mTokenizer(mInputPath.u8string(), mInputStream)
+        // bug utf8
+        , mTokenizer(mInputPath.string(), mInputStream)
     {
         fs::create_directories(mOutputFolderPath);
         mPrintContext.output = mDebugOutput;
@@ -186,8 +187,9 @@ int usagi_main(const std::vector<std::string> &args)
     gDebug = vm.count("debug");
 
     Compiler c {
-        fs::u8path(vm["input-file"].as<std::string>()),
-        fs::u8path(vm["output-folder"].as<std::string>())
+        // bug utf8
+        vm["input-file"].as<std::string>(),
+        vm["output-folder"].as<std::string>()
     };
     c.compile();
 
