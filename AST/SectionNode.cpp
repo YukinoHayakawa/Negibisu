@@ -78,6 +78,9 @@ void SectionNode::parseLine(ParsingContext *ctx)
                         ), text, ctx->line.any_dialog);
                     mStatements.push_back(std::move(stat));
                 }
+                mStatements.push_back(
+                    std::make_unique<SystemWaitInputCommand>()
+                );
                 ctx->line.any_dialog = true;
                 break;
             }
@@ -96,10 +99,15 @@ void SectionNode::parseLine(ParsingContext *ctx)
             case TokenType::NEWLINE:
             {
                 ctx->advance();
-                if(!ctx->line.beginning)
+                // last command is not a wait command
+                if(!ctx->line.beginning &&
+                    dynamic_cast<SystemWaitInputCommand*>(
+                        mStatements.back().get()) == nullptr)
+                {
                     mStatements.push_back(
                         std::make_unique<SystemWaitInputCommand>()
                     );
+                }
                 return;
             }
             default:
